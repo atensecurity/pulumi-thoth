@@ -1,0 +1,13 @@
+{
+  "name": "thoth-bootstrap",
+  "private": true,
+  "version": "0.1.0",
+  "dependencies": {
+    "@pulumi/command": "^1.1.3",
+    "@pulumi/pulumi": "^3.170.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.23",
+    "typescript": "^5.9.3"
+  }
+}

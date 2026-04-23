@@ -1,23 +1,62 @@
 # pulumi-thoth
 
-Official Pulumi provider source for Thoth headless control-plane operations.
+Official Pulumi artifacts for Thoth headless control-plane operations.
 
-## Scope
+## What works today
 
-This repository will host:
+Use the examples in this repository to run `thothctl bootstrap` from Pulumi for:
 
-- Native Pulumi provider packages (Node.js/Python first)
-- Typed resources for tenant settings, MDM provider sync, and webhook tests
-- Publishing workflows for npm + PyPI package distribution
+- tenant governance settings
+- SIEM/SOAR webhook routing
+- MDM provider upsert + optional sync start
 
-## Initial resources target
+The examples are dashboard-free and GitOps-friendly.
+
+## Prerequisites
+
+- `thothctl` available in `PATH` (or configure `thothctlBin`)
+- `bash` available on runner
+- GovAPI URL
+- tenant admin bearer token (inline secret or file path)
+
+## Install and run
+
+### Node.js
+
+```bash
+cd examples/nodejs
+npm install
+pulumi stack init dev
+pulumi config set tenantId rightway
+pulumi config set govapiUrl https://govapi.atensecurity.com
+pulumi config set adminBearerTokenFile /run/secrets/thoth_admin_jwt
+pulumi config set webhookUrl https://siem.example.com/hooks/thoth
+pulumi config set --secret webhookSecret "<secret>"
+pulumi up
+```
+
+### Python
+
+```bash
+cd examples/python
+python -m venv .venv
+source .venv/bin/activate
+pip install pulumi pulumi-command
+pulumi stack init dev
+pulumi config set tenantId rightway
+pulumi config set govapiUrl https://govapi.atensecurity.com
+pulumi config set adminBearerTokenFile /run/secrets/thoth_admin_jwt
+pulumi up
+```
+
+## Provider-native resources (in progress)
+
+Planned resource set:
 
 - `TenantSettings`
 - `MdmProvider`
 - `MdmSync`
 - `WebhookTest`
 
-## Examples
-
-- `examples/nodejs`
-- `examples/python`
+Until provider-native resources are released, use the bootstrap examples in this repo
+for strict production verification and reproducible control-plane rollout.
