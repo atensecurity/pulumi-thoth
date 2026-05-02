@@ -91,9 +91,9 @@ jobs:
           git clone --depth 1 https://github.com/atensecurity/terraform-provider-thoth.git ../terraform-provider-thoth
 
       - name: Install Pulumi CLI
-        uses: pulumi/actions@v6
+        uses: pulumi/setup-pulumi@59f86fcdedc88e5c7f2dd25e3903fa3e055eb14f
         with:
-          command: version
+          pulumi-version: latest
 
       - name: Verify provider build and schema generation
         shell: bash
