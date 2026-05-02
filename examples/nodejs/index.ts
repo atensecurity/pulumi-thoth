@@ -1,5 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
-import * as thoth from "@atensecurity/thoth";
+import * as thoth from "@atensec/pulumi-thoth";
 
 const cfg = new pulumi.Config();
 

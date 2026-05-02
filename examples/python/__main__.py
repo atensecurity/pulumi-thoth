@@ -1,7 +1,7 @@
 import json
 
 import pulumi
-import atensecurity_thoth as thoth
+import pulumi_thoth as thoth
 
 config = pulumi.Config()
 

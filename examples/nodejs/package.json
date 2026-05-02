@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "dependencies": {
-    "@atensecurity/thoth": "^0.1.0",
+    "@atensec/pulumi-thoth": "^0.1.0",
     "@pulumi/pulumi": "^3.170.0"
   },
   "devDependencies": {

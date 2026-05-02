@@ -83,13 +83,13 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_mdm_sync_job":    {Tok: makeDataSource("mdm", "getSyncJob")},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
-			PackageName: "@atensecurity/thoth",
+			PackageName: "@atensec/pulumi-thoth",
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
 			},
 		},
 		Python: &tfbridge.PythonInfo{
-			PackageName: "atensecurity_thoth",
+			PackageName: "pulumi_thoth",
 			Requires: map[string]string{
 				"pulumi": ">=3.0.0,<4.0.0",
 			},
@@ -104,7 +104,7 @@ func Provider() tfbridge.ProviderInfo {
 			GenerateResourceContainerTypes: true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
-			RootNamespace: "AtenSecurity.Thoth",
+			RootNamespace: "AtenSecurity.Pulumi.Thoth",
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
 			},
