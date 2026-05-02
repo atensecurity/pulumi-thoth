@@ -46,16 +46,5 @@ make test
 
 ## Release
 
-Public release automation for this repository is driven by:
-
-- `.github/workflows/release.yml`
-- `.goreleaser.yml`
-
-Required secrets for public release publishing:
-
-- `THOTH_PULUMI_PROVIDER_GPG_PRIVATE_KEY`
-- `THOTH_PULUMI_PROVIDER_GPG_PASSPHRASE`
-- `PULUMI_ACCESS_TOKEN`
-- `NPM_TOKEN`
-- `PYPI_API_TOKEN`
-- `NUGET_PUBLISH_KEY`
+Releases are published from signed tags via `.github/workflows/release.yml`
+and `.goreleaser.yml`.
