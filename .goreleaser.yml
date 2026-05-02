@@ -11,7 +11,8 @@ before:
 builds:
   - id: pulumi-resource-thoth
     binary: pulumi-resource-thoth
-    main: ./provider/cmd/pulumi-resource-thoth
+    dir: ./provider
+    main: ./cmd/pulumi-resource-thoth
     env:
       - CGO_ENABLED=0
     flags:
