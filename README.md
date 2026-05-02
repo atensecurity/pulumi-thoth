@@ -5,6 +5,7 @@ Official Pulumi provider for Aten Security Thoth headless AI Governance Control 
 - Pulumi Registry package: `thoth`
 - Terraform upstream: `atensecurity/terraform-provider-thoth`
 - Source repository: `github.com/atensecurity/pulumi-thoth`
+- Aten Security docs: https://docs.atensecurity.com/docs/pulumi-provider/
 
 ## Capabilities
 
