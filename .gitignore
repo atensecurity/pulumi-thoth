@@ -1,0 +1,11 @@
+.DS_Store
+.pulumi
+bin/
+dist/
+coverage/
+node_modules/
+sdk/
+sdk/nodejs/bin/
+sdk/nodejs/node_modules/
+sdk/python/venv/
+provider/cmd/pulumi-resource-thoth/Pulumi.yaml

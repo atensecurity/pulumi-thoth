@@ -1,3 +1,3 @@
-name: thoth-bootstrap
+name: pulumi-thoth-nodejs
 runtime: nodejs
-description: Headless Thoth control-plane bootstrap via thothctl
+description: Pulumi Thoth provider example (Node.js)

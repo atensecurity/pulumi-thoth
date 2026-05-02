@@ -1,0 +1,162 @@
+name: Release Pulumi Provider
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+-rc*"
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag (for example 0.1.0, 0.1.0-rc1, v0.1.0)"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout git history
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Install Go
+        uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.6.0
+        with:
+          go-version-file: provider/go.mod
+          check-latest: true
+          cache-dependency-path: provider/go.sum
+
+      - name: Resolve and validate release tag
+        id: release_tag
+        shell: bash
+        env:
+          RAW_TAG_INPUT: ${{ github.event.inputs.release_tag }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+
+          if [[ "${EVENT_NAME}" == "workflow_dispatch" ]]; then
+            RAW_TAG="${RAW_TAG_INPUT}"
+          else
+            RAW_TAG="${GITHUB_REF_NAME}"
+          fi
+
+          RAW_TAG="$(echo "${RAW_TAG}" | xargs)"
+          if [[ -z "${RAW_TAG}" ]]; then
+            echo "release_tag is required and cannot be empty." >&2
+            exit 1
+          fi
+
+          if [[ "${RAW_TAG}" == v* ]]; then
+            CURRENT_TAG="${RAW_TAG}"
+          else
+            CURRENT_TAG="v${RAW_TAG}"
+          fi
+
+          if [[ ! "${CURRENT_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-rc[0-9]+)?$ ]]; then
+            echo "Invalid release tag '${RAW_TAG}' (normalized: '${CURRENT_TAG}')." >&2
+            echo "Expected semantic version like 0.1.0 or 0.1.0-rc1." >&2
+            exit 1
+          fi
+
+          echo "current_tag=${CURRENT_TAG}" >> "$GITHUB_OUTPUT"
+          echo "release_version=${CURRENT_TAG#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch tags
+        run: git fetch --force --tags
+
+      - name: Ensure tag exists and checkout tag commit
+        shell: bash
+        env:
+          CURRENT_TAG: ${{ steps.release_tag.outputs.current_tag }}
+        run: |
+          set -euo pipefail
+          if ! git rev-parse --verify "refs/tags/${CURRENT_TAG}" >/dev/null 2>&1; then
+            echo "Tag '${CURRENT_TAG}' does not exist in this repository." >&2
+            exit 1
+          fi
+          git checkout --force "refs/tags/${CURRENT_TAG}"
+
+      - name: Clone terraform-provider-thoth for local replace
+        run: |
+          git clone --depth 1 https://github.com/atensecurity/terraform-provider-thoth.git ../terraform-provider-thoth
+
+      - name: Install Pulumi CLI
+        uses: pulumi/actions@v6
+        with:
+          command: version
+
+      - name: Verify provider build and schema generation
+        shell: bash
+        env:
+          CURRENT_TAG: ${{ steps.release_tag.outputs.current_tag }}
+        run: |
+          set -euo pipefail
+          RELEASE_VERSION="${CURRENT_TAG#v}"
+
+          (
+            cd provider
+            env THOTH_PULUMI_RELEASE_STRICT_VERSION=1 GOCACHE=/tmp/gocache \
+              go test -ldflags "-X github.com/atensecurity/pulumi-thoth/provider/pkg/version.Version=${RELEASE_VERSION}" ./...
+          )
+
+          make schema VERSION="${RELEASE_VERSION}"
+          make build VERSION="${RELEASE_VERSION}"
+          make sdk VERSION="${RELEASE_VERSION}"
+
+      - name: Import release signing key
+        id: gpg
+        shell: bash
+        env:
+          THOTH_PULUMI_PROVIDER_GPG_PRIVATE_KEY: ${{ secrets.THOTH_PULUMI_PROVIDER_GPG_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${THOTH_PULUMI_PROVIDER_GPG_PRIVATE_KEY}" ]]; then
+            echo "Missing secret THOTH_PULUMI_PROVIDER_GPG_PRIVATE_KEY" >&2
+            exit 1
+          fi
+
+          TMP_KEY_FILE="$(mktemp)"
+          printf '%s\n' "${THOTH_PULUMI_PROVIDER_GPG_PRIVATE_KEY}" > "${TMP_KEY_FILE}"
+          gpg --batch --import "${TMP_KEY_FILE}"
+          rm -f "${TMP_KEY_FILE}"
+
+          FINGERPRINT="$(gpg --list-secret-keys --with-colons | awk -F: '/^fpr:/ {print $10; exit}')"
+          if [[ -z "${FINGERPRINT}" ]]; then
+            echo "Unable to determine imported GPG fingerprint" >&2
+            exit 1
+          fi
+          echo "fingerprint=${FINGERPRINT}" >> "$GITHUB_OUTPUT"
+
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@9c156ee8a17a598857849441385a2041ef570552 # v6.3.0
+        with:
+          distribution: goreleaser
+          version: latest
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GPG_FINGERPRINT: ${{ steps.gpg.outputs.fingerprint }}
+          GPG_PASSPHRASE: ${{ secrets.THOTH_PULUMI_PROVIDER_GPG_PASSPHRASE }}
+
+      - name: Publish SDKs
+        if: ${{ !contains(steps.release_tag.outputs.current_tag, '-rc') }}
+        uses: pulumi/pulumi-package-publisher@3ec1409d3e894142b9825c7859be8e57d362762a # v0.0.23
+        with:
+          sdk: all
+          version: ${{ steps.release_tag.outputs.release_version }}
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          PYPI_USERNAME: __token__
+          PYPI_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}

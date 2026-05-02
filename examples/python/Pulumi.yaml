@@ -1,6 +1,6 @@
-name: thoth-bootstrap-python
+name: pulumi-thoth-python
 runtime:
   name: python
   options:
     toolchain: pip
-description: Headless Thoth control-plane bootstrap via thothctl (Python)
+description: Pulumi Thoth provider example (Python)

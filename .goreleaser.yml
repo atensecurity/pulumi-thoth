@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=https://goreleaser.com/static/schema.json
+version: 2
+
+project_name: pulumi-thoth
+
+before:
+  hooks:
+    - cd provider && go mod tidy
+    - cd provider && go test ./...
+
+builds:
+  - id: pulumi-resource-thoth
+    binary: pulumi-resource-thoth
+    main: ./provider/cmd/pulumi-resource-thoth
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X github.com/atensecurity/pulumi-thoth/provider/pkg/version.Version={{ .Version }}
+    mod_timestamp: "{{ .CommitTimestamp }}"
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm64
+
+archives:
+  - id: pulumi-plugin
+    formats: ["tar.gz"]
+    name_template: "{{ .Binary }}-v{{ .Version }}-{{ .Os }}-{{ .Arch }}"
+    files:
+      - README.md
+      - provider/cmd/pulumi-resource-thoth/schema.json
+
+checksum:
+  name_template: "pulumi-thoth_{{ .Version }}_SHA256SUMS"
+
+signs:
+  - artifacts: checksum
+    args:
+      - --batch
+      - --pinentry-mode
+      - loopback
+      - --passphrase
+      - "{{ .Env.GPG_PASSPHRASE }}"
+      - --local-user
+      - "{{ .Env.GPG_FINGERPRINT }}"
+      - --output
+      - "${signature}"
+      - --detach-sign
+      - "${artifact}"
+
+release:
+  prerelease: auto
+  mode: replace
