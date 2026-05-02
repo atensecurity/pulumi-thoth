@@ -5,8 +5,8 @@ project_name: pulumi-thoth
 
 before:
   hooks:
-    - cd provider && go mod tidy
-    - cd provider && go test ./...
+    - sh -c "cd provider && go mod tidy"
+    - sh -c "cd provider && go test ./..."
 
 builds:
   - id: pulumi-resource-thoth
