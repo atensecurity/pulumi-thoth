@@ -33,7 +33,6 @@ When `apiBaseUrl` is omitted, endpoint is derived as:
 
 ```bash
 cd platform/public/pulumi-thoth
-git clone --depth 1 https://github.com/atensecurity/terraform-provider-thoth.git ../terraform-provider-thoth
 make tfgen
 make schema
 make build
@@ -47,14 +46,10 @@ make test
 
 ## Release
 
-Public release automation is driven by:
+Public release automation for this repository is driven by:
 
 - `.github/workflows/release.yml`
 - `.goreleaser.yml`
-
-Monorepo-to-public mirroring and signed tag publication are handled by:
-
-- `.github/workflows/publish-pulumi-provider-thoth.yml`
 
 Required secrets for public release publishing:
 
