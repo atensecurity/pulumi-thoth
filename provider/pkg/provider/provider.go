@@ -68,11 +68,14 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			"thoth_webhook_test":      {Tok: makeResource("governance", "WebhookTest")},
 			"thoth_evidence_backfill": {Tok: makeResource("governance", "EvidenceBackfill")},
-			"thoth_api_key":           {Tok: makeResource("access", "ApiKey")},
-			"thoth_mdm_provider":      {Tok: makeResource("mdm", "Provider")},
-			"thoth_mdm_sync":          {Tok: makeResource("mdm", "Sync")},
-			"thoth_browser_provider":  {Tok: makeResource("browser", "Provider")},
-			"thoth_browser_policy":    {Tok: makeResource("browser", "Policy")},
+			"thoth_decision_field_backfill": {
+				Tok: makeResource("governance", "DecisionFieldBackfill"),
+			},
+			"thoth_api_key":          {Tok: makeResource("access", "ApiKey")},
+			"thoth_mdm_provider":     {Tok: makeResource("mdm", "Provider")},
+			"thoth_mdm_sync":         {Tok: makeResource("mdm", "Sync")},
+			"thoth_browser_provider": {Tok: makeResource("browser", "Provider")},
+			"thoth_browser_policy":   {Tok: makeResource("browser", "Policy")},
 			"thoth_browser_enrollment": {
 				Tok: makeResource("browser", "Enrollment"),
 			},
@@ -82,6 +85,9 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_governance_feed": {Tok: makeDataSource("governance", "getFeed")},
 			"thoth_governance_tools": {
 				Tok: makeDataSource("governance", "getTools"),
+			},
+			"thoth_governance_evidence_slos": {
+				Tok: makeDataSource("governance", "getEvidenceSlos"),
 			},
 			"thoth_api_key_metrics": {Tok: makeDataSource("access", "getApiKeyMetrics")},
 			"thoth_mdm_sync_job":    {Tok: makeDataSource("mdm", "getSyncJob")},

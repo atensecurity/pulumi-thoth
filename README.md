@@ -15,7 +15,8 @@ The provider exposes Thoth control-plane resources for:
 - Browser providers, policies, and enrollments
 - MDM providers and sync operations
 - API key management
-- Policy sync, approvals, pack assignment, webhook tests, and evidence backfill triggers
+- Policy sync, approvals, pack assignment, webhook tests, evidence backfill triggers,
+  decision-field backfills, and decision-evidence SLO reads
 
 Runtime evidence-chain export is surfaced by GovAPI/CLI endpoints:
 
