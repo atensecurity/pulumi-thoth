@@ -17,6 +17,12 @@ The provider exposes Thoth control-plane resources for:
 - API key management
 - Policy sync, approvals, pack assignment, and webhook tests
 
+Runtime evidence-chain export is surfaced by GovAPI/CLI endpoints:
+
+- `GET /:tenant-id/thoth/evidence/chain`
+- `GET /:tenant-id/thoth/sessions/:sessionId/evidence-bundle`
+- `thothctl evidence chain --tenant-id <tenant> --json`
+
 ## Configuration
 
 Provider inputs mirror Terraform provider behavior:
