@@ -63,6 +63,9 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_policy_sync":       {Tok: makeResource("governance", "PolicySync")},
 			"thoth_approval_decision": {Tok: makeResource("governance", "ApprovalDecision")},
 			"thoth_pack_assignment":   {Tok: makeResource("governance", "PackAssignment")},
+			"thoth_pack_assignment_bulk": {
+				Tok: makeResource("governance", "PackAssignmentBulk"),
+			},
 			"thoth_webhook_test":      {Tok: makeResource("governance", "WebhookTest")},
 			"thoth_api_key":           {Tok: makeResource("access", "ApiKey")},
 			"thoth_mdm_provider":      {Tok: makeResource("mdm", "Provider")},
