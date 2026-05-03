@@ -897,6 +897,161 @@
                 "type": "object"
             }
         },
+        "thoth:governance/evidenceBackfill:EvidenceBackfill": {
+            "properties": {
+                "candidates": {
+                    "type": "integer",
+                    "description": "Number of events that qualified for backfill."
+                },
+                "created": {
+                    "type": "integer",
+                    "description": "Number of new evidence records created."
+                },
+                "dryRun": {
+                    "type": "boolean",
+                    "description": "When true, preview records without persisting evidence."
+                },
+                "evidenceIdsJson": {
+                    "type": "string",
+                    "description": "Created or candidate evidence IDs as JSON array."
+                },
+                "examined": {
+                    "type": "integer",
+                    "description": "Number of source events examined."
+                },
+                "executedAt": {
+                    "type": "string",
+                    "description": "Timestamp when backfill was executed."
+                },
+                "includeBlockedEvents": {
+                    "type": "boolean",
+                    "description": "Include blocked decisions in addition to explicit violations."
+                },
+                "integrationId": {
+                    "type": "string",
+                    "description": "Optional integration ID stamped on created evidence records."
+                },
+                "limit": {
+                    "type": "integer",
+                    "description": "Maximum number of candidate events to evaluate (1-1000)."
+                },
+                "skippedExisting": {
+                    "type": "integer",
+                    "description": "Number of candidates skipped due to existing evidence."
+                },
+                "sourceCollection": {
+                    "type": "string",
+                    "description": "Source collection used by the backfill endpoint."
+                },
+                "tenantId": {
+                    "type": "string",
+                    "description": "Tenant ID from provider configuration."
+                },
+                "trigger": {
+                    "type": "string",
+                    "description": "Change this value to force a re-run."
+                },
+                "wouldCreate": {
+                    "type": "integer",
+                    "description": "Number of records that would be created in dry-run mode."
+                }
+            },
+            "required": [
+                "candidates",
+                "created",
+                "evidenceIdsJson",
+                "examined",
+                "executedAt",
+                "skippedExisting",
+                "sourceCollection",
+                "tenantId",
+                "wouldCreate"
+            ],
+            "inputProperties": {
+                "dryRun": {
+                    "type": "boolean",
+                    "description": "When true, preview records without persisting evidence."
+                },
+                "includeBlockedEvents": {
+                    "type": "boolean",
+                    "description": "Include blocked decisions in addition to explicit violations."
+                },
+                "integrationId": {
+                    "type": "string",
+                    "description": "Optional integration ID stamped on created evidence records."
+                },
+                "limit": {
+                    "type": "integer",
+                    "description": "Maximum number of candidate events to evaluate (1-1000)."
+                },
+                "trigger": {
+                    "type": "string",
+                    "description": "Change this value to force a re-run."
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering EvidenceBackfill resources.\n",
+                "properties": {
+                    "candidates": {
+                        "type": "integer",
+                        "description": "Number of events that qualified for backfill."
+                    },
+                    "created": {
+                        "type": "integer",
+                        "description": "Number of new evidence records created."
+                    },
+                    "dryRun": {
+                        "type": "boolean",
+                        "description": "When true, preview records without persisting evidence."
+                    },
+                    "evidenceIdsJson": {
+                        "type": "string",
+                        "description": "Created or candidate evidence IDs as JSON array."
+                    },
+                    "examined": {
+                        "type": "integer",
+                        "description": "Number of source events examined."
+                    },
+                    "executedAt": {
+                        "type": "string",
+                        "description": "Timestamp when backfill was executed."
+                    },
+                    "includeBlockedEvents": {
+                        "type": "boolean",
+                        "description": "Include blocked decisions in addition to explicit violations."
+                    },
+                    "integrationId": {
+                        "type": "string",
+                        "description": "Optional integration ID stamped on created evidence records."
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "description": "Maximum number of candidate events to evaluate (1-1000)."
+                    },
+                    "skippedExisting": {
+                        "type": "integer",
+                        "description": "Number of candidates skipped due to existing evidence."
+                    },
+                    "sourceCollection": {
+                        "type": "string",
+                        "description": "Source collection used by the backfill endpoint."
+                    },
+                    "tenantId": {
+                        "type": "string",
+                        "description": "Tenant ID from provider configuration."
+                    },
+                    "trigger": {
+                        "type": "string",
+                        "description": "Change this value to force a re-run."
+                    },
+                    "wouldCreate": {
+                        "type": "integer",
+                        "description": "Number of records that would be created in dry-run mode."
+                    }
+                },
+                "type": "object"
+            }
+        },
         "thoth:governance/packAssignment:PackAssignment": {
             "properties": {
                 "agentId": {
@@ -1035,6 +1190,231 @@
                     "tenantId": {
                         "type": "string",
                         "description": "Tenant ID from provider configuration."
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "thoth:governance/packAssignmentBulk:PackAssignmentBulk": {
+            "properties": {
+                "agentIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Specific agent IDs to target."
+                },
+                "allAgents": {
+                    "type": "boolean",
+                    "description": "Apply to all known agents for the tenant."
+                },
+                "appliedCount": {
+                    "type": "integer",
+                    "description": "Successful apply operations."
+                },
+                "approvalPolicyId": {
+                    "type": "string",
+                    "description": "Approval policy ID for pack application (defaults to 'default')."
+                },
+                "endpointIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Endpoint IDs whose agents should receive the selected packs."
+                },
+                "environment": {
+                    "type": "string",
+                    "description": "Environment: dev or prod."
+                },
+                "failedCount": {
+                    "type": "integer",
+                    "description": "Failed apply operations."
+                },
+                "fleetIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Fleet IDs whose agents should receive the selected packs."
+                },
+                "lastAppliedAt": {
+                    "type": "string",
+                    "description": "Timestamp of the most recent apply operation."
+                },
+                "overridesByPackJson": {
+                    "type": "string",
+                    "description": "JSON map keyed by\u003cspan pulumi-lang-nodejs=\" packId \" pulumi-lang-dotnet=\" PackId \" pulumi-lang-go=\" packId \" pulumi-lang-python=\" pack_id \" pulumi-lang-yaml=\" packId \" pulumi-lang-java=\" packId \"\u003e packId \u003c/span\u003ewith per-pack overrides."
+                },
+                "packIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Pack IDs to apply in one bulk operation."
+                },
+                "resultsJson": {
+                    "type": "string",
+                    "description": "Raw apply results as JSON array."
+                },
+                "targetAgentIdsJson": {
+                    "type": "string",
+                    "description": "Resolved target agent IDs as JSON array."
+                },
+                "tenantId": {
+                    "type": "string",
+                    "description": "Tenant ID from provider configuration."
+                },
+                "totalOps": {
+                    "type": "integer",
+                    "description": "Total attempted apply operations."
+                },
+                "trigger": {
+                    "type": "string",
+                    "description": "Change this value to force a fresh apply run."
+                }
+            },
+            "required": [
+                "appliedCount",
+                "failedCount",
+                "lastAppliedAt",
+                "packIds",
+                "resultsJson",
+                "targetAgentIdsJson",
+                "tenantId",
+                "totalOps"
+            ],
+            "inputProperties": {
+                "agentIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Specific agent IDs to target."
+                },
+                "allAgents": {
+                    "type": "boolean",
+                    "description": "Apply to all known agents for the tenant."
+                },
+                "approvalPolicyId": {
+                    "type": "string",
+                    "description": "Approval policy ID for pack application (defaults to 'default')."
+                },
+                "endpointIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Endpoint IDs whose agents should receive the selected packs."
+                },
+                "environment": {
+                    "type": "string",
+                    "description": "Environment: dev or prod."
+                },
+                "fleetIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Fleet IDs whose agents should receive the selected packs."
+                },
+                "overridesByPackJson": {
+                    "type": "string",
+                    "description": "JSON map keyed by\u003cspan pulumi-lang-nodejs=\" packId \" pulumi-lang-dotnet=\" PackId \" pulumi-lang-go=\" packId \" pulumi-lang-python=\" pack_id \" pulumi-lang-yaml=\" packId \" pulumi-lang-java=\" packId \"\u003e packId \u003c/span\u003ewith per-pack overrides."
+                },
+                "packIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Pack IDs to apply in one bulk operation."
+                },
+                "trigger": {
+                    "type": "string",
+                    "description": "Change this value to force a fresh apply run."
+                }
+            },
+            "requiredInputs": [
+                "packIds"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering PackAssignmentBulk resources.\n",
+                "properties": {
+                    "agentIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Specific agent IDs to target."
+                    },
+                    "allAgents": {
+                        "type": "boolean",
+                        "description": "Apply to all known agents for the tenant."
+                    },
+                    "appliedCount": {
+                        "type": "integer",
+                        "description": "Successful apply operations."
+                    },
+                    "approvalPolicyId": {
+                        "type": "string",
+                        "description": "Approval policy ID for pack application (defaults to 'default')."
+                    },
+                    "endpointIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Endpoint IDs whose agents should receive the selected packs."
+                    },
+                    "environment": {
+                        "type": "string",
+                        "description": "Environment: dev or prod."
+                    },
+                    "failedCount": {
+                        "type": "integer",
+                        "description": "Failed apply operations."
+                    },
+                    "fleetIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Fleet IDs whose agents should receive the selected packs."
+                    },
+                    "lastAppliedAt": {
+                        "type": "string",
+                        "description": "Timestamp of the most recent apply operation."
+                    },
+                    "overridesByPackJson": {
+                        "type": "string",
+                        "description": "JSON map keyed by\u003cspan pulumi-lang-nodejs=\" packId \" pulumi-lang-dotnet=\" PackId \" pulumi-lang-go=\" packId \" pulumi-lang-python=\" pack_id \" pulumi-lang-yaml=\" packId \" pulumi-lang-java=\" packId \"\u003e packId \u003c/span\u003ewith per-pack overrides."
+                    },
+                    "packIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Pack IDs to apply in one bulk operation."
+                    },
+                    "resultsJson": {
+                        "type": "string",
+                        "description": "Raw apply results as JSON array."
+                    },
+                    "targetAgentIdsJson": {
+                        "type": "string",
+                        "description": "Resolved target agent IDs as JSON array."
+                    },
+                    "tenantId": {
+                        "type": "string",
+                        "description": "Tenant ID from provider configuration."
+                    },
+                    "totalOps": {
+                        "type": "integer",
+                        "description": "Total attempted apply operations."
+                    },
+                    "trigger": {
+                        "type": "string",
+                        "description": "Change this value to force a fresh apply run."
                     }
                 },
                 "type": "object"

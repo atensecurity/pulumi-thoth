@@ -67,6 +67,7 @@ func Provider() tfbridge.ProviderInfo {
 				Tok: makeResource("governance", "PackAssignmentBulk"),
 			},
 			"thoth_webhook_test":      {Tok: makeResource("governance", "WebhookTest")},
+			"thoth_evidence_backfill": {Tok: makeResource("governance", "EvidenceBackfill")},
 			"thoth_api_key":           {Tok: makeResource("access", "ApiKey")},
 			"thoth_mdm_provider":      {Tok: makeResource("mdm", "Provider")},
 			"thoth_mdm_sync":          {Tok: makeResource("mdm", "Sync")},
