@@ -2,6 +2,19 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.3 - 2026-05-05
+
+### Changed
+
+- Updated module resolution to consume published `terraform-provider-thoth v0.1.3`
+  (removed local replace override in provider `go.mod`).
+- Refreshed provider dependency locks in `go.sum` against the released Terraform provider.
+
+### Compatibility
+
+- Maintains dual-auth support inherited from Terraform provider (`THOTH_API_KEY` and bearer token flows).
+- No breaking provider token or schema renames.
+
 ## 0.1.2 - 2026-05-05
 
 ### Changed
