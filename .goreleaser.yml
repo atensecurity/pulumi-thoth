@@ -42,6 +42,9 @@ archives:
 checksum:
   name_template: "pulumi-thoth_{{ .Version }}_SHA256SUMS"
 
+changelog:
+  disable: true
+
 signs:
   - artifacts: checksum
     args:
@@ -60,3 +63,9 @@ signs:
 release:
   prerelease: auto
   mode: replace
+  header: |
+    {{- if .Env.RELEASE_NOTES -}}
+    {{ .Env.RELEASE_NOTES }}
+    {{- else -}}
+    See CHANGELOG.md for release details.
+    {{- end }}
