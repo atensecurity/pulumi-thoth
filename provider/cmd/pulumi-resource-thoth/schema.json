@@ -73,6 +73,15 @@
         "type": "boolean",
         "description": "Skip TLS certificate verification (development/testing only)."
       },
+      "orgApiKey": {
+        "type": "string",
+        "description": "Organization API key used for non-interactive CI/CD control-plane operations.",
+        "secret": true
+      },
+      "orgApiKeyFile": {
+        "type": "string",
+        "description": "Path to a file containing the organization API key."
+      },
       "requestTimeoutSeconds": {
         "type": "integer",
         "description": "Per-request timeout in seconds."
@@ -122,6 +131,15 @@
         "type": "boolean",
         "description": "Skip TLS certificate verification (development/testing only)."
       },
+      "orgApiKey": {
+        "type": "string",
+        "description": "Organization API key used for non-interactive CI/CD control-plane operations.",
+        "secret": true
+      },
+      "orgApiKeyFile": {
+        "type": "string",
+        "description": "Path to a file containing the organization API key."
+      },
       "requestTimeoutSeconds": {
         "type": "integer",
         "description": "Per-request timeout in seconds."
@@ -167,6 +185,15 @@
       "insecureSkipTlsVerify": {
         "type": "boolean",
         "description": "Skip TLS certificate verification (development/testing only)."
+      },
+      "orgApiKey": {
+        "type": "string",
+        "description": "Organization API key used for non-interactive CI/CD control-plane operations.",
+        "secret": true
+      },
+      "orgApiKeyFile": {
+        "type": "string",
+        "description": "Path to a file containing the organization API key."
       },
       "requestTimeoutSeconds": {
         "type": "integer",

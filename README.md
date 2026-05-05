@@ -29,9 +29,12 @@ Runtime evidence-chain export is surfaced by GovAPI/CLI endpoints:
 Provider inputs mirror Terraform provider behavior:
 
 - `tenantId` (required)
-- `adminBearerToken` or `adminBearerTokenFile`
+- `orgApiKey` or `orgApiKeyFile` (recommended for CI/CD)
+- `adminBearerToken` or `adminBearerTokenFile` (legacy/session auth)
 - `apexDomain` (defaults to `atensecurity.com`)
 - `apiBaseUrl` (optional override; derived from tenant when omitted)
+
+If provider auth fields are omitted, exporting `THOTH_API_KEY` is supported.
 
 When `apiBaseUrl` is omitted, endpoint is derived as:
 

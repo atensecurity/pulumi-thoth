@@ -6,14 +6,14 @@ import pulumi_thoth as thoth
 config = pulumi.Config()
 
 tenant_id = config.require("tenantId")
-admin_bearer_token = config.require_secret("adminBearerToken")
+org_api_key = config.require_secret("orgApiKey")
 webhook_url = config.require("webhookUrl")
 webhook_secret = config.require_secret("webhookSecret")
 
 provider = thoth.Provider(
     "thoth",
     tenant_id=tenant_id,
-    admin_bearer_token=admin_bearer_token,
+    org_api_key=org_api_key,
 )
 
 tenant_settings = thoth.governance.TenantSettings(

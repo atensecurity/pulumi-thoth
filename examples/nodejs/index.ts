@@ -4,13 +4,13 @@ import * as thoth from "@atensec/pulumi-thoth";
 const cfg = new pulumi.Config();
 
 const tenantId = cfg.require("tenantId");
-const adminBearerToken = cfg.requireSecret("adminBearerToken");
+const orgApiKey = cfg.requireSecret("orgApiKey");
 const webhookUrl = cfg.require("webhookUrl");
 const webhookSecret = cfg.requireSecret("webhookSecret");
 
 const provider = new thoth.Provider("thoth", {
   tenantId,
-  adminBearerToken,
+  orgApiKey,
 });
 
 const tenantSettings = new thoth.governance.TenantSettings(
