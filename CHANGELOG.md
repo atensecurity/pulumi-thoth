@@ -9,9 +9,18 @@ All notable changes to `pulumi-thoth` are documented in this file.
 - Bridged coverage for the latest Terraform provider parity surface, including:
   - API key inventory (`getApiKeys`)
   - Scope-specific API key resources (`FleetApiKey`, `EndpointApiKey`, `AgentApiKey`)
+  - Focused tenant settings resources (`GovernanceSettings`, `WebhookSettings`,
+    `SiemSettings`, `PamSettings`)
   - Fleet lifecycle helpers (`getFleet`, `getFleets`, `getEndpoints`, `getEndpointStats`)
   - Governance evidence reads (`getEvidenceBundle`, `getEvidenceChain`, `getEvidenceVerify`)
   - MDM and browser inventory helpers (`getProviders`, `getPolicies`, `getEnrollments`)
+
+### Removed
+
+- Deprecated legacy `TenantSettings` resource from the Pulumi bridge.
+  Use `GovernanceSettings`, `WebhookSettings`, `SiemSettings`, and `PamSettings`.
+- Deprecated legacy `ApiKey` resource from the Pulumi bridge.
+  Use `FleetApiKey`, `EndpointApiKey`, and `AgentApiKey`.
 
 ### Changed
 
@@ -21,14 +30,16 @@ All notable changes to `pulumi-thoth` are documented in this file.
   published provider lag.
 - Regenerated Pulumi package schema against the current in-repo Terraform provider
   implementation.
-- Bridged `ApiKey` now rejects `organization` scope creation; organization keys
-  should be created out-of-band with `thothctl` and used via provider auth config.
+- Regenerated Pulumi schema after removing deprecated resource mappings.
+- Pack assignment resource split remains unchanged (`PackAssignment` and
+  `PackAssignmentBulk` stay separate).
+- MDM/browser resources remain unified multi-provider resources until provider-
+  specific typed contracts are exposed upstream.
 
 ### Compatibility
 
-- No breaking Pulumi token renames.
-- Auth behavior remains inherited from the Terraform provider bridge
-  (`THOTH_API_KEY` org-scoped workflow and admin bearer token flows).
+- This release intentionally removes deprecated resources because the provider
+  is not yet in production customer use.
 
 ## 0.1.3 - 2026-05-05
 

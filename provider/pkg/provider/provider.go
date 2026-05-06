@@ -59,10 +59,13 @@ func Provider() tfbridge.ProviderInfo {
 		Version:    version.Version,
 		GitHubOrg:  "atensecurity",
 		Resources: map[string]*tfbridge.ResourceInfo{
-			"thoth_tenant_settings":   {Tok: makeResource("governance", "TenantSettings")},
-			"thoth_policy_sync":       {Tok: makeResource("governance", "PolicySync")},
-			"thoth_approval_decision": {Tok: makeResource("governance", "ApprovalDecision")},
-			"thoth_pack_assignment":   {Tok: makeResource("governance", "PackAssignment")},
+			"thoth_governance_settings": {Tok: makeResource("governance", "GovernanceSettings")},
+			"thoth_webhook_settings":    {Tok: makeResource("governance", "WebhookSettings")},
+			"thoth_siem_settings":       {Tok: makeResource("governance", "SiemSettings")},
+			"thoth_pam_settings":        {Tok: makeResource("governance", "PamSettings")},
+			"thoth_policy_sync":         {Tok: makeResource("governance", "PolicySync")},
+			"thoth_approval_decision":   {Tok: makeResource("governance", "ApprovalDecision")},
+			"thoth_pack_assignment":     {Tok: makeResource("governance", "PackAssignment")},
 			"thoth_pack_assignment_bulk": {
 				Tok: makeResource("governance", "PackAssignmentBulk"),
 			},
@@ -71,7 +74,6 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_decision_field_backfill": {
 				Tok: makeResource("governance", "DecisionFieldBackfill"),
 			},
-			"thoth_api_key":          {Tok: makeResource("access", "ApiKey")},
 			"thoth_fleet_api_key":    {Tok: makeResource("access", "FleetApiKey")},
 			"thoth_endpoint_api_key": {Tok: makeResource("access", "EndpointApiKey")},
 			"thoth_agent_api_key":    {Tok: makeResource("access", "AgentApiKey")},

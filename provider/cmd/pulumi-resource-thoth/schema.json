@@ -100,12 +100,9 @@
       },
       "tenantId": {
         "type": "string",
-        "description": "Tenant slug used in GovAPI route scoping."
+        "description": "Tenant slug used in GovAPI route scoping. If omitted, provider reads THOTH_TENANT_ID."
       }
-    },
-    "defaults": [
-      "tenantId"
-    ]
+    }
   },
   "provider": {
     "description": "The provider type for the thoth package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
@@ -158,12 +155,9 @@
       },
       "tenantId": {
         "type": "string",
-        "description": "Tenant slug used in GovAPI route scoping."
+        "description": "Tenant slug used in GovAPI route scoping. If omitted, provider reads THOTH_TENANT_ID."
       }
     },
-    "required": [
-      "tenantId"
-    ],
     "inputProperties": {
       "adminBearerToken": {
         "type": "string",
@@ -213,12 +207,9 @@
       },
       "tenantId": {
         "type": "string",
-        "description": "Tenant slug used in GovAPI route scoping."
+        "description": "Tenant slug used in GovAPI route scoping. If omitted, provider reads THOTH_TENANT_ID."
       }
     },
-    "requiredInputs": [
-      "tenantId"
-    ],
     "methods": {
       "terraformConfig": "pulumi:providers:thoth/terraformConfig"
     }
@@ -383,184 +374,6 @@
           "scopeTargetId": {
             "type": "string",
             "description": "Agent ID targeted by this API key scope."
-          },
-          "tenantId": {
-            "type": "string",
-            "description": "Tenant ID from provider configuration."
-          },
-          "ttlSeconds": {
-            "type": "integer",
-            "description": "TTL in seconds for key expiry."
-          }
-        },
-        "type": "object"
-      }
-    },
-    "thoth:access/apiKey:ApiKey": {
-      "properties": {
-        "active": {
-          "type": "boolean",
-          "description": "Whether key is currently active and not expired/revoked."
-        },
-        "apiKey": {
-          "type": "string",
-          "description": "One-time plaintext API key (returned only on create).",
-          "secret": true
-        },
-        "createdAt": {
-          "type": "string",
-          "description": "Creation timestamp."
-        },
-        "expiresAt": {
-          "type": "string",
-          "description": "Expiry timestamp."
-        },
-        "jitReason": {
-          "type": "string",
-          "description": "Audit reason for just-in-time issuance."
-        },
-        "keyId": {
-          "type": "string",
-          "description": "GovAPI key identifier."
-        },
-        "lastUsedAt": {
-          "type": "string",
-          "description": "Last authorization timestamp."
-        },
-        "name": {
-          "type": "string",
-          "description": "Display name for the API key."
-        },
-        "permissions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed permissions: read, write, execute."
-        },
-        "prefix": {
-          "type": "string",
-          "description": "Key prefix for operator identification."
-        },
-        "scopeLevel": {
-          "type": "string",
-          "description": "Scope level for issued key. Supported in provider: fleet, endpoint, agent. Organization keys must be created out-of-band via thothctl.",
-          "deprecationMessage": "Use thoth_fleet_api_key, thoth_endpoint_api_key, or<span pulumi-lang-nodejs=\" thoth.access.AgentApiKey \" pulumi-lang-dotnet=\" thoth.access.AgentApiKey \" pulumi-lang-go=\" access.AgentApiKey \" pulumi-lang-python=\" access.AgentApiKey \" pulumi-lang-yaml=\" thoth.access.AgentApiKey \" pulumi-lang-java=\" thoth.access.AgentApiKey \"> thoth.access.AgentApiKey </span>instead."
-        },
-        "scopeTargetId": {
-          "type": "string",
-          "description": "Target ID for the selected scope level. Required for fleet, endpoint, and agent scopes."
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "Tenant ID from provider configuration."
-        },
-        "ttlSeconds": {
-          "type": "integer",
-          "description": "TTL in seconds for key expiry."
-        }
-      },
-      "required": [
-        "active",
-        "apiKey",
-        "createdAt",
-        "expiresAt",
-        "keyId",
-        "lastUsedAt",
-        "permissions",
-        "prefix",
-        "scopeLevel",
-        "tenantId"
-      ],
-      "inputProperties": {
-        "jitReason": {
-          "type": "string",
-          "description": "Audit reason for just-in-time issuance."
-        },
-        "name": {
-          "type": "string",
-          "description": "Display name for the API key."
-        },
-        "permissions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed permissions: read, write, execute."
-        },
-        "scopeLevel": {
-          "type": "string",
-          "description": "Scope level for issued key. Supported in provider: fleet, endpoint, agent. Organization keys must be created out-of-band via thothctl.",
-          "deprecationMessage": "Use thoth_fleet_api_key, thoth_endpoint_api_key, or<span pulumi-lang-nodejs=\" thoth.access.AgentApiKey \" pulumi-lang-dotnet=\" thoth.access.AgentApiKey \" pulumi-lang-go=\" access.AgentApiKey \" pulumi-lang-python=\" access.AgentApiKey \" pulumi-lang-yaml=\" thoth.access.AgentApiKey \" pulumi-lang-java=\" thoth.access.AgentApiKey \"> thoth.access.AgentApiKey </span>instead."
-        },
-        "scopeTargetId": {
-          "type": "string",
-          "description": "Target ID for the selected scope level. Required for fleet, endpoint, and agent scopes."
-        },
-        "ttlSeconds": {
-          "type": "integer",
-          "description": "TTL in seconds for key expiry."
-        }
-      },
-      "requiredInputs": [
-        "permissions",
-        "scopeLevel"
-      ],
-      "stateInputs": {
-        "description": "Input properties used for looking up and filtering ApiKey resources.\n",
-        "properties": {
-          "active": {
-            "type": "boolean",
-            "description": "Whether key is currently active and not expired/revoked."
-          },
-          "apiKey": {
-            "type": "string",
-            "description": "One-time plaintext API key (returned only on create).",
-            "secret": true
-          },
-          "createdAt": {
-            "type": "string",
-            "description": "Creation timestamp."
-          },
-          "expiresAt": {
-            "type": "string",
-            "description": "Expiry timestamp."
-          },
-          "jitReason": {
-            "type": "string",
-            "description": "Audit reason for just-in-time issuance."
-          },
-          "keyId": {
-            "type": "string",
-            "description": "GovAPI key identifier."
-          },
-          "lastUsedAt": {
-            "type": "string",
-            "description": "Last authorization timestamp."
-          },
-          "name": {
-            "type": "string",
-            "description": "Display name for the API key."
-          },
-          "permissions": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed permissions: read, write, execute."
-          },
-          "prefix": {
-            "type": "string",
-            "description": "Key prefix for operator identification."
-          },
-          "scopeLevel": {
-            "type": "string",
-            "description": "Scope level for issued key. Supported in provider: fleet, endpoint, agent. Organization keys must be created out-of-band via thothctl.",
-            "deprecationMessage": "Use thoth_fleet_api_key, thoth_endpoint_api_key, or<span pulumi-lang-nodejs=\" thoth.access.AgentApiKey \" pulumi-lang-dotnet=\" thoth.access.AgentApiKey \" pulumi-lang-go=\" access.AgentApiKey \" pulumi-lang-python=\" access.AgentApiKey \" pulumi-lang-yaml=\" thoth.access.AgentApiKey \" pulumi-lang-java=\" thoth.access.AgentApiKey \"> thoth.access.AgentApiKey </span>instead."
-          },
-          "scopeTargetId": {
-            "type": "string",
-            "description": "Target ID for the selected scope level. Required for fleet, endpoint, and agent scopes."
           },
           "tenantId": {
             "type": "string",
@@ -2011,6 +1824,311 @@
         "type": "object"
       }
     },
+    "thoth:governance/governanceSettings:GovernanceSettings": {
+      "properties": {
+        "complianceProfile": {
+          "type": "string",
+          "description": "Compliance profile (soc2, healthcare, financial, public_sector, privacy, ai_governance)."
+        },
+        "extraSettingsJson": {
+          "type": "string",
+          "description": "Additional JSON object merged into the outgoing settings payload for forward compatibility."
+        },
+        "modelRouterAllowedModels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed model names allowlist."
+        },
+        "modelRouterAllowedProviders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed model providers allowlist."
+        },
+        "modelRouterDefaultModel": {
+          "type": "string",
+          "description": "Default model name."
+        },
+        "modelRouterDefaultProvider": {
+          "type": "string",
+          "description": "Default model provider."
+        },
+        "modelRouterEnabled": {
+          "type": "boolean",
+          "description": "Enable model routing policy controls."
+        },
+        "modelRouterFailoverProviders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Failover provider order."
+        },
+        "secretBrokerAllowedHosts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed host patterns for secret broker."
+        },
+        "secretBrokerAuthBindingsJson": {
+          "type": "string",
+          "description": "JSON array of auth binding objects (host_pattern, header, secret_ref, prefix)."
+        },
+        "secretBrokerEnabled": {
+          "type": "boolean",
+          "description": "Enable secret broker policy enforcement."
+        },
+        "secretBrokerFailOnMissingSecret": {
+          "type": "boolean",
+          "description": "Fail governed calls when referenced secret is unavailable."
+        },
+        "secretBrokerProvider": {
+          "type": "string",
+          "description": "Secret broker provider slug."
+        },
+        "secretBrokerStrictEndpointMode": {
+          "type": "boolean",
+          "description": "Require endpoint registration for secret resolution."
+        },
+        "shadowCritical": {
+          "type": "string",
+          "description": "Default action for critical risk events."
+        },
+        "shadowHigh": {
+          "type": "string",
+          "description": "Default action for high risk events."
+        },
+        "shadowLow": {
+          "type": "string",
+          "description": "Default action for low risk events."
+        },
+        "shadowMedium": {
+          "type": "string",
+          "description": "Default action for medium risk events."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID resolved from provider configuration."
+        },
+        "toolRiskOverrides": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tool-specific risk tier overrides."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp returned by GovAPI."
+        }
+      },
+      "required": [
+        "tenantId",
+        "updatedAt"
+      ],
+      "inputProperties": {
+        "complianceProfile": {
+          "type": "string",
+          "description": "Compliance profile (soc2, healthcare, financial, public_sector, privacy, ai_governance)."
+        },
+        "extraSettingsJson": {
+          "type": "string",
+          "description": "Additional JSON object merged into the outgoing settings payload for forward compatibility."
+        },
+        "modelRouterAllowedModels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed model names allowlist."
+        },
+        "modelRouterAllowedProviders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed model providers allowlist."
+        },
+        "modelRouterDefaultModel": {
+          "type": "string",
+          "description": "Default model name."
+        },
+        "modelRouterDefaultProvider": {
+          "type": "string",
+          "description": "Default model provider."
+        },
+        "modelRouterEnabled": {
+          "type": "boolean",
+          "description": "Enable model routing policy controls."
+        },
+        "modelRouterFailoverProviders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Failover provider order."
+        },
+        "secretBrokerAllowedHosts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed host patterns for secret broker."
+        },
+        "secretBrokerAuthBindingsJson": {
+          "type": "string",
+          "description": "JSON array of auth binding objects (host_pattern, header, secret_ref, prefix)."
+        },
+        "secretBrokerEnabled": {
+          "type": "boolean",
+          "description": "Enable secret broker policy enforcement."
+        },
+        "secretBrokerFailOnMissingSecret": {
+          "type": "boolean",
+          "description": "Fail governed calls when referenced secret is unavailable."
+        },
+        "secretBrokerProvider": {
+          "type": "string",
+          "description": "Secret broker provider slug."
+        },
+        "secretBrokerStrictEndpointMode": {
+          "type": "boolean",
+          "description": "Require endpoint registration for secret resolution."
+        },
+        "shadowCritical": {
+          "type": "string",
+          "description": "Default action for critical risk events."
+        },
+        "shadowHigh": {
+          "type": "string",
+          "description": "Default action for high risk events."
+        },
+        "shadowLow": {
+          "type": "string",
+          "description": "Default action for low risk events."
+        },
+        "shadowMedium": {
+          "type": "string",
+          "description": "Default action for medium risk events."
+        },
+        "toolRiskOverrides": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tool-specific risk tier overrides."
+        }
+      },
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering GovernanceSettings resources.\n",
+        "properties": {
+          "complianceProfile": {
+            "type": "string",
+            "description": "Compliance profile (soc2, healthcare, financial, public_sector, privacy, ai_governance)."
+          },
+          "extraSettingsJson": {
+            "type": "string",
+            "description": "Additional JSON object merged into the outgoing settings payload for forward compatibility."
+          },
+          "modelRouterAllowedModels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Allowed model names allowlist."
+          },
+          "modelRouterAllowedProviders": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Allowed model providers allowlist."
+          },
+          "modelRouterDefaultModel": {
+            "type": "string",
+            "description": "Default model name."
+          },
+          "modelRouterDefaultProvider": {
+            "type": "string",
+            "description": "Default model provider."
+          },
+          "modelRouterEnabled": {
+            "type": "boolean",
+            "description": "Enable model routing policy controls."
+          },
+          "modelRouterFailoverProviders": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Failover provider order."
+          },
+          "secretBrokerAllowedHosts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Allowed host patterns for secret broker."
+          },
+          "secretBrokerAuthBindingsJson": {
+            "type": "string",
+            "description": "JSON array of auth binding objects (host_pattern, header, secret_ref, prefix)."
+          },
+          "secretBrokerEnabled": {
+            "type": "boolean",
+            "description": "Enable secret broker policy enforcement."
+          },
+          "secretBrokerFailOnMissingSecret": {
+            "type": "boolean",
+            "description": "Fail governed calls when referenced secret is unavailable."
+          },
+          "secretBrokerProvider": {
+            "type": "string",
+            "description": "Secret broker provider slug."
+          },
+          "secretBrokerStrictEndpointMode": {
+            "type": "boolean",
+            "description": "Require endpoint registration for secret resolution."
+          },
+          "shadowCritical": {
+            "type": "string",
+            "description": "Default action for critical risk events."
+          },
+          "shadowHigh": {
+            "type": "string",
+            "description": "Default action for high risk events."
+          },
+          "shadowLow": {
+            "type": "string",
+            "description": "Default action for low risk events."
+          },
+          "shadowMedium": {
+            "type": "string",
+            "description": "Default action for medium risk events."
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "Tenant ID resolved from provider configuration."
+          },
+          "toolRiskOverrides": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tool-specific risk tier overrides."
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp returned by GovAPI."
+          }
+        },
+        "type": "object"
+      }
+    },
     "thoth:governance/packAssignment:PackAssignment": {
       "properties": {
         "agentId": {
@@ -2379,6 +2497,131 @@
         "type": "object"
       }
     },
+    "thoth:governance/pamSettings:PamSettings": {
+      "properties": {
+        "pamCallbackSecret": {
+          "type": "string",
+          "description": "Shared secret for PAM callback validation.",
+          "secret": true
+        },
+        "pamEnabled": {
+          "type": "boolean",
+          "description": "Enable PAM step-up callback integration."
+        },
+        "pamProvider": {
+          "type": "string",
+          "description": "PAM provider slug."
+        },
+        "pamRequestAuthToken": {
+          "type": "string",
+          "description": "Outbound PAM auth token.",
+          "secret": true
+        },
+        "pamRequestSecret": {
+          "type": "string",
+          "description": "Outbound PAM request secret.",
+          "secret": true
+        },
+        "pamRequestTimeoutSeconds": {
+          "type": "number",
+          "description": "Outbound PAM request timeout in seconds."
+        },
+        "pamRequestUrl": {
+          "type": "string",
+          "description": "Outbound PAM request URL."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID resolved from provider configuration."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp returned by GovAPI."
+        }
+      },
+      "required": [
+        "tenantId",
+        "updatedAt"
+      ],
+      "inputProperties": {
+        "pamCallbackSecret": {
+          "type": "string",
+          "description": "Shared secret for PAM callback validation.",
+          "secret": true
+        },
+        "pamEnabled": {
+          "type": "boolean",
+          "description": "Enable PAM step-up callback integration."
+        },
+        "pamProvider": {
+          "type": "string",
+          "description": "PAM provider slug."
+        },
+        "pamRequestAuthToken": {
+          "type": "string",
+          "description": "Outbound PAM auth token.",
+          "secret": true
+        },
+        "pamRequestSecret": {
+          "type": "string",
+          "description": "Outbound PAM request secret.",
+          "secret": true
+        },
+        "pamRequestTimeoutSeconds": {
+          "type": "number",
+          "description": "Outbound PAM request timeout in seconds."
+        },
+        "pamRequestUrl": {
+          "type": "string",
+          "description": "Outbound PAM request URL."
+        }
+      },
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering PamSettings resources.\n",
+        "properties": {
+          "pamCallbackSecret": {
+            "type": "string",
+            "description": "Shared secret for PAM callback validation.",
+            "secret": true
+          },
+          "pamEnabled": {
+            "type": "boolean",
+            "description": "Enable PAM step-up callback integration."
+          },
+          "pamProvider": {
+            "type": "string",
+            "description": "PAM provider slug."
+          },
+          "pamRequestAuthToken": {
+            "type": "string",
+            "description": "Outbound PAM auth token.",
+            "secret": true
+          },
+          "pamRequestSecret": {
+            "type": "string",
+            "description": "Outbound PAM request secret.",
+            "secret": true
+          },
+          "pamRequestTimeoutSeconds": {
+            "type": "number",
+            "description": "Outbound PAM request timeout in seconds."
+          },
+          "pamRequestUrl": {
+            "type": "string",
+            "description": "Outbound PAM request URL."
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "Tenant ID resolved from provider configuration."
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp returned by GovAPI."
+          }
+        },
+        "type": "object"
+      }
+    },
     "thoth:governance/policySync:PolicySync": {
       "properties": {
         "appliedAgentsJson": {
@@ -2540,123 +2783,8 @@
         "type": "object"
       }
     },
-    "thoth:governance/tenantSettings:TenantSettings": {
+    "thoth:governance/siemSettings:SiemSettings": {
       "properties": {
-        "complianceProfile": {
-          "type": "string",
-          "description": "Compliance profile (soc2, healthcare, financial, public_sector, privacy, ai_governance)."
-        },
-        "extraSettingsJson": {
-          "type": "string",
-          "description": "Additional JSON object merged into the outgoing settings payload for forward compatibility."
-        },
-        "modelRouterAllowedModels": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed model names allowlist."
-        },
-        "modelRouterAllowedProviders": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed model providers allowlist."
-        },
-        "modelRouterDefaultModel": {
-          "type": "string",
-          "description": "Default model name."
-        },
-        "modelRouterDefaultProvider": {
-          "type": "string",
-          "description": "Default model provider."
-        },
-        "modelRouterEnabled": {
-          "type": "boolean",
-          "description": "Enable model routing policy controls."
-        },
-        "modelRouterFailoverProviders": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Failover provider order."
-        },
-        "pamCallbackSecret": {
-          "type": "string",
-          "description": "Shared secret for PAM callback validation.",
-          "secret": true
-        },
-        "pamEnabled": {
-          "type": "boolean",
-          "description": "Enable PAM step-up callback integration."
-        },
-        "pamProvider": {
-          "type": "string",
-          "description": "PAM provider slug."
-        },
-        "pamRequestAuthToken": {
-          "type": "string",
-          "description": "Outbound PAM auth token.",
-          "secret": true
-        },
-        "pamRequestSecret": {
-          "type": "string",
-          "description": "Outbound PAM request secret.",
-          "secret": true
-        },
-        "pamRequestTimeoutSeconds": {
-          "type": "number",
-          "description": "Outbound PAM request timeout in seconds."
-        },
-        "pamRequestUrl": {
-          "type": "string",
-          "description": "Outbound PAM request URL."
-        },
-        "secretBrokerAllowedHosts": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed host patterns for secret broker."
-        },
-        "secretBrokerAuthBindingsJson": {
-          "type": "string",
-          "description": "JSON array of auth binding objects (host_pattern, header, secret_ref, prefix)."
-        },
-        "secretBrokerEnabled": {
-          "type": "boolean",
-          "description": "Enable secret broker policy enforcement."
-        },
-        "secretBrokerFailOnMissingSecret": {
-          "type": "boolean",
-          "description": "Fail governed calls when referenced secret is unavailable."
-        },
-        "secretBrokerProvider": {
-          "type": "string",
-          "description": "Secret broker provider slug."
-        },
-        "secretBrokerStrictEndpointMode": {
-          "type": "boolean",
-          "description": "Require endpoint registration for secret resolution."
-        },
-        "shadowCritical": {
-          "type": "string",
-          "description": "Default action for critical risk events."
-        },
-        "shadowHigh": {
-          "type": "string",
-          "description": "Default action for high risk events."
-        },
-        "shadowLow": {
-          "type": "string",
-          "description": "Default action for low risk events."
-        },
-        "shadowMedium": {
-          "type": "string",
-          "description": "Default action for medium risk events."
-        },
         "siemProvider": {
           "type": "string",
           "description": "SIEM provider slug."
@@ -2682,33 +2810,9 @@
           "type": "string",
           "description": "Tenant ID resolved from provider configuration."
         },
-        "testWebhookOnApply": {
-          "type": "boolean",
-          "description": "Run webhook test endpoint after applying settings."
-        },
-        "toolRiskOverrides": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Tool-specific risk tier overrides."
-        },
         "updatedAt": {
           "type": "string",
           "description": "Last update timestamp returned by GovAPI."
-        },
-        "webhookEnabled": {
-          "type": "boolean",
-          "description": "Enable outbound webhook delivery."
-        },
-        "webhookSecret": {
-          "type": "string",
-          "description": "Webhook signing secret.",
-          "secret": true
-        },
-        "webhookUrl": {
-          "type": "string",
-          "description": "Outbound webhook URL."
         }
       },
       "required": [
@@ -2716,121 +2820,6 @@
         "updatedAt"
       ],
       "inputProperties": {
-        "complianceProfile": {
-          "type": "string",
-          "description": "Compliance profile (soc2, healthcare, financial, public_sector, privacy, ai_governance)."
-        },
-        "extraSettingsJson": {
-          "type": "string",
-          "description": "Additional JSON object merged into the outgoing settings payload for forward compatibility."
-        },
-        "modelRouterAllowedModels": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed model names allowlist."
-        },
-        "modelRouterAllowedProviders": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed model providers allowlist."
-        },
-        "modelRouterDefaultModel": {
-          "type": "string",
-          "description": "Default model name."
-        },
-        "modelRouterDefaultProvider": {
-          "type": "string",
-          "description": "Default model provider."
-        },
-        "modelRouterEnabled": {
-          "type": "boolean",
-          "description": "Enable model routing policy controls."
-        },
-        "modelRouterFailoverProviders": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Failover provider order."
-        },
-        "pamCallbackSecret": {
-          "type": "string",
-          "description": "Shared secret for PAM callback validation.",
-          "secret": true
-        },
-        "pamEnabled": {
-          "type": "boolean",
-          "description": "Enable PAM step-up callback integration."
-        },
-        "pamProvider": {
-          "type": "string",
-          "description": "PAM provider slug."
-        },
-        "pamRequestAuthToken": {
-          "type": "string",
-          "description": "Outbound PAM auth token.",
-          "secret": true
-        },
-        "pamRequestSecret": {
-          "type": "string",
-          "description": "Outbound PAM request secret.",
-          "secret": true
-        },
-        "pamRequestTimeoutSeconds": {
-          "type": "number",
-          "description": "Outbound PAM request timeout in seconds."
-        },
-        "pamRequestUrl": {
-          "type": "string",
-          "description": "Outbound PAM request URL."
-        },
-        "secretBrokerAllowedHosts": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Allowed host patterns for secret broker."
-        },
-        "secretBrokerAuthBindingsJson": {
-          "type": "string",
-          "description": "JSON array of auth binding objects (host_pattern, header, secret_ref, prefix)."
-        },
-        "secretBrokerEnabled": {
-          "type": "boolean",
-          "description": "Enable secret broker policy enforcement."
-        },
-        "secretBrokerFailOnMissingSecret": {
-          "type": "boolean",
-          "description": "Fail governed calls when referenced secret is unavailable."
-        },
-        "secretBrokerProvider": {
-          "type": "string",
-          "description": "Secret broker provider slug."
-        },
-        "secretBrokerStrictEndpointMode": {
-          "type": "boolean",
-          "description": "Require endpoint registration for secret resolution."
-        },
-        "shadowCritical": {
-          "type": "string",
-          "description": "Default action for critical risk events."
-        },
-        "shadowHigh": {
-          "type": "string",
-          "description": "Default action for high risk events."
-        },
-        "shadowLow": {
-          "type": "string",
-          "description": "Default action for low risk events."
-        },
-        "shadowMedium": {
-          "type": "string",
-          "description": "Default action for medium risk events."
-        },
         "siemProvider": {
           "type": "string",
           "description": "SIEM provider slug."
@@ -2851,150 +2840,11 @@
         "siemWebhookUrl": {
           "type": "string",
           "description": "SIEM webhook URL."
-        },
-        "testWebhookOnApply": {
-          "type": "boolean",
-          "description": "Run webhook test endpoint after applying settings."
-        },
-        "toolRiskOverrides": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Tool-specific risk tier overrides."
-        },
-        "webhookEnabled": {
-          "type": "boolean",
-          "description": "Enable outbound webhook delivery."
-        },
-        "webhookSecret": {
-          "type": "string",
-          "description": "Webhook signing secret.",
-          "secret": true
-        },
-        "webhookUrl": {
-          "type": "string",
-          "description": "Outbound webhook URL."
         }
       },
       "stateInputs": {
-        "description": "Input properties used for looking up and filtering TenantSettings resources.\n",
+        "description": "Input properties used for looking up and filtering SiemSettings resources.\n",
         "properties": {
-          "complianceProfile": {
-            "type": "string",
-            "description": "Compliance profile (soc2, healthcare, financial, public_sector, privacy, ai_governance)."
-          },
-          "extraSettingsJson": {
-            "type": "string",
-            "description": "Additional JSON object merged into the outgoing settings payload for forward compatibility."
-          },
-          "modelRouterAllowedModels": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed model names allowlist."
-          },
-          "modelRouterAllowedProviders": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed model providers allowlist."
-          },
-          "modelRouterDefaultModel": {
-            "type": "string",
-            "description": "Default model name."
-          },
-          "modelRouterDefaultProvider": {
-            "type": "string",
-            "description": "Default model provider."
-          },
-          "modelRouterEnabled": {
-            "type": "boolean",
-            "description": "Enable model routing policy controls."
-          },
-          "modelRouterFailoverProviders": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Failover provider order."
-          },
-          "pamCallbackSecret": {
-            "type": "string",
-            "description": "Shared secret for PAM callback validation.",
-            "secret": true
-          },
-          "pamEnabled": {
-            "type": "boolean",
-            "description": "Enable PAM step-up callback integration."
-          },
-          "pamProvider": {
-            "type": "string",
-            "description": "PAM provider slug."
-          },
-          "pamRequestAuthToken": {
-            "type": "string",
-            "description": "Outbound PAM auth token.",
-            "secret": true
-          },
-          "pamRequestSecret": {
-            "type": "string",
-            "description": "Outbound PAM request secret.",
-            "secret": true
-          },
-          "pamRequestTimeoutSeconds": {
-            "type": "number",
-            "description": "Outbound PAM request timeout in seconds."
-          },
-          "pamRequestUrl": {
-            "type": "string",
-            "description": "Outbound PAM request URL."
-          },
-          "secretBrokerAllowedHosts": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "Allowed host patterns for secret broker."
-          },
-          "secretBrokerAuthBindingsJson": {
-            "type": "string",
-            "description": "JSON array of auth binding objects (host_pattern, header, secret_ref, prefix)."
-          },
-          "secretBrokerEnabled": {
-            "type": "boolean",
-            "description": "Enable secret broker policy enforcement."
-          },
-          "secretBrokerFailOnMissingSecret": {
-            "type": "boolean",
-            "description": "Fail governed calls when referenced secret is unavailable."
-          },
-          "secretBrokerProvider": {
-            "type": "string",
-            "description": "Secret broker provider slug."
-          },
-          "secretBrokerStrictEndpointMode": {
-            "type": "boolean",
-            "description": "Require endpoint registration for secret resolution."
-          },
-          "shadowCritical": {
-            "type": "string",
-            "description": "Default action for critical risk events."
-          },
-          "shadowHigh": {
-            "type": "string",
-            "description": "Default action for high risk events."
-          },
-          "shadowLow": {
-            "type": "string",
-            "description": "Default action for low risk events."
-          },
-          "shadowMedium": {
-            "type": "string",
-            "description": "Default action for medium risk events."
-          },
           "siemProvider": {
             "type": "string",
             "description": "SIEM provider slug."
@@ -3020,16 +2870,75 @@
             "type": "string",
             "description": "Tenant ID resolved from provider configuration."
           },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp returned by GovAPI."
+          }
+        },
+        "type": "object"
+      }
+    },
+    "thoth:governance/webhookSettings:WebhookSettings": {
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID resolved from provider configuration."
+        },
+        "testWebhookOnApply": {
+          "type": "boolean",
+          "description": "Run webhook test endpoint after applying settings."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp returned by GovAPI."
+        },
+        "webhookEnabled": {
+          "type": "boolean",
+          "description": "Enable outbound webhook delivery."
+        },
+        "webhookSecret": {
+          "type": "string",
+          "description": "Webhook signing secret.",
+          "secret": true
+        },
+        "webhookUrl": {
+          "type": "string",
+          "description": "Outbound webhook URL."
+        }
+      },
+      "required": [
+        "tenantId",
+        "updatedAt"
+      ],
+      "inputProperties": {
+        "testWebhookOnApply": {
+          "type": "boolean",
+          "description": "Run webhook test endpoint after applying settings."
+        },
+        "webhookEnabled": {
+          "type": "boolean",
+          "description": "Enable outbound webhook delivery."
+        },
+        "webhookSecret": {
+          "type": "string",
+          "description": "Webhook signing secret.",
+          "secret": true
+        },
+        "webhookUrl": {
+          "type": "string",
+          "description": "Outbound webhook URL."
+        }
+      },
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering WebhookSettings resources.\n",
+        "properties": {
+          "tenantId": {
+            "type": "string",
+            "description": "Tenant ID resolved from provider configuration."
+          },
           "testWebhookOnApply": {
             "type": "boolean",
             "description": "Run webhook test endpoint after applying settings."
-          },
-          "toolRiskOverrides": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Tool-specific risk tier overrides."
           },
           "updatedAt": {
             "type": "string",

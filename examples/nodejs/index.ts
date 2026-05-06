@@ -4,23 +4,29 @@ import * as thoth from "@atensec/pulumi-thoth";
 const cfg = new pulumi.Config();
 
 const tenantId = cfg.require("tenantId");
-const orgApiKey = cfg.requireSecret("orgApiKey");
 const webhookUrl = cfg.require("webhookUrl");
 const webhookSecret = cfg.requireSecret("webhookSecret");
 
+// Auth is resolved from THOTH_API_KEY (org-scoped).
 const provider = new thoth.Provider("thoth", {
   tenantId,
-  orgApiKey,
 });
 
-const tenantSettings = new thoth.governance.TenantSettings(
-  "baseline",
+const governanceSettings = new thoth.governance.GovernanceSettings(
+  "baseline-governance",
   {
     complianceProfile: "soc2",
     shadowLow: "allow",
     shadowMedium: "step_up",
     shadowHigh: "block",
     shadowCritical: "block",
+  },
+  { provider }
+);
+
+new thoth.governance.WebhookSettings(
+  "baseline-webhook",
+  {
     webhookEnabled: true,
     webhookUrl,
     webhookSecret,
@@ -53,5 +59,5 @@ const mdmSync = new thoth.mdm.Sync(
   { provider }
 );
 
-export const tenant = tenantSettings.tenantId;
+export const tenant = governanceSettings.tenantId;
 export const mdmSyncJobId = mdmSync.id;
