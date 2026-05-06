@@ -72,6 +72,10 @@ func Provider() tfbridge.ProviderInfo {
 				Tok: makeResource("governance", "DecisionFieldBackfill"),
 			},
 			"thoth_api_key":          {Tok: makeResource("access", "ApiKey")},
+			"thoth_fleet_api_key":    {Tok: makeResource("access", "FleetApiKey")},
+			"thoth_endpoint_api_key": {Tok: makeResource("access", "EndpointApiKey")},
+			"thoth_agent_api_key":    {Tok: makeResource("access", "AgentApiKey")},
+			"thoth_fleet":            {Tok: makeResource("fleet", "Fleet")},
 			"thoth_mdm_provider":     {Tok: makeResource("mdm", "Provider")},
 			"thoth_mdm_sync":         {Tok: makeResource("mdm", "Sync")},
 			"thoth_browser_provider": {Tok: makeResource("browser", "Provider")},
@@ -81,8 +85,58 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
+			"thoth_approvals": {Tok: makeDataSource("governance", "getApprovals")},
+			"thoth_api_key_authorization": {
+				Tok: makeDataSource("access", "getApiKeyAuthorization"),
+			},
+			"thoth_api_keys": {
+				Tok: makeDataSource("access", "getApiKeys"),
+			},
+			"thoth_billing_pricing": {
+				Tok: makeDataSource("billing", "getPricing"),
+			},
+			"thoth_billing_monthly_cost": {
+				Tok: makeDataSource("billing", "getMonthlyCost"),
+			},
+			"thoth_billing_invoices": {
+				Tok: makeDataSource("billing", "getInvoices"),
+			},
+			"thoth_billing_reports": {
+				Tok: makeDataSource("billing", "getReports"),
+			},
+			"thoth_billing_report": {
+				Tok: makeDataSource("billing", "getReport"),
+			},
+			"thoth_evidence_chain": {
+				Tok: makeDataSource("governance", "getEvidenceChain"),
+			},
+			"thoth_evidence_verify": {
+				Tok: makeDataSource("governance", "getEvidenceVerify"),
+			},
+			"thoth_evidence_bundle": {
+				Tok: makeDataSource("governance", "getEvidenceBundle"),
+			},
+			"thoth_endpoints":       {Tok: makeDataSource("fleet", "getEndpoints")},
+			"thoth_endpoint_stats":  {Tok: makeDataSource("fleet", "getEndpointStats")},
+			"thoth_fleets":          {Tok: makeDataSource("fleet", "getFleets")},
+			"thoth_fleet":           {Tok: makeDataSource("fleet", "getFleet")},
 			"thoth_tenant_settings": {Tok: makeDataSource("governance", "getTenantSettings")},
 			"thoth_governance_feed": {Tok: makeDataSource("governance", "getFeed")},
+			"thoth_governance_packs": {
+				Tok: makeDataSource("governance", "getPacks"),
+			},
+			"thoth_governance_runtime_status": {
+				Tok: makeDataSource("governance", "getRuntimeStatus"),
+			},
+			"thoth_governance_day7_report": {
+				Tok: makeDataSource("governance", "getDay7Report"),
+			},
+			"thoth_governance_reports_overview": {
+				Tok: makeDataSource("governance", "getReportsOverview"),
+			},
+			"thoth_governance_cost_report": {
+				Tok: makeDataSource("governance", "getCostReport"),
+			},
 			"thoth_governance_tools": {
 				Tok: makeDataSource("governance", "getTools"),
 			},
@@ -90,7 +144,17 @@ func Provider() tfbridge.ProviderInfo {
 				Tok: makeDataSource("governance", "getEvidenceSlos"),
 			},
 			"thoth_api_key_metrics": {Tok: makeDataSource("access", "getApiKeyMetrics")},
+			"thoth_mdm_providers":   {Tok: makeDataSource("mdm", "getProviders")},
 			"thoth_mdm_sync_job":    {Tok: makeDataSource("mdm", "getSyncJob")},
+			"thoth_browser_providers": {
+				Tok: makeDataSource("browser", "getProviders"),
+			},
+			"thoth_browser_policies": {
+				Tok: makeDataSource("browser", "getPolicies"),
+			},
+			"thoth_browser_enrollments": {
+				Tok: makeDataSource("browser", "getEnrollments"),
+			},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
 			PackageName: "@atensec/pulumi-thoth",

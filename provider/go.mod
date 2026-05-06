@@ -8,6 +8,8 @@ require (
 	github.com/pulumi/pulumi/sdk/v3 v3.228.0
 )
 
+replace github.com/atensecurity/terraform-provider-thoth => ../../terraform-provider-thoth
+
 require (
 	cel.dev/expr v0.25.1 // indirect
 	cloud.google.com/go v0.123.0 // indirect

@@ -15,6 +15,10 @@ The provider exposes Thoth control-plane resources for:
 - Browser providers, policies, and enrollments
 - MDM providers and sync operations
 - API key management
+- Fleet lifecycle management and fleet inventory reads
+- Billing pricing, invoice, monthly-cost, and historical report reads
+- Endpoint inventory and fleet summary stats
+- Governance pack catalog, runtime/reporting, and evidence chain reads
 - Policy sync, approvals, pack assignment, webhook tests, evidence backfill triggers,
   decision-field backfills, and decision-evidence SLO reads
 
@@ -35,6 +39,7 @@ Provider inputs mirror Terraform provider behavior:
 - `apiBaseUrl` (optional override; derived from tenant when omitted)
 
 If provider auth fields are omitted, exporting `THOTH_API_KEY` is supported.
+Use an org-scoped key.
 
 When `apiBaseUrl` is omitted, endpoint is derived as:
 

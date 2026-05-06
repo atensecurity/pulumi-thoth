@@ -2,6 +2,34 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.4 - 2026-05-06
+
+### Added
+
+- Bridged coverage for the latest Terraform provider parity surface, including:
+  - API key inventory (`getApiKeys`)
+  - Scope-specific API key resources (`FleetApiKey`, `EndpointApiKey`, `AgentApiKey`)
+  - Fleet lifecycle helpers (`getFleet`, `getFleets`, `getEndpoints`, `getEndpointStats`)
+  - Governance evidence reads (`getEvidenceBundle`, `getEvidenceChain`, `getEvidenceVerify`)
+  - MDM and browser inventory helpers (`getProviders`, `getPolicies`, `getEnrollments`)
+
+### Changed
+
+- Updated Pulumi provider module resolution to use the monorepo-local
+  `terraform-provider-thoth` module during CI/schema generation
+  (provider `go.mod` replace override), preventing tfgen/bridge drift against
+  published provider lag.
+- Regenerated Pulumi package schema against the current in-repo Terraform provider
+  implementation.
+- Bridged `ApiKey` now rejects `organization` scope creation; organization keys
+  should be created out-of-band with `thothctl` and used via provider auth config.
+
+### Compatibility
+
+- No breaking Pulumi token renames.
+- Auth behavior remains inherited from the Terraform provider bridge
+  (`THOTH_API_KEY` org-scoped workflow and admin bearer token flows).
+
 ## 0.1.3 - 2026-05-05
 
 ### Changed
