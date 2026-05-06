@@ -24,6 +24,7 @@ All notable changes to `pulumi-thoth` are documented in this file.
 
 ### Changed
 
+- Updated Terraform provider dependency pin to `github.com/atensecurity/terraform-provider-thoth v0.1.4`.
 - Updated Pulumi provider module resolution to use the monorepo-local
   `terraform-provider-thoth` module during CI/schema generation
   (provider `go.mod` replace override), preventing tfgen/bridge drift against
