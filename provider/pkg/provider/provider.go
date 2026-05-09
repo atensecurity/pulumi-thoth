@@ -59,6 +59,7 @@ func Provider() tfbridge.ProviderInfo {
 		Version:    version.Version,
 		GitHubOrg:  "atensecurity",
 		Resources: map[string]*tfbridge.ResourceInfo{
+			"thoth_billing_overage_cap": {Tok: makeResource("billing", "OverageCap")},
 			"thoth_governance_settings": {Tok: makeResource("governance", "GovernanceSettings")},
 			"thoth_webhook_settings":    {Tok: makeResource("governance", "WebhookSettings")},
 			"thoth_siem_settings":       {Tok: makeResource("governance", "SiemSettings")},
@@ -99,6 +100,12 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			"thoth_billing_monthly_cost": {
 				Tok: makeDataSource("billing", "getMonthlyCost"),
+			},
+			"thoth_billing_credit_bank": {
+				Tok: makeDataSource("billing", "getCreditBank"),
+			},
+			"thoth_billing_estimate": {
+				Tok: makeDataSource("billing", "getEstimate"),
 			},
 			"thoth_billing_invoices": {
 				Tok: makeDataSource("billing", "getInvoices"),

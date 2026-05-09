@@ -731,6 +731,117 @@
         "type": "object"
       }
     },
+    "thoth:billing/overageCap:OverageCap": {
+      "properties": {
+        "activeTier": {
+          "type": "string",
+          "description": "Effective active pricing tier."
+        },
+        "baseMonthlyPlatformFeeUsd": {
+          "type": "number",
+          "description": "Base monthly platform fee in USD for the active tier."
+        },
+        "governedIdentityUsdPerMonth": {
+          "type": "number",
+          "description": "Per-governed-identity overage rate."
+        },
+        "includedGovernedIdentities": {
+          "type": "integer",
+          "description": "Included governed identities before overage."
+        },
+        "includedPolicyChecks": {
+          "type": "integer",
+          "description": "Included policy checks before overage."
+        },
+        "overageCapUsd": {
+          "type": "number",
+          "description": "Monthly variable overage cap in USD."
+        },
+        "policyChecksUsdPerMillion": {
+          "type": "number",
+          "description": "Per-million policy checks overage rate."
+        },
+        "responseJson": {
+          "type": "string",
+          "description": "Full billing pricing profile response payload as JSON."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID resolved from provider configuration."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when the overage cap was last applied via provider."
+        }
+      },
+      "required": [
+        "activeTier",
+        "baseMonthlyPlatformFeeUsd",
+        "governedIdentityUsdPerMonth",
+        "includedGovernedIdentities",
+        "includedPolicyChecks",
+        "overageCapUsd",
+        "policyChecksUsdPerMillion",
+        "responseJson",
+        "tenantId",
+        "updatedAt"
+      ],
+      "inputProperties": {
+        "overageCapUsd": {
+          "type": "number",
+          "description": "Monthly variable overage cap in USD."
+        }
+      },
+      "requiredInputs": [
+        "overageCapUsd"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering OverageCap resources.\n",
+        "properties": {
+          "activeTier": {
+            "type": "string",
+            "description": "Effective active pricing tier."
+          },
+          "baseMonthlyPlatformFeeUsd": {
+            "type": "number",
+            "description": "Base monthly platform fee in USD for the active tier."
+          },
+          "governedIdentityUsdPerMonth": {
+            "type": "number",
+            "description": "Per-governed-identity overage rate."
+          },
+          "includedGovernedIdentities": {
+            "type": "integer",
+            "description": "Included governed identities before overage."
+          },
+          "includedPolicyChecks": {
+            "type": "integer",
+            "description": "Included policy checks before overage."
+          },
+          "overageCapUsd": {
+            "type": "number",
+            "description": "Monthly variable overage cap in USD."
+          },
+          "policyChecksUsdPerMillion": {
+            "type": "number",
+            "description": "Per-million policy checks overage rate."
+          },
+          "responseJson": {
+            "type": "string",
+            "description": "Full billing pricing profile response payload as JSON."
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "Tenant ID resolved from provider configuration."
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Timestamp when the overage cap was last applied via provider."
+          }
+        },
+        "type": "object"
+      }
+    },
     "thoth:browser/enrollment:Enrollment": {
       "properties": {
         "browserProfile": {
@@ -3553,6 +3664,198 @@
         "type": "object"
       }
     },
+    "thoth:billing/getCreditBank:getCreditBank": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getCreditBank.\n",
+        "properties": {
+          "asOf": {
+            "type": "string"
+          },
+          "averageMonthlyBurnCents": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "description": "A collection of values returned by getCreditBank.\n",
+        "properties": {
+          "activeWalletCount": {
+            "type": "integer"
+          },
+          "activeWalletsJson": {
+            "type": "string"
+          },
+          "asOf": {
+            "type": "string"
+          },
+          "averageMonthlyBurnCents": {
+            "type": "integer"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "lowBalanceAlert": {
+            "type": "boolean"
+          },
+          "lowBalanceThresholdCents": {
+            "type": "integer"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "totalActiveBalanceCents": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "activeWalletCount",
+          "activeWalletsJson",
+          "lowBalanceAlert",
+          "lowBalanceThresholdCents",
+          "responseJson",
+          "totalActiveBalanceCents",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:billing/getEstimate:getEstimate": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getEstimate.\n",
+        "properties": {
+          "activeIdentitiesOverride": {
+            "type": "integer"
+          },
+          "asOf": {
+            "type": "string"
+          },
+          "averageMonthlyBurnCents": {
+            "type": "integer"
+          },
+          "complianceUpliftPercent": {
+            "type": "number"
+          },
+          "fixedDiscountPercent": {
+            "type": "number"
+          },
+          "period": {
+            "type": "string"
+          },
+          "policyChecksOverride": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "description": "A collection of values returned by getEstimate.\n",
+        "properties": {
+          "activeIdentitiesOverride": {
+            "type": "integer"
+          },
+          "asOf": {
+            "type": "string"
+          },
+          "averageMonthlyBurnCents": {
+            "type": "integer"
+          },
+          "complianceReceipt": {
+            "type": "string"
+          },
+          "complianceUpliftPercent": {
+            "type": "number"
+          },
+          "creditBurnsJson": {
+            "type": "string"
+          },
+          "fixedDiscountPercent": {
+            "type": "number"
+          },
+          "grossBillCents": {
+            "type": "integer"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "lineItemComplianceUpliftCents": {
+            "type": "integer"
+          },
+          "lineItemCreditsAppliedCents": {
+            "type": "integer"
+          },
+          "lineItemEnforcementOverageCents": {
+            "type": "integer"
+          },
+          "lineItemFixedDiscountCents": {
+            "type": "integer"
+          },
+          "lineItemIdentityOverageCents": {
+            "type": "integer"
+          },
+          "lineItemPlatformFeeCents": {
+            "type": "integer"
+          },
+          "lineItemStorageCapacityCents": {
+            "type": "integer"
+          },
+          "lineItemStorageRetentionCents": {
+            "type": "integer"
+          },
+          "lowBalanceAlert": {
+            "type": "boolean"
+          },
+          "netTotalCents": {
+            "type": "integer"
+          },
+          "period": {
+            "type": "string"
+          },
+          "periodEffective": {
+            "type": "string"
+          },
+          "policyChecksOverride": {
+            "type": "integer"
+          },
+          "pricingTier": {
+            "type": "string"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "summaryJson": {
+            "type": "string"
+          },
+          "wormRetentionDays": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "complianceReceipt",
+          "creditBurnsJson",
+          "grossBillCents",
+          "lineItemComplianceUpliftCents",
+          "lineItemCreditsAppliedCents",
+          "lineItemEnforcementOverageCents",
+          "lineItemFixedDiscountCents",
+          "lineItemIdentityOverageCents",
+          "lineItemPlatformFeeCents",
+          "lineItemStorageCapacityCents",
+          "lineItemStorageRetentionCents",
+          "lowBalanceAlert",
+          "netTotalCents",
+          "periodEffective",
+          "pricingTier",
+          "responseJson",
+          "summaryJson",
+          "wormRetentionDays",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
     "thoth:billing/getInvoices:getInvoices": {
       "inputs": {
         "description": "A collection of arguments for invoking getInvoices.\n",
@@ -3600,16 +3903,60 @@
       "outputs": {
         "description": "A collection of values returned by getMonthlyCost.\n",
         "properties": {
+          "actionCostUsd": {
+            "type": "number"
+          },
+          "creditDiscountUsd": {
+            "type": "number"
+          },
+          "governedIdentitiesObserved": {
+            "type": "integer"
+          },
+          "governedIdentityCostUsd": {
+            "type": "number"
+          },
           "id": {
             "description": "The provider-assigned unique ID for this managed resource.",
             "type": "string"
           },
+          "netCostUsd": {
+            "type": "number"
+          },
+          "policyChecksCostUsd": {
+            "type": "number"
+          },
+          "policyChecksTotal": {
+            "type": "integer"
+          },
           "responseJson": {
             "type": "string"
+          },
+          "stripeInvoiceTotalUsd": {
+            "type": "number"
+          },
+          "stripeReconciliationUsd": {
+            "type": "number"
+          },
+          "tier": {
+            "type": "string"
+          },
+          "totalCostUsd": {
+            "type": "number"
           }
         },
         "required": [
+          "actionCostUsd",
+          "creditDiscountUsd",
+          "governedIdentitiesObserved",
+          "governedIdentityCostUsd",
+          "netCostUsd",
+          "policyChecksCostUsd",
+          "policyChecksTotal",
           "responseJson",
+          "stripeInvoiceTotalUsd",
+          "stripeReconciliationUsd",
+          "tier",
+          "totalCostUsd",
           "id"
         ],
         "type": "object"
@@ -3619,15 +3966,55 @@
       "outputs": {
         "description": "A collection of values returned by getPricing.\n",
         "properties": {
+          "activeTier": {
+            "type": "string"
+          },
+          "baseMonthlyPlatformFeeUsd": {
+            "type": "number"
+          },
+          "catalogVersion": {
+            "type": "string"
+          },
+          "creditDiscountPercent": {
+            "type": "number"
+          },
+          "governedIdentityUsdPerMonth": {
+            "type": "number"
+          },
           "id": {
             "description": "The provider-assigned unique ID for this managed resource.",
             "type": "string"
+          },
+          "includedGovernedIdentities": {
+            "type": "integer"
+          },
+          "includedPolicyChecks": {
+            "type": "integer"
+          },
+          "overageCapUsd": {
+            "type": "number"
+          },
+          "policyChecksUsdPerMillion": {
+            "type": "number"
+          },
+          "prepaidCreditUsd": {
+            "type": "number"
           },
           "responseJson": {
             "type": "string"
           }
         },
         "required": [
+          "activeTier",
+          "baseMonthlyPlatformFeeUsd",
+          "catalogVersion",
+          "creditDiscountPercent",
+          "governedIdentityUsdPerMonth",
+          "includedGovernedIdentities",
+          "includedPolicyChecks",
+          "overageCapUsd",
+          "policyChecksUsdPerMillion",
+          "prepaidCreditUsd",
           "responseJson",
           "id"
         ],
