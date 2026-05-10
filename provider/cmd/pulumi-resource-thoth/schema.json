@@ -2258,9 +2258,21 @@
           "type": "string",
           "description": "Approval policy ID for pack application."
         },
+        "criticalThreshold": {
+          "type": "number",
+          "description": "Force at least STEP_UP when normalized risk meets/exceeds this threshold (0-1)."
+        },
+        "delegationBoost": {
+          "type": "number",
+          "description": "Deterministic boost for delegation risk signals (0-100)."
+        },
         "environment": {
           "type": "string",
           "description": "Environment: dev or prod."
+        },
+        "mismatchBoost": {
+          "type": "number",
+          "description": "Deterministic boost for purpose/sensitivity mismatch signals (0-100)."
         },
         "overridesJson": {
           "type": "string",
@@ -2289,6 +2301,10 @@
         "tenantId": {
           "type": "string",
           "description": "Tenant ID from provider configuration."
+        },
+        "trustFloor": {
+          "type": "number",
+          "description": "Ignore low-confidence purpose/delegation signals below this floor (0-1)."
         }
       },
       "required": [
@@ -2311,9 +2327,21 @@
           "type": "string",
           "description": "Approval policy ID for pack application."
         },
+        "criticalThreshold": {
+          "type": "number",
+          "description": "Force at least STEP_UP when normalized risk meets/exceeds this threshold (0-1)."
+        },
+        "delegationBoost": {
+          "type": "number",
+          "description": "Deterministic boost for delegation risk signals (0-100)."
+        },
         "environment": {
           "type": "string",
           "description": "Environment: dev or prod."
+        },
+        "mismatchBoost": {
+          "type": "number",
+          "description": "Deterministic boost for purpose/sensitivity mismatch signals (0-100)."
         },
         "overridesJson": {
           "type": "string",
@@ -2322,6 +2350,10 @@
         "packId": {
           "type": "string",
           "description": "Compliance pack identifier."
+        },
+        "trustFloor": {
+          "type": "number",
+          "description": "Ignore low-confidence purpose/delegation signals below this floor (0-1)."
         }
       },
       "requiredInputs": [
@@ -2347,9 +2379,21 @@
             "type": "string",
             "description": "Approval policy ID for pack application."
           },
+          "criticalThreshold": {
+            "type": "number",
+            "description": "Force at least STEP_UP when normalized risk meets/exceeds this threshold (0-1)."
+          },
+          "delegationBoost": {
+            "type": "number",
+            "description": "Deterministic boost for delegation risk signals (0-100)."
+          },
           "environment": {
             "type": "string",
             "description": "Environment: dev or prod."
+          },
+          "mismatchBoost": {
+            "type": "number",
+            "description": "Deterministic boost for purpose/sensitivity mismatch signals (0-100)."
           },
           "overridesJson": {
             "type": "string",
@@ -2378,6 +2422,10 @@
           "tenantId": {
             "type": "string",
             "description": "Tenant ID from provider configuration."
+          },
+          "trustFloor": {
+            "type": "number",
+            "description": "Ignore low-confidence purpose/delegation signals below this floor (0-1)."
           }
         },
         "type": "object"
@@ -2404,6 +2452,14 @@
           "type": "string",
           "description": "Approval policy ID for pack application (defaults to 'default')."
         },
+        "criticalThreshold": {
+          "type": "number",
+          "description": "Force at least STEP_UP when normalized risk meets/exceeds this threshold (0-1). Applied to selected pack_ids."
+        },
+        "delegationBoost": {
+          "type": "number",
+          "description": "Deterministic boost for delegation risk signals (0-100). Applied to selected pack_ids."
+        },
         "endpointIds": {
           "type": "array",
           "items": {
@@ -2429,6 +2485,10 @@
         "lastAppliedAt": {
           "type": "string",
           "description": "Timestamp of the most recent apply operation."
+        },
+        "mismatchBoost": {
+          "type": "number",
+          "description": "Deterministic boost for purpose/sensitivity mismatch signals (0-100). Applied to selected pack_ids."
         },
         "overridesByPackJson": {
           "type": "string",
@@ -2460,6 +2520,10 @@
         "trigger": {
           "type": "string",
           "description": "Change this value to force a fresh apply run."
+        },
+        "trustFloor": {
+          "type": "number",
+          "description": "Ignore low-confidence purpose/delegation signals below this floor (0-1). Applied to selected pack_ids."
         }
       },
       "required": [
@@ -2488,6 +2552,14 @@
           "type": "string",
           "description": "Approval policy ID for pack application (defaults to 'default')."
         },
+        "criticalThreshold": {
+          "type": "number",
+          "description": "Force at least STEP_UP when normalized risk meets/exceeds this threshold (0-1). Applied to selected pack_ids."
+        },
+        "delegationBoost": {
+          "type": "number",
+          "description": "Deterministic boost for delegation risk signals (0-100). Applied to selected pack_ids."
+        },
         "endpointIds": {
           "type": "array",
           "items": {
@@ -2506,6 +2578,10 @@
           },
           "description": "Fleet IDs whose agents should receive the selected packs."
         },
+        "mismatchBoost": {
+          "type": "number",
+          "description": "Deterministic boost for purpose/sensitivity mismatch signals (0-100). Applied to selected pack_ids."
+        },
         "overridesByPackJson": {
           "type": "string",
           "description": "JSON map keyed by<span pulumi-lang-nodejs=\" packId \" pulumi-lang-dotnet=\" PackId \" pulumi-lang-go=\" packId \" pulumi-lang-python=\" pack_id \" pulumi-lang-yaml=\" packId \" pulumi-lang-java=\" packId \"> packId </span>with per-pack overrides."
@@ -2520,6 +2596,10 @@
         "trigger": {
           "type": "string",
           "description": "Change this value to force a fresh apply run."
+        },
+        "trustFloor": {
+          "type": "number",
+          "description": "Ignore low-confidence purpose/delegation signals below this floor (0-1). Applied to selected pack_ids."
         }
       },
       "requiredInputs": [
@@ -2547,6 +2627,14 @@
             "type": "string",
             "description": "Approval policy ID for pack application (defaults to 'default')."
           },
+          "criticalThreshold": {
+            "type": "number",
+            "description": "Force at least STEP_UP when normalized risk meets/exceeds this threshold (0-1). Applied to selected pack_ids."
+          },
+          "delegationBoost": {
+            "type": "number",
+            "description": "Deterministic boost for delegation risk signals (0-100). Applied to selected pack_ids."
+          },
           "endpointIds": {
             "type": "array",
             "items": {
@@ -2572,6 +2660,10 @@
           "lastAppliedAt": {
             "type": "string",
             "description": "Timestamp of the most recent apply operation."
+          },
+          "mismatchBoost": {
+            "type": "number",
+            "description": "Deterministic boost for purpose/sensitivity mismatch signals (0-100). Applied to selected pack_ids."
           },
           "overridesByPackJson": {
             "type": "string",
@@ -2603,6 +2695,10 @@
           "trigger": {
             "type": "string",
             "description": "Change this value to force a fresh apply run."
+          },
+          "trustFloor": {
+            "type": "number",
+            "description": "Ignore low-confidence purpose/delegation signals below this floor (0-1). Applied to selected pack_ids."
           }
         },
         "type": "object"
