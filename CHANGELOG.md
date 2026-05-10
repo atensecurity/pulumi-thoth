@@ -2,6 +2,31 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.7 - 2026-05-10
+
+### Added
+
+- Terraform parity note for endpoint inventory management:
+  - upstream Terraform provider now exposes `thoth_endpoint` for endpoint
+    registration/update flows used by scoped key tests.
+
+### Fixed
+
+- Pulumi bridge inherits Terraform provider `0.1.7` drift/stability fixes for:
+  - `BrowserPolicy` server-managed audit/version fields (`version`,
+    `createdBy`, `updatedBy`) no longer causing post-apply state drift when
+    unset in config.
+  - `MdmProvider.configJson` sensitive-state round-trip consistency when backend
+    responses redact or normalize provider config payloads.
+- Trantor bootstrap example surfaces now reflect stable default behavior for
+  environment-dependent probes and corrected OPA policy examples.
+
+### Changed
+
+- Documented GovAPI Cedar runtime validation compatibility behavior for bridged
+  policy bundle workflows (Cedar syntax is validated at GovAPI write-time; CLI
+  runtime validation remains best-effort by deployment environment).
+
 ## 0.1.6 - 2026-05-10
 
 ### Added
