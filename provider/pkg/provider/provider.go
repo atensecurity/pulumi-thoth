@@ -65,6 +65,7 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_siem_settings":       {Tok: makeResource("governance", "SiemSettings")},
 			"thoth_pam_settings":        {Tok: makeResource("governance", "PamSettings")},
 			"thoth_policy_sync":         {Tok: makeResource("governance", "PolicySync")},
+			"thoth_policy_bundle":       {Tok: makeResource("governance", "PolicyBundle")},
 			"thoth_approval_decision":   {Tok: makeResource("governance", "ApprovalDecision")},
 			"thoth_pack_assignment":     {Tok: makeResource("governance", "PackAssignment")},
 			"thoth_pack_assignment_bulk": {
@@ -134,6 +135,12 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_governance_packs": {
 				Tok: makeDataSource("governance", "getPacks"),
 			},
+			"thoth_governance_pack_rules": {
+				Tok: makeDataSource("governance", "getPackRules"),
+			},
+			"thoth_governance_pack_rule_versions": {
+				Tok: makeDataSource("governance", "getPackRuleVersions"),
+			},
 			"thoth_governance_runtime_status": {
 				Tok: makeDataSource("governance", "getRuntimeStatus"),
 			},
@@ -145,6 +152,15 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			"thoth_governance_cost_report": {
 				Tok: makeDataSource("governance", "getCostReport"),
+			},
+			"thoth_report_data": {
+				Tok: makeDataSource("governance", "getReportData"),
+			},
+			"thoth_policy_bundles": {
+				Tok: makeDataSource("governance", "getPolicyBundles"),
+			},
+			"thoth_effective_policy_bundles": {
+				Tok: makeDataSource("governance", "getEffectivePolicyBundles"),
 			},
 			"thoth_governance_tools": {
 				Tok: makeDataSource("governance", "getTools"),

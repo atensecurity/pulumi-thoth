@@ -2,6 +2,24 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.6 - 2026-05-10
+
+### Changed
+
+- Updated Terraform provider bridge dependency pin to
+  `github.com/atensecurity/terraform-provider-thoth v0.1.6`.
+- Regenerated Pulumi schema/SDK surfaces to reflect governance updates in this branch:
+  - explicit regulatory regimes on governance settings
+  - policy bundle surfaces aligned to mode-based behavior
+- Refreshed Pulumi release defaults/examples to `0.1.6`:
+  - `Makefile` default `VERSION`
+  - Node.js example package dependency (`@atensec/pulumi-thoth`)
+  - Runbook install commands for Node.js/Python quickstarts
+
+### Breaking Changes
+
+- Removed environment-scoped policy bundle inputs from bridged policy bundle APIs.
+
 ## 0.1.5 - 2026-05-09
 
 ### Changed

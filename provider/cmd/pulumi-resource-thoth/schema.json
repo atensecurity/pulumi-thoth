@@ -1978,6 +1978,13 @@
           },
           "description": "Failover provider order."
         },
+        "regulatoryRegimes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Explicit regulatory regimes for onboarding baseline auto-pack loading (for example: soc2, hipaa, gdpr, fedramp, sec_cftc). Defaults to SOC2 when unset."
+        },
         "secretBrokerAllowedHosts": {
           "type": "array",
           "items": {
@@ -2083,6 +2090,13 @@
           },
           "description": "Failover provider order."
         },
+        "regulatoryRegimes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Explicit regulatory regimes for onboarding baseline auto-pack loading (for example: soc2, hipaa, gdpr, fedramp, sec_cftc). Defaults to SOC2 when unset."
+        },
         "secretBrokerAllowedHosts": {
           "type": "array",
           "items": {
@@ -2177,6 +2191,13 @@
               "type": "string"
             },
             "description": "Failover provider order."
+          },
+          "regulatoryRegimes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Explicit regulatory regimes for onboarding baseline auto-pack loading (for example: soc2, hipaa, gdpr, fedramp, sec_cftc). Defaults to SOC2 when unset."
           },
           "secretBrokerAllowedHosts": {
             "type": "array",
@@ -2824,6 +2845,233 @@
           "updatedAt": {
             "type": "string",
             "description": "Last update timestamp returned by GovAPI."
+          }
+        },
+        "type": "object"
+      }
+    },
+    "thoth:governance/policyBundle:PolicyBundle": {
+      "properties": {
+        "assignments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Assignment targets (for example: all, agent:security-analyst-agent, coding-agent). Defaults to all."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Creator identity."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional policy bundle description."
+        },
+        "enforcementMode": {
+          "type": "string",
+          "description": "Customer-facing policy mode: enforce or observe. Defaults to enforce."
+        },
+        "expectedHash": {
+          "type": "string",
+          "description": "Optional expected SHA-256 hash (hex or sha256:<hex>) to enforce policy integrity."
+        },
+        "framework": {
+          "type": "string",
+          "description": "Policy framework: OPA or CEDAR."
+        },
+        "name": {
+          "type": "string",
+          "description": "Stable bundle name. Updates create a new version for the same name."
+        },
+        "policyHash": {
+          "type": "string",
+          "description": "SHA-256 hash of policy content."
+        },
+        "rawPolicy": {
+          "type": "string",
+          "description": "Raw Rego/Cedar policy payload. Set this or source_uri/s3_uri.",
+          "secret": true
+        },
+        "resolvedVersion": {
+          "type": "string",
+          "description": "Resolved immutable source version (S3 version ID or file revision hint)."
+        },
+        "s3Uri": {
+          "type": "string",
+          "description": "Legacy S3 source URI (for example: s3://bucket/path/policy.rego). Set this or raw_policy. Prefer source_uri."
+        },
+        "s3VersionId": {
+          "type": "string",
+          "description": "Optional S3 object version ID to pin deterministic policy enforcement."
+        },
+        "sourceUri": {
+          "type": "string",
+          "description": "Unified policy source URI (file:// or s3://). Set this or raw_policy."
+        },
+        "status": {
+          "type": "string",
+          "description": "Bundle lifecycle status: active, staged, paused, or disabled (alias of paused)."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID from provider configuration."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp."
+        },
+        "version": {
+          "type": "integer",
+          "description": "Monotonic policy bundle version."
+        }
+      },
+      "required": [
+        "createdAt",
+        "createdBy",
+        "framework",
+        "name",
+        "policyHash",
+        "resolvedVersion",
+        "tenantId",
+        "updatedAt",
+        "version"
+      ],
+      "inputProperties": {
+        "assignments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Assignment targets (for example: all, agent:security-analyst-agent, coding-agent). Defaults to all."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional policy bundle description."
+        },
+        "enforcementMode": {
+          "type": "string",
+          "description": "Customer-facing policy mode: enforce or observe. Defaults to enforce."
+        },
+        "expectedHash": {
+          "type": "string",
+          "description": "Optional expected SHA-256 hash (hex or sha256:<hex>) to enforce policy integrity."
+        },
+        "framework": {
+          "type": "string",
+          "description": "Policy framework: OPA or CEDAR."
+        },
+        "name": {
+          "type": "string",
+          "description": "Stable bundle name. Updates create a new version for the same name."
+        },
+        "rawPolicy": {
+          "type": "string",
+          "description": "Raw Rego/Cedar policy payload. Set this or source_uri/s3_uri.",
+          "secret": true
+        },
+        "s3Uri": {
+          "type": "string",
+          "description": "Legacy S3 source URI (for example: s3://bucket/path/policy.rego). Set this or raw_policy. Prefer source_uri."
+        },
+        "s3VersionId": {
+          "type": "string",
+          "description": "Optional S3 object version ID to pin deterministic policy enforcement."
+        },
+        "sourceUri": {
+          "type": "string",
+          "description": "Unified policy source URI (file:// or s3://). Set this or raw_policy."
+        },
+        "status": {
+          "type": "string",
+          "description": "Bundle lifecycle status: active, staged, paused, or disabled (alias of paused)."
+        }
+      },
+      "requiredInputs": [
+        "framework",
+        "name"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering PolicyBundle resources.\n",
+        "properties": {
+          "assignments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Assignment targets (for example: all, agent:security-analyst-agent, coding-agent). Defaults to all."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Creation timestamp."
+          },
+          "createdBy": {
+            "type": "string",
+            "description": "Creator identity."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional policy bundle description."
+          },
+          "enforcementMode": {
+            "type": "string",
+            "description": "Customer-facing policy mode: enforce or observe. Defaults to enforce."
+          },
+          "expectedHash": {
+            "type": "string",
+            "description": "Optional expected SHA-256 hash (hex or sha256:<hex>) to enforce policy integrity."
+          },
+          "framework": {
+            "type": "string",
+            "description": "Policy framework: OPA or CEDAR."
+          },
+          "name": {
+            "type": "string",
+            "description": "Stable bundle name. Updates create a new version for the same name."
+          },
+          "policyHash": {
+            "type": "string",
+            "description": "SHA-256 hash of policy content."
+          },
+          "rawPolicy": {
+            "type": "string",
+            "description": "Raw Rego/Cedar policy payload. Set this or source_uri/s3_uri.",
+            "secret": true
+          },
+          "resolvedVersion": {
+            "type": "string",
+            "description": "Resolved immutable source version (S3 version ID or file revision hint)."
+          },
+          "s3Uri": {
+            "type": "string",
+            "description": "Legacy S3 source URI (for example: s3://bucket/path/policy.rego). Set this or raw_policy. Prefer source_uri."
+          },
+          "s3VersionId": {
+            "type": "string",
+            "description": "Optional S3 object version ID to pin deterministic policy enforcement."
+          },
+          "sourceUri": {
+            "type": "string",
+            "description": "Unified policy source URI (file:// or s3://). Set this or raw_policy."
+          },
+          "status": {
+            "type": "string",
+            "description": "Bundle lifecycle status: active, staged, paused, or disabled (alias of paused)."
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "Tenant ID from provider configuration."
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp."
+          },
+          "version": {
+            "type": "integer",
+            "description": "Monotonic policy bundle version."
           }
         },
         "type": "object"
@@ -4595,6 +4843,47 @@
         "type": "object"
       }
     },
+    "thoth:governance/getEffectivePolicyBundles:getEffectivePolicyBundles": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getEffectivePolicyBundles.\n",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "framework": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "description": "A collection of values returned by getEffectivePolicyBundles.\n",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "dataJson": {
+            "type": "string"
+          },
+          "framework": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "dataJson",
+          "total",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
     "thoth:governance/getEvidenceBundle:getEvidenceBundle": {
       "inputs": {
         "description": "A collection of arguments for invoking getEvidenceBundle.\n",
@@ -4924,6 +5213,104 @@
         "type": "object"
       }
     },
+    "thoth:governance/getPackRuleVersions:getPackRuleVersions": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getPackRuleVersions.\n",
+        "properties": {
+          "packId": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "packId"
+        ]
+      },
+      "outputs": {
+        "description": "A collection of values returned by getPackRuleVersions.\n",
+        "properties": {
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "packId": {
+            "type": "string"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          },
+          "versionsJson": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "packId",
+          "responseJson",
+          "total",
+          "versionsJson",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:governance/getPackRules:getPackRules": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getPackRules.\n",
+        "properties": {
+          "packId": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "packId"
+        ]
+      },
+      "outputs": {
+        "description": "A collection of values returned by getPackRules.\n",
+        "properties": {
+          "basePackVersion": {
+            "type": "string"
+          },
+          "currentVersionJson": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "packId": {
+            "type": "string"
+          },
+          "regulation": {
+            "type": "string"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "totalVersions": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "basePackVersion",
+          "currentVersionJson",
+          "displayName",
+          "packId",
+          "regulation",
+          "responseJson",
+          "totalVersions",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
     "thoth:governance/getPacks:getPacks": {
       "outputs": {
         "description": "A collection of values returned by getPacks.\n",
@@ -4941,6 +5328,59 @@
         },
         "required": [
           "packsJson",
+          "total",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:governance/getPolicyBundles:getPolicyBundles": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getPolicyBundles.\n",
+        "properties": {
+          "assignment": {
+            "type": "string"
+          },
+          "enforcementMode": {
+            "type": "string"
+          },
+          "framework": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "description": "A collection of values returned by getPolicyBundles.\n",
+        "properties": {
+          "assignment": {
+            "type": "string"
+          },
+          "dataJson": {
+            "type": "string"
+          },
+          "enforcementMode": {
+            "type": "string"
+          },
+          "framework": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "dataJson",
           "total",
           "id"
         ],
@@ -5020,6 +5460,12 @@
             "description": "The provider-assigned unique ID for this managed resource.",
             "type": "string"
           },
+          "regulatoryRegimes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
           "settingsJson": {
             "type": "string"
           },
@@ -5044,6 +5490,7 @@
         },
         "required": [
           "complianceProfile",
+          "regulatoryRegimes",
           "settingsJson",
           "tenantId",
           "toolRiskOverrides",

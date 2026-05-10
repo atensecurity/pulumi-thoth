@@ -1,4 +1,5 @@
 import * as pulumi from "@pulumi/pulumi";
+import * as fs from "fs";
 import * as thoth from "@atensec/pulumi-thoth";
 
 const cfg = new pulumi.Config();
@@ -6,6 +7,7 @@ const cfg = new pulumi.Config();
 const tenantId = cfg.require("tenantId");
 const webhookUrl = cfg.require("webhookUrl");
 const webhookSecret = cfg.requireSecret("webhookSecret");
+const regulatoryRegimes = cfg.getObject<string[]>("regulatoryRegimes") ?? ["soc2"];
 
 // Auth is resolved from THOTH_API_KEY (org-scoped).
 const provider = new thoth.Provider("thoth", {
@@ -16,6 +18,7 @@ const governanceSettings = new thoth.governance.GovernanceSettings(
   "baseline-governance",
   {
     complianceProfile: "soc2",
+    regulatoryRegimes,
     shadowLow: "allow",
     shadowMedium: "step_up",
     shadowHigh: "block",
@@ -59,5 +62,34 @@ const mdmSync = new thoth.mdm.Sync(
   { provider }
 );
 
+const standardDlpOpa = new thoth.governance.PolicyBundle(
+  "standard-dlp-opa",
+  {
+    name: "standard-dlp",
+    description: "Customer-agnostic purpose/sensitivity DLP baseline",
+    framework: "OPA",
+    rawPolicy: fs.readFileSync("./policies/opa-standard-dlp.rego", "utf8"),
+    enforcementMode: "enforce",
+  },
+  { provider }
+);
+
+const leastPrivilegeCedar = new thoth.governance.PolicyBundle(
+  "least-privilege-cedar",
+  {
+    name: "least-privilege-analyst",
+    description: "Least-privilege baseline for selected agents",
+    framework: "CEDAR",
+    rawPolicy: fs.readFileSync("./policies/cedar-least-privilege-analyst.cedar", "utf8"),
+    assignments: ["agent:security-analyst-agent", "agent:coding-agent"],
+    enforcementMode: "enforce",
+  },
+  { provider }
+);
+
 export const tenant = governanceSettings.tenantId;
 export const mdmSyncJobId = mdmSync.id;
+export const policyBundleIds = {
+  standardDlpOpa: standardDlpOpa.id,
+  leastPrivilegeCedar: leastPrivilegeCedar.id,
+};

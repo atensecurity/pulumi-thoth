@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 import pulumi
 import pulumi_thoth as thoth
@@ -8,6 +9,7 @@ config = pulumi.Config()
 tenant_id = config.require("tenantId")
 webhook_url = config.require("webhookUrl")
 webhook_secret = config.require_secret("webhookSecret")
+regulatory_regimes = config.get_object("regulatoryRegimes") or ["soc2"]
 
 # Auth is resolved from THOTH_API_KEY (org-scoped).
 provider = thoth.Provider(
@@ -18,6 +20,7 @@ provider = thoth.Provider(
 governance_settings = thoth.governance.GovernanceSettings(
     "baseline-governance",
     compliance_profile="soc2",
+    regulatory_regimes=regulatory_regimes,
     shadow_low="allow",
     shadow_medium="step_up",
     shadow_high="block",
@@ -56,5 +59,37 @@ mdm_sync = thoth.mdm.Sync(
     opts=pulumi.ResourceOptions(provider=provider),
 )
 
+policy_dir = Path(__file__).resolve().parent / "policies"
+
+standard_dlp_opa = thoth.governance.PolicyBundle(
+    "standard-dlp-opa",
+    name="standard-dlp",
+    description="Customer-agnostic purpose/sensitivity DLP baseline",
+    framework="OPA",
+    raw_policy=(policy_dir / "opa-standard-dlp.rego").read_text(encoding="utf-8"),
+    enforcement_mode="enforce",
+    opts=pulumi.ResourceOptions(provider=provider),
+)
+
+least_privilege_cedar = thoth.governance.PolicyBundle(
+    "least-privilege-cedar",
+    name="least-privilege-analyst",
+    description="Least-privilege baseline for selected agents",
+    framework="CEDAR",
+    raw_policy=(policy_dir / "cedar-least-privilege-analyst.cedar").read_text(
+        encoding="utf-8"
+    ),
+    assignments=["agent:security-analyst-agent", "agent:coding-agent"],
+    enforcement_mode="enforce",
+    opts=pulumi.ResourceOptions(provider=provider),
+)
+
 pulumi.export("tenant", governance_settings.tenant_id)
 pulumi.export("mdmSyncJobId", mdm_sync.id)
+pulumi.export(
+    "policyBundleIds",
+    {
+        "standardDlpOpa": standard_dlp_opa.id,
+        "leastPrivilegeCedar": least_privilege_cedar.id,
+    },
+)

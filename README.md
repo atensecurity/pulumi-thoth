@@ -12,6 +12,7 @@ Official Pulumi provider for Aten Security Thoth headless AI Governance Control 
 The provider exposes Thoth control-plane resources for:
 
 - Tenant governance settings
+  - Includes both `complianceProfile` (preset) and `regulatoryRegimes` (explicit obligations)
 - Browser providers, policies, and enrollments
 - MDM providers and sync operations
 - API key management
@@ -19,6 +20,7 @@ The provider exposes Thoth control-plane resources for:
 - Billing pricing, invoice, monthly-cost, and historical report reads
 - Endpoint inventory and fleet summary stats
 - Governance pack catalog, runtime/reporting, and evidence chain reads
+- Versioned OPA/Cedar policy bundle management with explicit assignment scopes
 - Policy sync, approvals, pack assignment, webhook tests, evidence backfill triggers,
   decision-field backfills, and decision-evidence SLO reads
 
