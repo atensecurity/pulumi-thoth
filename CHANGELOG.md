@@ -4,10 +4,18 @@ All notable changes to `pulumi-thoth` are documented in this file.
 
 ## 0.1.6 - 2026-05-10
 
+### Added
+
+- AIRS billing report artifact data source bridge mappings for Terraform parity:
+  - `thoth_billing_artifacts` -> `billing/getArtifacts`
+  - `thoth_billing_artifact` -> `billing/getArtifact`
+
 ### Changed
 
 - Updated Terraform provider bridge dependency pin to
   `github.com/atensecurity/terraform-provider-thoth v0.1.6`.
+- Updated Pulumi provider bridge metadata to expose monthly billing artifact
+  lookup/listing surfaces in the billing module.
 - Regenerated Pulumi schema/SDK surfaces to reflect governance updates in this branch:
   - explicit regulatory regimes on governance settings
   - policy bundle surfaces aligned to mode-based behavior

@@ -111,6 +111,12 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_billing_invoices": {
 				Tok: makeDataSource("billing", "getInvoices"),
 			},
+			"thoth_billing_artifacts": {
+				Tok: makeDataSource("billing", "getArtifacts"),
+			},
+			"thoth_billing_artifact": {
+				Tok: makeDataSource("billing", "getArtifact"),
+			},
 			"thoth_billing_reports": {
 				Tok: makeDataSource("billing", "getReports"),
 			},
