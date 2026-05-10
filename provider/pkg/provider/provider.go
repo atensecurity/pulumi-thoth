@@ -80,6 +80,7 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_endpoint_api_key": {Tok: makeResource("access", "EndpointApiKey")},
 			"thoth_agent_api_key":    {Tok: makeResource("access", "AgentApiKey")},
 			"thoth_fleet":            {Tok: makeResource("fleet", "Fleet")},
+			"thoth_endpoint":         {Tok: makeResource("fleet", "Endpoint")},
 			"thoth_mdm_provider":     {Tok: makeResource("mdm", "Provider")},
 			"thoth_mdm_sync":         {Tok: makeResource("mdm", "Sync")},
 			"thoth_browser_provider": {Tok: makeResource("browser", "Provider")},

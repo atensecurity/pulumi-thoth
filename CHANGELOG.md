@@ -26,6 +26,11 @@ All notable changes to `pulumi-thoth` are documented in this file.
 - Documented GovAPI Cedar runtime validation compatibility behavior for bridged
   policy bundle workflows (Cedar syntax is validated at GovAPI write-time; CLI
   runtime validation remains best-effort by deployment environment).
+- Bumped Pulumi release defaults/examples to `0.1.7`:
+  - `Makefile` default `VERSION`
+  - Node.js example package dependency (`@atensec/pulumi-thoth`)
+- Added Pulumi resource mapping for Terraform `thoth_endpoint` so tfgen/schema
+  generation succeeds against Terraform provider `v0.1.7`.
 
 ## 0.1.6 - 2026-05-10
 
