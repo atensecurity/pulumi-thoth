@@ -3,7 +3,7 @@ module github.com/atensecurity/pulumi-thoth/provider
 go 1.26
 
 require (
-	github.com/atensecurity/terraform-provider-thoth v0.1.9
+	github.com/atensecurity/terraform-provider-thoth v0.1.10
 	github.com/pulumi/pulumi-terraform-bridge/v3 v3.128.0
 	github.com/pulumi/pulumi/sdk/v3 v3.228.0
 )

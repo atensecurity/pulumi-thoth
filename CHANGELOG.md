@@ -2,6 +2,21 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.10 - 2026-05-11
+
+### Changed
+
+- Updated Terraform provider bridge dependency pin to
+  `github.com/atensecurity/terraform-provider-thoth v0.1.10`.
+- Bumped Pulumi release defaults/examples to `0.1.10`:
+  - `Makefile` default `VERSION`
+  - Node.js example package dependency (`@atensec/pulumi-thoth`)
+
+### Fixed
+
+- Pulumi bridge now inherits Terraform `0.1.10` evidence backfill endpoint
+  compatibility handling for mixed GovAPI deployments.
+
 ## 0.1.9 - 2026-05-11
 
 ### Changed
