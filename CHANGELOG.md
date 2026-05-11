@@ -2,6 +2,22 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.11 - 2026-05-11
+
+### Changed
+
+- Updated Terraform provider bridge dependency pin to
+  `github.com/atensecurity/terraform-provider-thoth v0.1.11`.
+- Bumped Pulumi release defaults/examples to `0.1.11`:
+  - `Makefile` default `VERSION`
+  - Node.js example package dependency (`@atensec/pulumi-thoth`)
+
+### Added
+
+- Pulumi provider requests now inherit Terraform `0.1.11` provisioning
+  attribution metadata headers to classify IaC-managed policy bundles in
+  governance inventory and stats surfaces.
+
 ## 0.1.10 - 2026-05-11
 
 ### Changed
