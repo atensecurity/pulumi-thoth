@@ -20,6 +20,7 @@ The provider exposes Thoth control-plane resources for:
 - Billing pricing, invoice, monthly-cost, and historical report reads
 - Endpoint inventory and fleet summary stats
 - Governance pack catalog, runtime/reporting, and evidence chain reads
+- Investigation forensics reads (session, incident, and agent-latest)
 - Versioned OPA/Cedar policy bundle management with explicit assignment scopes
 - Policy sync, approvals, pack assignment, webhook tests, evidence backfill triggers,
   decision-field backfills, and decision-evidence SLO reads

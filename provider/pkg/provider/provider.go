@@ -133,6 +133,15 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_evidence_bundle": {
 				Tok: makeDataSource("governance", "getEvidenceBundle"),
 			},
+			"thoth_session_forensics": {
+				Tok: makeDataSource("governance", "getSessionForensics"),
+			},
+			"thoth_incident_forensics": {
+				Tok: makeDataSource("governance", "getIncidentForensics"),
+			},
+			"thoth_agent_latest_forensics": {
+				Tok: makeDataSource("governance", "getAgentLatestForensics"),
+			},
 			"thoth_endpoints":       {Tok: makeDataSource("fleet", "getEndpoints")},
 			"thoth_endpoint_stats":  {Tok: makeDataSource("fleet", "getEndpointStats")},
 			"thoth_fleets":          {Tok: makeDataSource("fleet", "getFleets")},
