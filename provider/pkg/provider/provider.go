@@ -2,9 +2,6 @@ package provider
 
 import (
 	"fmt"
-	"path/filepath"
-	"regexp"
-	"strings"
 
 	pftfbridge "github.com/pulumi/pulumi-terraform-bridge/v3/pkg/pf/tfbridge"
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfbridge"
@@ -17,8 +14,6 @@ import (
 const (
 	mainPkg = "thoth"
 )
-
-var semverPattern = regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+(?:[-+].*)?$`)
 
 func makeMember(mod, mem string) tokens.ModuleMember {
 	return tfbridge.MakeMember(mainPkg, mod, mem)
@@ -197,26 +192,11 @@ func Provider() tfbridge.ProviderInfo {
 				Tok: makeDataSource("browser", "getEnrollments"),
 			},
 		},
-		JavaScript: &tfbridge.JavaScriptInfo{
-			PackageName: "@atensec/pulumi-thoth",
-			Dependencies: map[string]string{
-				"@pulumi/pulumi": "^3.0.0",
-			},
-		},
 		Python: &tfbridge.PythonInfo{
 			PackageName: "pulumi_thoth",
 			Requires: map[string]string{
 				"pulumi": ">=3.0.0,<4.0.0",
 			},
-		},
-		Golang: &tfbridge.GolangInfo{
-			ImportBasePath: filepath.Join(
-				"github.com/atensecurity/pulumi-thoth/sdk",
-				moduleMajorVersion(version.Version),
-				"go",
-				"thoth",
-			),
-			GenerateResourceContainerTypes: true,
 		},
 		CSharp: &tfbridge.CSharpInfo{
 			RootNamespace: "AtenSecurity.Pulumi.Thoth",
@@ -225,18 +205,6 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 	}
-}
-
-func moduleMajorVersion(rawVersion string) string {
-	v := strings.TrimSpace(rawVersion)
-	if v == "" || v == "dev" {
-		return ""
-	}
-	v = strings.TrimPrefix(v, "v")
-	if !semverPattern.MatchString(v) {
-		return ""
-	}
-	return tfbridge.GetModuleMajorVersion(v)
 }
 
 // PluginDownloadURL returns the default GitHub release URL for plugin downloads.

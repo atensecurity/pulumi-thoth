@@ -23,8 +23,6 @@ schema: tfgen
 
 sdk: tfgen
 	./bin/$(TFGEN_BIN) dotnet --out sdk/dotnet
-	./bin/$(TFGEN_BIN) go --out sdk/go
-	./bin/$(TFGEN_BIN) nodejs --out sdk/nodejs
 	./bin/$(TFGEN_BIN) python --out sdk/python
 
 test:
