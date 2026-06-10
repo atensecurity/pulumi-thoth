@@ -134,9 +134,13 @@ jobs:
         run: |
           set -euo pipefail
 
-          jq --arg version "${RELEASE_VERSION}" '.version = $version' \
-            sdk/nodejs/package.json > sdk/nodejs/package.json.tmp
-          mv sdk/nodejs/package.json.tmp sdk/nodejs/package.json
+          if [[ -f sdk/nodejs/package.json ]]; then
+            jq --arg version "${RELEASE_VERSION}" '.version = $version' \
+              sdk/nodejs/package.json > sdk/nodejs/package.json.tmp
+            mv sdk/nodejs/package.json.tmp sdk/nodejs/package.json
+          else
+            echo "Node.js SDK not generated; skipping Node.js version normalization."
+          fi
 
           sed -i "s/^VERSION = .*/VERSION = \"${RELEASE_VERSION}\"/" sdk/python/setup.py
 
@@ -312,17 +316,23 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Publish npm package
-        working-directory: sdk/nodejs
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           RELEASE_VERSION: ${{ needs.prepare.outputs.release_version }}
         run: |
           set -euo pipefail
 
+          if [[ ! -f "sdk/nodejs/package.json" ]]; then
+            echo "Node.js SDK not generated; skipping npm publish."
+            exit 0
+          fi
+
           if [[ -z "${NODE_AUTH_TOKEN:-}" ]]; then
             echo "::error::Missing NPM_TOKEN secret."
             exit 1
           fi
+
+          cd sdk/nodejs
 
           npm view "@atensec/pulumi-thoth@${RELEASE_VERSION}" version >/dev/null 2>&1 && {
             echo "@atensec/pulumi-thoth@${RELEASE_VERSION} already published; skipping."
