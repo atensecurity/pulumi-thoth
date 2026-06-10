@@ -2,6 +2,31 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.12 - 2026-06-10
+
+### Changed
+
+- Updated Terraform provider bridge dependency pin to
+  `github.com/atensecurity/terraform-provider-thoth v0.1.12`.
+- Bumped Pulumi release defaults/examples to `0.1.12`:
+  - `Makefile` default `VERSION`
+  - Node.js example package dependency (`@atensec/pulumi-thoth`)
+
+### Added
+
+- Pulumi bridge now exposes Terraform `0.1.12` MCP vendor registry and catalog
+  verification surfaces:
+  - `McpVendor` resource
+  - `getMcpVendors` data source
+  - `McpCatalogVerify` resource
+  - `getMcpInventoryReport` data source
+
+### Fixed
+
+- Inherited Terraform `0.1.12` stabilization for MCP vendor `hostPatterns`
+  ordering so Pulumi up/refresh operations converge deterministically when API
+  response ordering differs.
+
 ## 0.1.11 - 2026-05-11
 
 ### Changed

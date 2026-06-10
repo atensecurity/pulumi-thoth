@@ -3802,6 +3802,167 @@
         "type": "object"
       }
     },
+    "thoth:mcp/catalogVerify:CatalogVerify": {
+      "properties": {
+        "allowedToolsCount": {
+          "type": "integer",
+          "description": "Number of allowed tools in the result catalog."
+        },
+        "authContextJson": {
+          "type": "string",
+          "description": "Optional auth context JSON object merged into the verification request."
+        },
+        "blockedToolsCount": {
+          "type": "integer",
+          "description": "Number of blocked tools in the result catalog."
+        },
+        "environment": {
+          "type": "string",
+          "description": "Optional environment filter (dev/prod)."
+        },
+        "humanGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional human groups for catalog verification context."
+        },
+        "humanPrincipal": {
+          "type": "string",
+          "description": "Optional human principal seed for catalog verification."
+        },
+        "humanRole": {
+          "type": "string",
+          "description": "Optional human role seed for catalog verification."
+        },
+        "policyCount": {
+          "type": "integer",
+          "description": "Matched policy count returned by the verifier."
+        },
+        "principal": {
+          "type": "string",
+          "description": "Principal used for catalog verification."
+        },
+        "responseJson": {
+          "type": "string",
+          "description": "Catalog verification response payload as JSON."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID from provider configuration."
+        },
+        "trigger": {
+          "type": "string",
+          "description": "Change this field to force another verification run."
+        },
+        "verifiedAt": {
+          "type": "string",
+          "description": "RFC3339 timestamp when verification ran."
+        }
+      },
+      "required": [
+        "allowedToolsCount",
+        "blockedToolsCount",
+        "policyCount",
+        "responseJson",
+        "tenantId",
+        "verifiedAt"
+      ],
+      "inputProperties": {
+        "authContextJson": {
+          "type": "string",
+          "description": "Optional auth context JSON object merged into the verification request."
+        },
+        "environment": {
+          "type": "string",
+          "description": "Optional environment filter (dev/prod)."
+        },
+        "humanGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional human groups for catalog verification context."
+        },
+        "humanPrincipal": {
+          "type": "string",
+          "description": "Optional human principal seed for catalog verification."
+        },
+        "humanRole": {
+          "type": "string",
+          "description": "Optional human role seed for catalog verification."
+        },
+        "principal": {
+          "type": "string",
+          "description": "Principal used for catalog verification."
+        },
+        "trigger": {
+          "type": "string",
+          "description": "Change this field to force another verification run."
+        }
+      },
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering CatalogVerify resources.\n",
+        "properties": {
+          "allowedToolsCount": {
+            "type": "integer",
+            "description": "Number of allowed tools in the result catalog."
+          },
+          "authContextJson": {
+            "type": "string",
+            "description": "Optional auth context JSON object merged into the verification request."
+          },
+          "blockedToolsCount": {
+            "type": "integer",
+            "description": "Number of blocked tools in the result catalog."
+          },
+          "environment": {
+            "type": "string",
+            "description": "Optional environment filter (dev/prod)."
+          },
+          "humanGroups": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional human groups for catalog verification context."
+          },
+          "humanPrincipal": {
+            "type": "string",
+            "description": "Optional human principal seed for catalog verification."
+          },
+          "humanRole": {
+            "type": "string",
+            "description": "Optional human role seed for catalog verification."
+          },
+          "policyCount": {
+            "type": "integer",
+            "description": "Matched policy count returned by the verifier."
+          },
+          "principal": {
+            "type": "string",
+            "description": "Principal used for catalog verification."
+          },
+          "responseJson": {
+            "type": "string",
+            "description": "Catalog verification response payload as JSON."
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "Tenant ID from provider configuration."
+          },
+          "trigger": {
+            "type": "string",
+            "description": "Change this field to force another verification run."
+          },
+          "verifiedAt": {
+            "type": "string",
+            "description": "RFC3339 timestamp when verification ran."
+          }
+        },
+        "type": "object"
+      }
+    },
     "thoth:mcp/vendor:Vendor": {
       "properties": {
         "approved": {
@@ -6323,6 +6484,128 @@
         },
         "required": [
           "dataJson",
+          "total",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:mcp/getInventoryReport:getInventoryReport": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getInventoryReport.\n",
+        "properties": {
+          "windowHours": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "description": "A collection of values returned by getInventoryReport.\n",
+        "properties": {
+          "dataJson": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          },
+          "unapprovedCalls": {
+            "type": "integer"
+          },
+          "unapprovedEndpoints": {
+            "type": "integer"
+          },
+          "windowHours": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "dataJson",
+          "responseJson",
+          "total",
+          "unapprovedCalls",
+          "unapprovedEndpoints",
+          "windowHours",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:mcp/getVendor:getVendor": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getVendor.\n",
+        "properties": {
+          "vendorId": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "vendorId"
+        ]
+      },
+      "outputs": {
+        "description": "A collection of values returned by getVendor.\n",
+        "properties": {
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "vendorId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "responseJson",
+          "vendorId",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:mcp/getVendors:getVendors": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getVendors.\n",
+        "properties": {
+          "approved": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "description": "A collection of values returned by getVendors.\n",
+        "properties": {
+          "approved": {
+            "type": "boolean"
+          },
+          "dataJson": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "dataJson",
+          "responseJson",
           "total",
           "id"
         ],
