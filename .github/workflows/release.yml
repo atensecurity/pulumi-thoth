@@ -197,8 +197,12 @@ jobs:
           CURRENT_TAG: ${{ needs.prepare.outputs.current_tag }}
         run: |
           set -euo pipefail
-          mkdir -p dist
-          tar -C sdk/go -czf "dist/pulumi-thoth-go-sdk-${CURRENT_TAG}.tar.gz" .
+          if [[ -d sdk/go ]]; then
+            mkdir -p dist
+            tar -C sdk/go -czf "dist/pulumi-thoth-go-sdk-${CURRENT_TAG}.tar.gz" .
+          else
+            echo "Go SDK not generated; skipping Go SDK bundle creation."
+          fi
 
       - name: Upload release inputs artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -260,6 +264,7 @@ jobs:
             cat release_notes.md
             echo "EOF"
           } >> "$GITHUB_ENV"
+          rm -f release_notes.md
 
       - name: Import release signing key
         id: gpg
@@ -494,4 +499,10 @@ jobs:
           CURRENT_TAG: ${{ needs.prepare.outputs.current_tag }}
         run: |
           set -euo pipefail
+
+          if [[ ! -f "dist/pulumi-thoth-go-sdk-${CURRENT_TAG}.tar.gz" ]]; then
+            echo "Go SDK bundle not present; skipping upload."
+            exit 0
+          fi
+
           gh release upload "${CURRENT_TAG}" "dist/pulumi-thoth-go-sdk-${CURRENT_TAG}.tar.gz" --clobber
