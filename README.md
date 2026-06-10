@@ -71,7 +71,6 @@ Current public package releases are:
 
 - Python: `pulumi-thoth` (PyPI)
 - .NET: `AtenSecurity.Pulumi.Thoth` (NuGet)
-- Release line: `v0.1.12`
 
 Go and Node.js schema language declarations are intentionally omitted until
 public package publishing is enabled for those ecosystems.
