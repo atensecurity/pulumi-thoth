@@ -62,6 +62,19 @@ const mdmSync = new thoth.mdm.Sync(
   { provider }
 );
 
+const mcpVendorOpenAi = new thoth.mcp.Vendor(
+  "mcp-openai",
+  {
+    vendorId: "openai",
+    displayName: "OpenAI",
+    approved: true,
+    hostPatterns: ["api.openai.com", "*.openai.com"],
+    source: "manual",
+    notes: "Managed by pulumi-thoth example stack.",
+  },
+  { provider }
+);
+
 const standardDlpOpa = new thoth.governance.PolicyBundle(
   "standard-dlp-opa",
   {
@@ -89,6 +102,7 @@ const leastPrivilegeCedar = new thoth.governance.PolicyBundle(
 
 export const tenant = governanceSettings.tenantId;
 export const mdmSyncJobId = mdmSync.id;
+export const mcpVendorId = mcpVendorOpenAi.vendorId;
 export const policyBundleIds = {
   standardDlpOpa: standardDlpOpa.id,
   leastPrivilegeCedar: leastPrivilegeCedar.id,

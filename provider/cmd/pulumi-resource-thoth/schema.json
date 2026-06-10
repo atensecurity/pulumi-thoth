@@ -25,6 +25,12 @@
       "compatibility": "tfbridge20",
       "rootNamespace": "AtenSecurity.Pulumi.Thoth"
     },
+    "nodejs": {
+      "packageDescription": "Pulumi provider for Aten Security Thoth AI governance control plane.",
+      "readme": "> This provider is a derived work of the [Terraform Provider](https://github.com/atensecurity/terraform-provider-thoth)\n> distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n> first check the [`pulumi-thoth` repo](https://github.com/atensecurity/pulumi-thoth/issues); however, if that doesn't turn up anything,\n> please consult the source [`terraform-provider-thoth` repo](https://github.com/atensecurity/terraform-provider-thoth/issues).",
+      "compatibility": "tfbridge20",
+      "disableUnionOutputTypes": true
+    },
     "python": {
       "packageName": "pulumi_thoth",
       "requires": {
@@ -1035,12 +1041,15 @@
       "required": [
         "compiledPolicyJson",
         "createdAt",
+        "createdBy",
         "name",
         "policyId",
         "policyJson",
         "providerName",
         "tenantId",
-        "updatedAt"
+        "updatedAt",
+        "updatedBy",
+        "version"
       ],
       "inputProperties": {
         "active": {
@@ -1272,6 +1281,316 @@
         "type": "object"
       }
     },
+    "thoth:fleet/endpoint:Endpoint": {
+      "properties": {
+        "agentIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Agent IDs associated with this endpoint."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp."
+        },
+        "department": {
+          "type": "string",
+          "description": "Department label for this endpoint."
+        },
+        "employeeEmail": {
+          "type": "string",
+          "description": "Employee email tied to this endpoint."
+        },
+        "employeeName": {
+          "type": "string",
+          "description": "Employee display name tied to this endpoint."
+        },
+        "endpointId": {
+          "type": "string",
+          "description": "Endpoint identifier."
+        },
+        "enforcementMode": {
+          "type": "string",
+          "description": "Enforcement mode (enforce, shadow, off)."
+        },
+        "enrollment": {
+          "type": "string",
+          "description": "Enrollment source (jamf, intune, manual, unmanaged)."
+        },
+        "environment": {
+          "type": "string",
+          "description": "Environment (dev, staging, prod)."
+        },
+        "fleetId": {
+          "type": "string",
+          "description": "Fleet ID associated with this endpoint."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "Endpoint hostname."
+        },
+        "identityBindingUser": {
+          "type": "string",
+          "description": "User identity bound to endpoint runtime credentials."
+        },
+        "lastSeen": {
+          "type": "string",
+          "description": "Last heartbeat timestamp."
+        },
+        "managedRuntimeKeyId": {
+          "type": "string",
+          "description": "Server-managed runtime API key ID (when applicable)."
+        },
+        "os": {
+          "type": "string",
+          "description": "Operating system (macos, windows, linux)."
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "Operating system version."
+        },
+        "providerName": {
+          "type": "string",
+          "description": "Provider hint for endpoint provenance."
+        },
+        "proxyVersion": {
+          "type": "string",
+          "description": "Reported proxy version."
+        },
+        "riskScore": {
+          "type": "number",
+          "description": "Risk score for this endpoint."
+        },
+        "runtimeAuthMode": {
+          "type": "string",
+          "description": "Runtime auth mode recorded by GovAPI."
+        },
+        "sessionsToday": {
+          "type": "integer",
+          "description": "Sessions seen today."
+        },
+        "status": {
+          "type": "string",
+          "description": "Endpoint status."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID from provider configuration."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp."
+        },
+        "violationsToday": {
+          "type": "integer",
+          "description": "Violations seen today."
+        }
+      },
+      "required": [
+        "createdAt",
+        "endpointId",
+        "enforcementMode",
+        "hostname",
+        "identityBindingUser",
+        "lastSeen",
+        "managedRuntimeKeyId",
+        "runtimeAuthMode",
+        "status",
+        "tenantId",
+        "updatedAt"
+      ],
+      "inputProperties": {
+        "agentIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Agent IDs associated with this endpoint."
+        },
+        "department": {
+          "type": "string",
+          "description": "Department label for this endpoint."
+        },
+        "employeeEmail": {
+          "type": "string",
+          "description": "Employee email tied to this endpoint."
+        },
+        "employeeName": {
+          "type": "string",
+          "description": "Employee display name tied to this endpoint."
+        },
+        "endpointId": {
+          "type": "string",
+          "description": "Endpoint identifier."
+        },
+        "enforcementMode": {
+          "type": "string",
+          "description": "Enforcement mode (enforce, shadow, off)."
+        },
+        "enrollment": {
+          "type": "string",
+          "description": "Enrollment source (jamf, intune, manual, unmanaged)."
+        },
+        "environment": {
+          "type": "string",
+          "description": "Environment (dev, staging, prod)."
+        },
+        "fleetId": {
+          "type": "string",
+          "description": "Fleet ID associated with this endpoint."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "Endpoint hostname."
+        },
+        "os": {
+          "type": "string",
+          "description": "Operating system (macos, windows, linux)."
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "Operating system version."
+        },
+        "providerName": {
+          "type": "string",
+          "description": "Provider hint for endpoint provenance."
+        },
+        "proxyVersion": {
+          "type": "string",
+          "description": "Reported proxy version."
+        },
+        "riskScore": {
+          "type": "number",
+          "description": "Risk score for this endpoint."
+        },
+        "sessionsToday": {
+          "type": "integer",
+          "description": "Sessions seen today."
+        },
+        "status": {
+          "type": "string",
+          "description": "Endpoint status."
+        },
+        "violationsToday": {
+          "type": "integer",
+          "description": "Violations seen today."
+        }
+      },
+      "requiredInputs": [
+        "endpointId",
+        "hostname"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering Endpoint resources.\n",
+        "properties": {
+          "agentIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Agent IDs associated with this endpoint."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Creation timestamp."
+          },
+          "department": {
+            "type": "string",
+            "description": "Department label for this endpoint."
+          },
+          "employeeEmail": {
+            "type": "string",
+            "description": "Employee email tied to this endpoint."
+          },
+          "employeeName": {
+            "type": "string",
+            "description": "Employee display name tied to this endpoint."
+          },
+          "endpointId": {
+            "type": "string",
+            "description": "Endpoint identifier."
+          },
+          "enforcementMode": {
+            "type": "string",
+            "description": "Enforcement mode (enforce, shadow, off)."
+          },
+          "enrollment": {
+            "type": "string",
+            "description": "Enrollment source (jamf, intune, manual, unmanaged)."
+          },
+          "environment": {
+            "type": "string",
+            "description": "Environment (dev, staging, prod)."
+          },
+          "fleetId": {
+            "type": "string",
+            "description": "Fleet ID associated with this endpoint."
+          },
+          "hostname": {
+            "type": "string",
+            "description": "Endpoint hostname."
+          },
+          "identityBindingUser": {
+            "type": "string",
+            "description": "User identity bound to endpoint runtime credentials."
+          },
+          "lastSeen": {
+            "type": "string",
+            "description": "Last heartbeat timestamp."
+          },
+          "managedRuntimeKeyId": {
+            "type": "string",
+            "description": "Server-managed runtime API key ID (when applicable)."
+          },
+          "os": {
+            "type": "string",
+            "description": "Operating system (macos, windows, linux)."
+          },
+          "osVersion": {
+            "type": "string",
+            "description": "Operating system version."
+          },
+          "providerName": {
+            "type": "string",
+            "description": "Provider hint for endpoint provenance."
+          },
+          "proxyVersion": {
+            "type": "string",
+            "description": "Reported proxy version."
+          },
+          "riskScore": {
+            "type": "number",
+            "description": "Risk score for this endpoint."
+          },
+          "runtimeAuthMode": {
+            "type": "string",
+            "description": "Runtime auth mode recorded by GovAPI."
+          },
+          "sessionsToday": {
+            "type": "integer",
+            "description": "Sessions seen today."
+          },
+          "status": {
+            "type": "string",
+            "description": "Endpoint status."
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "Tenant ID from provider configuration."
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp."
+          },
+          "violationsToday": {
+            "type": "integer",
+            "description": "Violations seen today."
+          }
+        },
+        "type": "object"
+      }
+    },
     "thoth:fleet/fleet:Fleet": {
       "properties": {
         "compliancePct": {
@@ -1322,7 +1641,7 @@
           "type": "string",
           "description": "Attached policy name."
         },
-        "provider": {
+        "providerName": {
           "type": "string",
           "description": "Provider hint (jamf, intune, workspace_one, custom, none)."
         },
@@ -1378,7 +1697,7 @@
           "type": "string",
           "description": "Attached policy name."
         },
-        "provider": {
+        "providerName": {
           "type": "string",
           "description": "Provider hint (jamf, intune, workspace_one, custom, none)."
         },
@@ -1453,7 +1772,7 @@
             "type": "string",
             "description": "Attached policy name."
           },
-          "provider": {
+          "providerName": {
             "type": "string",
             "description": "Provider hint (jamf, intune, workspace_one, custom, none)."
           },
@@ -2030,6 +2349,13 @@
         }
       },
       "required": [
+        "modelRouterAllowedModels",
+        "modelRouterAllowedProviders",
+        "modelRouterDefaultModel",
+        "modelRouterDefaultProvider",
+        "modelRouterEnabled",
+        "modelRouterFailoverProviders",
+        "secretBrokerProvider",
         "tenantId",
         "updatedAt"
       ],
@@ -2753,6 +3079,10 @@
         }
       },
       "required": [
+        "pamEnabled",
+        "pamProvider",
+        "pamRequestTimeoutSeconds",
+        "pamRequestUrl",
         "tenantId",
         "updatedAt"
       ],
@@ -3472,6 +3802,150 @@
         "type": "object"
       }
     },
+    "thoth:mcp/vendor:Vendor": {
+      "properties": {
+        "approved": {
+          "type": "boolean",
+          "description": "Whether this vendor is approved for pass-through MCP host access."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-friendly vendor display name."
+        },
+        "hostPatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed host patterns for this vendor (for example api.openai.com)."
+        },
+        "lastSeenAt": {
+          "type": "string",
+          "description": "Last observed timestamp (RFC3339) for this vendor in runtime traffic."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional reviewer notes for this vendor entry."
+        },
+        "source": {
+          "type": "string",
+          "description": "Vendor entry source (for example manual, discovered)."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID from provider configuration."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp."
+        },
+        "vendorId": {
+          "type": "string",
+          "description": "Stable vendor identifier."
+        }
+      },
+      "required": [
+        "approved",
+        "createdAt",
+        "displayName",
+        "hostPatterns",
+        "lastSeenAt",
+        "tenantId",
+        "updatedAt",
+        "vendorId"
+      ],
+      "inputProperties": {
+        "approved": {
+          "type": "boolean",
+          "description": "Whether this vendor is approved for pass-through MCP host access."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-friendly vendor display name."
+        },
+        "hostPatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Allowed host patterns for this vendor (for example api.openai.com)."
+        },
+        "lastSeenAt": {
+          "type": "string",
+          "description": "Last observed timestamp (RFC3339) for this vendor in runtime traffic."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional reviewer notes for this vendor entry."
+        },
+        "source": {
+          "type": "string",
+          "description": "Vendor entry source (for example manual, discovered)."
+        },
+        "vendorId": {
+          "type": "string",
+          "description": "Stable vendor identifier."
+        }
+      },
+      "requiredInputs": [
+        "displayName",
+        "hostPatterns",
+        "vendorId"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering Vendor resources.\n",
+        "properties": {
+          "approved": {
+            "type": "boolean",
+            "description": "Whether this vendor is approved for pass-through MCP host access."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Creation timestamp."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Human-friendly vendor display name."
+          },
+          "hostPatterns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Allowed host patterns for this vendor (for example api.openai.com)."
+          },
+          "lastSeenAt": {
+            "type": "string",
+            "description": "Last observed timestamp (RFC3339) for this vendor in runtime traffic."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Optional reviewer notes for this vendor entry."
+          },
+          "source": {
+            "type": "string",
+            "description": "Vendor entry source (for example manual, discovered)."
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "Tenant ID from provider configuration."
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp."
+          },
+          "vendorId": {
+            "type": "string",
+            "description": "Stable vendor identifier."
+          }
+        },
+        "type": "object"
+      }
+    },
     "thoth:mdm/provider:Provider": {
       "properties": {
         "configJson": {
@@ -3993,6 +4467,88 @@
         "type": "object"
       }
     },
+    "thoth:billing/getArtifact:getArtifact": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getArtifact.\n",
+        "properties": {
+          "month": {
+            "type": "integer"
+          },
+          "year": {
+            "type": "integer"
+          }
+        },
+        "type": "object",
+        "required": [
+          "month",
+          "year"
+        ]
+      },
+      "outputs": {
+        "description": "A collection of values returned by getArtifact.\n",
+        "properties": {
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "month": {
+            "type": "integer"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "year": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "month",
+          "responseJson",
+          "year",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:billing/getArtifacts:getArtifacts": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getArtifacts.\n",
+        "properties": {
+          "limit": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "description": "A collection of values returned by getArtifacts.\n",
+        "properties": {
+          "artifactsJson": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "totalCount": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "artifactsJson",
+          "responseJson",
+          "totalCount",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
     "thoth:billing/getCreditBank:getCreditBank": {
       "inputs": {
         "description": "A collection of arguments for invoking getCreditBank.\n",
@@ -4424,7 +4980,7 @@
       "inputs": {
         "description": "A collection of arguments for invoking getEnrollments.\n",
         "properties": {
-          "provider": {
+          "providerName": {
             "type": "string"
           },
           "status": {
@@ -4443,7 +4999,7 @@
             "description": "The provider-assigned unique ID for this managed resource.",
             "type": "string"
           },
-          "provider": {
+          "providerName": {
             "type": "string"
           },
           "status": {
@@ -4465,7 +5021,7 @@
       "inputs": {
         "description": "A collection of arguments for invoking getPolicies.\n",
         "properties": {
-          "provider": {
+          "providerName": {
             "type": "string"
           }
         },
@@ -4481,7 +5037,7 @@
             "description": "The provider-assigned unique ID for this managed resource.",
             "type": "string"
           },
-          "provider": {
+          "providerName": {
             "type": "string"
           },
           "total": {
@@ -4670,7 +5226,7 @@
       "inputs": {
         "description": "A collection of arguments for invoking getFleets.\n",
         "properties": {
-          "provider": {
+          "providerName": {
             "type": "string"
           },
           "region": {
@@ -4692,7 +5248,7 @@
             "description": "The provider-assigned unique ID for this managed resource.",
             "type": "string"
           },
-          "provider": {
+          "providerName": {
             "type": "string"
           },
           "region": {
@@ -4708,6 +5264,65 @@
         "required": [
           "dataJson",
           "total",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:governance/getAgentLatestForensics:getAgentLatestForensics": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getAgentLatestForensics.\n",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "agentId"
+        ]
+      },
+      "outputs": {
+        "description": "A collection of values returned by getAgentLatestForensics.\n",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "agentName": {
+            "type": "string"
+          },
+          "attackSurfaceJson": {
+            "type": "string"
+          },
+          "eventsJson": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "riskScore": {
+            "type": "integer"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "telemetrySummaryJson": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "agentId",
+          "agentName",
+          "attackSurfaceJson",
+          "eventsJson",
+          "responseJson",
+          "riskScore",
+          "sessionId",
+          "telemetrySummaryJson",
           "id"
         ],
         "type": "object"
@@ -5198,6 +5813,73 @@
         "type": "object"
       }
     },
+    "thoth:governance/getIncidentForensics:getIncidentForensics": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getIncidentForensics.\n",
+        "properties": {
+          "incidentId": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "incidentId"
+        ]
+      },
+      "outputs": {
+        "description": "A collection of values returned by getIncidentForensics.\n",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "agentName": {
+            "type": "string"
+          },
+          "attackSurfaceJson": {
+            "type": "string"
+          },
+          "eventsJson": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "incidentId": {
+            "type": "string"
+          },
+          "incidentSource": {
+            "type": "string"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "riskScore": {
+            "type": "integer"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "telemetrySummaryJson": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "agentId",
+          "agentName",
+          "attackSurfaceJson",
+          "eventsJson",
+          "incidentId",
+          "incidentSource",
+          "responseJson",
+          "riskScore",
+          "sessionId",
+          "telemetrySummaryJson",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
     "thoth:governance/getPackRuleVersions:getPackRuleVersions": {
       "inputs": {
         "description": "A collection of arguments for invoking getPackRuleVersions.\n",
@@ -5372,6 +6054,66 @@
         "type": "object"
       }
     },
+    "thoth:governance/getReportData:getReportData": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getReportData.\n",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "cadence": {
+            "type": "string"
+          },
+          "reportId": {
+            "type": "string"
+          },
+          "reportType": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "description": "A collection of values returned by getReportData.\n",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "cadence": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "metadataJson": {
+            "type": "string"
+          },
+          "reportId": {
+            "type": "string"
+          },
+          "reportType": {
+            "type": "string"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "metadataJson",
+          "reportId",
+          "responseJson",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
     "thoth:governance/getReportsOverview:getReportsOverview": {
       "inputs": {
         "description": "A collection of arguments for invoking getReportsOverview.\n",
@@ -5429,6 +6171,65 @@
         },
         "required": [
           "responseJson",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:governance/getSessionForensics:getSessionForensics": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getSessionForensics.\n",
+        "properties": {
+          "sessionId": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "sessionId"
+        ]
+      },
+      "outputs": {
+        "description": "A collection of values returned by getSessionForensics.\n",
+        "properties": {
+          "agentId": {
+            "type": "string"
+          },
+          "agentName": {
+            "type": "string"
+          },
+          "attackSurfaceJson": {
+            "type": "string"
+          },
+          "eventsJson": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "riskScore": {
+            "type": "integer"
+          },
+          "sessionId": {
+            "type": "string"
+          },
+          "telemetrySummaryJson": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "agentId",
+          "agentName",
+          "attackSurfaceJson",
+          "eventsJson",
+          "responseJson",
+          "riskScore",
+          "sessionId",
+          "telemetrySummaryJson",
           "id"
         ],
         "type": "object"

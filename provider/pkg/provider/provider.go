@@ -78,6 +78,10 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_endpoint":         {Tok: makeResource("fleet", "Endpoint")},
 			"thoth_mdm_provider":     {Tok: makeResource("mdm", "Provider")},
 			"thoth_mdm_sync":         {Tok: makeResource("mdm", "Sync")},
+			"thoth_mcp_vendor":       {Tok: makeResource("mcp", "Vendor")},
+			"thoth_mcp_catalog_verify": {
+				Tok: makeResource("mcp", "CatalogVerify"),
+			},
 			"thoth_browser_provider": {Tok: makeResource("browser", "Provider")},
 			"thoth_browser_policy":   {Tok: makeResource("browser", "Policy")},
 			"thoth_browser_enrollment": {
@@ -190,6 +194,15 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			"thoth_browser_enrollments": {
 				Tok: makeDataSource("browser", "getEnrollments"),
+			},
+			"thoth_mcp_vendors": {
+				Tok: makeDataSource("mcp", "getVendors"),
+			},
+			"thoth_mcp_vendor": {
+				Tok: makeDataSource("mcp", "getVendor"),
+			},
+			"thoth_mcp_inventory_report": {
+				Tok: makeDataSource("mcp", "getInventoryReport"),
 			},
 		},
 		Python: &tfbridge.PythonInfo{

@@ -59,6 +59,17 @@ mdm_sync = thoth.mdm.Sync(
     opts=pulumi.ResourceOptions(provider=provider),
 )
 
+mcp_vendor_openai = thoth.mcp.Vendor(
+    "mcp-openai",
+    vendor_id="openai",
+    display_name="OpenAI",
+    approved=True,
+    host_patterns=["api.openai.com", "*.openai.com"],
+    source="manual",
+    notes="Managed by pulumi-thoth example stack.",
+    opts=pulumi.ResourceOptions(provider=provider),
+)
+
 policy_dir = Path(__file__).resolve().parent / "policies"
 
 standard_dlp_opa = thoth.governance.PolicyBundle(
@@ -86,6 +97,7 @@ least_privilege_cedar = thoth.governance.PolicyBundle(
 
 pulumi.export("tenant", governance_settings.tenant_id)
 pulumi.export("mdmSyncJobId", mdm_sync.id)
+pulumi.export("mcpVendorId", mcp_vendor_openai.vendor_id)
 pulumi.export(
     "policyBundleIds",
     {

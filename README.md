@@ -15,6 +15,7 @@ The provider exposes Thoth control-plane resources for:
   - Includes both `complianceProfile` (preset) and `regulatoryRegimes` (explicit obligations)
 - Browser providers, policies, and enrollments
 - MDM providers and sync operations
+- MCP vendor registry allowlist management
 - API key management
 - Fleet lifecycle management and fleet inventory reads
 - Billing pricing, invoice, monthly-cost, and historical report reads
