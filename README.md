@@ -63,18 +63,16 @@ make test
 ## Examples
 
 - Python: `examples/python`
-- Node.js: `examples/nodejs` (local/dev usage with generated SDK; npm package is not published)
+- Node.js: `examples/nodejs`
 
 ## Published SDKs
 
 Current public package releases are:
 
+- Node.js: `@atensec/pulumi-thoth` (npm)
 - Python: `pulumi-thoth` (PyPI)
 - .NET: `AtenSecurity.Pulumi.Thoth` (NuGet)
 - Release line: `v0.1.12`
-
-Go and Node.js schema language declarations are intentionally omitted until
-public package publishing is enabled for those ecosystems.
 
 ## Release
 

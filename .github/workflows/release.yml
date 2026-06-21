@@ -135,7 +135,8 @@ jobs:
           set -euo pipefail
 
           if [[ -f sdk/nodejs/package.json ]]; then
-            jq --arg version "${RELEASE_VERSION}" '.version = $version' \
+            jq --arg version "${RELEASE_VERSION}" --arg name "@atensec/pulumi-thoth" \
+              '.name = $name | .version = $version' \
               sdk/nodejs/package.json > sdk/nodejs/package.json.tmp
             mv sdk/nodejs/package.json.tmp sdk/nodejs/package.json
           else
@@ -308,6 +309,9 @@ jobs:
       - validate_build_sdks
       - release_provider
     if: ${{ needs.prepare.outputs.is_rc != 'true' }}
+    environment:
+      name: npm
+      url: https://www.npmjs.com/package/@atensec/pulumi-thoth
     steps:
       - name: Download release inputs artifact
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
@@ -315,25 +319,26 @@ jobs:
           name: pulumi-thoth-release-inputs
 
       - name: Set up Node.js
-        uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: "20"
-          registry-url: "https://registry.npmjs.org"
+          node-version: "22"
+
+      - name: Upgrade npm for Trusted Publishing
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install -g npm@^11.5.1
+          node --version
+          npm --version
 
       - name: Publish npm package
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           RELEASE_VERSION: ${{ needs.prepare.outputs.release_version }}
         run: |
           set -euo pipefail
 
           if [[ ! -f "sdk/nodejs/package.json" ]]; then
-            echo "Node.js SDK not generated; skipping npm publish."
-            exit 0
-          fi
-
-          if [[ -z "${NODE_AUTH_TOKEN:-}" ]]; then
-            echo "::error::Missing NPM_TOKEN secret."
+            echo "::error::Node.js SDK not generated (missing sdk/nodejs/package.json)."
             exit 1
           fi
 
@@ -346,7 +351,7 @@ jobs:
 
           npm install
           npm run build
-          npm publish --access public
+          npm publish --provenance --access public
 
   publish_nuget:
     runs-on: ubuntu-latest

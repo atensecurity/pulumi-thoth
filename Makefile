@@ -22,6 +22,7 @@ schema: tfgen
 	./bin/$(TFGEN_BIN) schema --out $(SCHEMA_OUT_DIR)
 
 sdk: tfgen
+	./bin/$(TFGEN_BIN) nodejs --out sdk/nodejs
 	./bin/$(TFGEN_BIN) dotnet --out sdk/dotnet
 	./bin/$(TFGEN_BIN) python --out sdk/python
 
