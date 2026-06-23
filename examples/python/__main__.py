@@ -10,6 +10,9 @@ tenant_id = config.require("tenantId")
 webhook_url = config.require("webhookUrl")
 webhook_secret = config.require_secret("webhookSecret")
 regulatory_regimes = config.get_object("regulatoryRegimes") or ["soc2"]
+violation_id = config.get("violationId") or "vio-example-001"
+requested_by = config.get("requestedBy") or "udev-example"
+security_reviewer = config.get("securityReviewer") or "usec-example"
 
 # Auth is resolved from THOTH_API_KEY (org-scoped).
 provider = thoth.Provider(
@@ -95,9 +98,51 @@ least_privilege_cedar = thoth.governance.PolicyBundle(
     opts=pulumi.ResourceOptions(provider=provider),
 )
 
+policy_exception = thoth.governance.PolicyException(
+    "crm-export-exception",
+    violation_id=violation_id,
+    agent_id="crm-agent",
+    tool_name="export_records",
+    requested_by=requested_by,
+    business_justification="Month-end reconciliation export workflow",
+    frequency_estimate="weekly",
+    data_sensitivity="financial",
+    alternatives_considered="Manual export path is too slow",
+    opts=pulumi.ResourceOptions(provider=provider),
+)
+
+policy_exception_review = thoth.governance.PolicyExceptionReview(
+    "crm-export-exception-review",
+    request_id=policy_exception.request_id,
+    review_decision="approve",
+    reviewed_by=security_reviewer,
+    review_notes="Approved for controlled rollout using govapi apply channel.",
+    owner="security-platform",
+    target_environment="prod",
+    opts=pulumi.ResourceOptions(provider=provider),
+)
+
+policy_change_apply = thoth.governance.PolicyChangeArtifactApply(
+    "crm-export-exception-apply",
+    request_id=policy_exception.request_id,
+    applied_by=security_reviewer,
+    apply_channel="govapi",
+    policy_format="rego",
+    bundle_name="exception-crm-export",
+    bundle_description="Policy exception artifact promotion",
+    assignments=["all"],
+    enforcement_mode="enforce",
+    status="active",
+    opts=pulumi.ResourceOptions(
+        provider=provider, depends_on=[policy_exception_review]
+    ),
+)
+
 pulumi.export("tenant", governance_settings.tenant_id)
 pulumi.export("mdmSyncJobId", mdm_sync.id)
 pulumi.export("mcpVendorId", mcp_vendor_openai.vendor_id)
+pulumi.export("policyExceptionRequestId", policy_exception.request_id)
+pulumi.export("policyPatchApplyId", policy_change_apply.id)
 pulumi.export(
     "policyBundleIds",
     {

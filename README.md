@@ -25,6 +25,11 @@ The provider exposes Thoth control-plane resources for:
 - Versioned OPA/Cedar policy bundle management with explicit assignment scopes
 - Policy sync, approvals, pack assignment, webhook tests, evidence backfill triggers,
   decision-field backfills, and decision-evidence SLO reads
+- Policy exception workflow resources:
+  - `PolicyException` (request)
+  - `PolicyExceptionReview` (security review)
+  - `PolicyChangeArtifactApply` (govapi apply channel)
+  - plus `getPolicyException(s)` and `getPolicyChangeArtifact(s)` data sources
 
 Runtime evidence-chain export is surfaced by GovAPI/CLI endpoints:
 

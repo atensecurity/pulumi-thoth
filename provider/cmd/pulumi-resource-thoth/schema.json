@@ -3392,6 +3392,579 @@
         "type": "object"
       }
     },
+    "thoth:governance/policyChangeArtifactApply:PolicyChangeArtifactApply": {
+      "properties": {
+        "appliedAt": {
+          "type": "string",
+          "description": "Apply execution timestamp."
+        },
+        "appliedBy": {
+          "type": "string",
+          "description": "Actor applying the artifact."
+        },
+        "applyChannel": {
+          "type": "string",
+          "description": "Apply channel to use. Defaults to govapi."
+        },
+        "artifactId": {
+          "type": "string",
+          "description": "Artifact ID used for apply."
+        },
+        "assignments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional assignment targets for govapi policy bundle apply."
+        },
+        "bundleDescription": {
+          "type": "string",
+          "description": "Optional bundle description for govapi apply."
+        },
+        "bundleName": {
+          "type": "string",
+          "description": "Optional override bundle name for govapi apply."
+        },
+        "enforcementMode": {
+          "type": "string",
+          "description": "Optional enforcement mode override (enforce or observe)."
+        },
+        "govapiResourceJson": {
+          "type": "string",
+          "description": "GovAPI resource returned by apply operation as JSON."
+        },
+        "overrideRevoked": {
+          "type": "boolean",
+          "description": "Whether a temporary runtime override was revoked after apply."
+        },
+        "policyFormat": {
+          "type": "string",
+          "description": "Preferred policy format for apply payload (cedar, rego, yaml)."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Policy exception request ID."
+        },
+        "responseJson": {
+          "type": "string",
+          "description": "Full apply response as JSON."
+        },
+        "status": {
+          "type": "string",
+          "description": "Optional policy bundle status override (active, staged, paused, disabled)."
+        },
+        "targetEnvironment": {
+          "type": "string",
+          "description": "Target environment for the apply operation."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID from provider configuration."
+        }
+      },
+      "required": [
+        "appliedAt",
+        "appliedBy",
+        "artifactId",
+        "govapiResourceJson",
+        "overrideRevoked",
+        "requestId",
+        "responseJson",
+        "targetEnvironment",
+        "tenantId"
+      ],
+      "inputProperties": {
+        "appliedBy": {
+          "type": "string",
+          "description": "Actor applying the artifact."
+        },
+        "applyChannel": {
+          "type": "string",
+          "description": "Apply channel to use. Defaults to govapi."
+        },
+        "assignments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional assignment targets for govapi policy bundle apply."
+        },
+        "bundleDescription": {
+          "type": "string",
+          "description": "Optional bundle description for govapi apply."
+        },
+        "bundleName": {
+          "type": "string",
+          "description": "Optional override bundle name for govapi apply."
+        },
+        "enforcementMode": {
+          "type": "string",
+          "description": "Optional enforcement mode override (enforce or observe)."
+        },
+        "policyFormat": {
+          "type": "string",
+          "description": "Preferred policy format for apply payload (cedar, rego, yaml)."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Policy exception request ID."
+        },
+        "status": {
+          "type": "string",
+          "description": "Optional policy bundle status override (active, staged, paused, disabled)."
+        }
+      },
+      "requiredInputs": [
+        "appliedBy",
+        "requestId"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering PolicyChangeArtifactApply resources.\n",
+        "properties": {
+          "appliedAt": {
+            "type": "string",
+            "description": "Apply execution timestamp."
+          },
+          "appliedBy": {
+            "type": "string",
+            "description": "Actor applying the artifact."
+          },
+          "applyChannel": {
+            "type": "string",
+            "description": "Apply channel to use. Defaults to govapi."
+          },
+          "artifactId": {
+            "type": "string",
+            "description": "Artifact ID used for apply."
+          },
+          "assignments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional assignment targets for govapi policy bundle apply."
+          },
+          "bundleDescription": {
+            "type": "string",
+            "description": "Optional bundle description for govapi apply."
+          },
+          "bundleName": {
+            "type": "string",
+            "description": "Optional override bundle name for govapi apply."
+          },
+          "enforcementMode": {
+            "type": "string",
+            "description": "Optional enforcement mode override (enforce or observe)."
+          },
+          "govapiResourceJson": {
+            "type": "string",
+            "description": "GovAPI resource returned by apply operation as JSON."
+          },
+          "overrideRevoked": {
+            "type": "boolean",
+            "description": "Whether a temporary runtime override was revoked after apply."
+          },
+          "policyFormat": {
+            "type": "string",
+            "description": "Preferred policy format for apply payload (cedar, rego, yaml)."
+          },
+          "requestId": {
+            "type": "string",
+            "description": "Policy exception request ID."
+          },
+          "responseJson": {
+            "type": "string",
+            "description": "Full apply response as JSON."
+          },
+          "status": {
+            "type": "string",
+            "description": "Optional policy bundle status override (active, staged, paused, disabled)."
+          },
+          "targetEnvironment": {
+            "type": "string",
+            "description": "Target environment for the apply operation."
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "Tenant ID from provider configuration."
+          }
+        },
+        "type": "object"
+      }
+    },
+    "thoth:governance/policyException:PolicyException": {
+      "properties": {
+        "agentId": {
+          "type": "string",
+          "description": "Agent ID associated with the request."
+        },
+        "alternativesConsidered": {
+          "type": "string",
+          "description": "Optional alternatives reviewed before requesting an exception."
+        },
+        "businessJustification": {
+          "type": "string",
+          "description": "Business reason for requesting the exception."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp."
+        },
+        "dataSensitivity": {
+          "type": "string",
+          "description": "Data sensitivity level touched by this exception."
+        },
+        "frequencyEstimate": {
+          "type": "string",
+          "description": "How often this exception is expected to occur."
+        },
+        "holdToken": {
+          "type": "string",
+          "description": "Optional hold token when exception is tied to STEP_UP workflow."
+        },
+        "policyChangeJson": {
+          "type": "string",
+          "description": "Policy change metadata returned by the review flow."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Optional request ID. If omitted, enforcer generates one."
+        },
+        "requestedBy": {
+          "type": "string",
+          "description": "Requester identity."
+        },
+        "reviewDecision": {
+          "type": "string",
+          "description": "Review decision when present."
+        },
+        "reviewNotes": {
+          "type": "string",
+          "description": "Review notes when present."
+        },
+        "reviewedBy": {
+          "type": "string",
+          "description": "Reviewer identity when present."
+        },
+        "status": {
+          "type": "string",
+          "description": "Current policy exception status."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID from provider configuration."
+        },
+        "toolName": {
+          "type": "string",
+          "description": "Tool/action name associated with the request."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last update timestamp."
+        },
+        "violationId": {
+          "type": "string",
+          "description": "Violation ID associated with this exception request."
+        }
+      },
+      "required": [
+        "businessJustification",
+        "createdAt",
+        "dataSensitivity",
+        "frequencyEstimate",
+        "policyChangeJson",
+        "requestId",
+        "requestedBy",
+        "reviewDecision",
+        "reviewNotes",
+        "reviewedBy",
+        "status",
+        "tenantId",
+        "updatedAt",
+        "violationId"
+      ],
+      "inputProperties": {
+        "agentId": {
+          "type": "string",
+          "description": "Agent ID associated with the request."
+        },
+        "alternativesConsidered": {
+          "type": "string",
+          "description": "Optional alternatives reviewed before requesting an exception."
+        },
+        "businessJustification": {
+          "type": "string",
+          "description": "Business reason for requesting the exception."
+        },
+        "dataSensitivity": {
+          "type": "string",
+          "description": "Data sensitivity level touched by this exception."
+        },
+        "frequencyEstimate": {
+          "type": "string",
+          "description": "How often this exception is expected to occur."
+        },
+        "holdToken": {
+          "type": "string",
+          "description": "Optional hold token when exception is tied to STEP_UP workflow."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Optional request ID. If omitted, enforcer generates one."
+        },
+        "requestedBy": {
+          "type": "string",
+          "description": "Requester identity."
+        },
+        "toolName": {
+          "type": "string",
+          "description": "Tool/action name associated with the request."
+        },
+        "violationId": {
+          "type": "string",
+          "description": "Violation ID associated with this exception request."
+        }
+      },
+      "requiredInputs": [
+        "businessJustification",
+        "dataSensitivity",
+        "frequencyEstimate",
+        "requestedBy",
+        "violationId"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering PolicyException resources.\n",
+        "properties": {
+          "agentId": {
+            "type": "string",
+            "description": "Agent ID associated with the request."
+          },
+          "alternativesConsidered": {
+            "type": "string",
+            "description": "Optional alternatives reviewed before requesting an exception."
+          },
+          "businessJustification": {
+            "type": "string",
+            "description": "Business reason for requesting the exception."
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Creation timestamp."
+          },
+          "dataSensitivity": {
+            "type": "string",
+            "description": "Data sensitivity level touched by this exception."
+          },
+          "frequencyEstimate": {
+            "type": "string",
+            "description": "How often this exception is expected to occur."
+          },
+          "holdToken": {
+            "type": "string",
+            "description": "Optional hold token when exception is tied to STEP_UP workflow."
+          },
+          "policyChangeJson": {
+            "type": "string",
+            "description": "Policy change metadata returned by the review flow."
+          },
+          "requestId": {
+            "type": "string",
+            "description": "Optional request ID. If omitted, enforcer generates one."
+          },
+          "requestedBy": {
+            "type": "string",
+            "description": "Requester identity."
+          },
+          "reviewDecision": {
+            "type": "string",
+            "description": "Review decision when present."
+          },
+          "reviewNotes": {
+            "type": "string",
+            "description": "Review notes when present."
+          },
+          "reviewedBy": {
+            "type": "string",
+            "description": "Reviewer identity when present."
+          },
+          "status": {
+            "type": "string",
+            "description": "Current policy exception status."
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "Tenant ID from provider configuration."
+          },
+          "toolName": {
+            "type": "string",
+            "description": "Tool/action name associated with the request."
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Last update timestamp."
+          },
+          "violationId": {
+            "type": "string",
+            "description": "Violation ID associated with this exception request."
+          }
+        },
+        "type": "object"
+      }
+    },
+    "thoth:governance/policyExceptionReview:PolicyExceptionReview": {
+      "properties": {
+        "appliedPolicyChangeJson": {
+          "type": "string",
+          "description": "Policy change metadata present on the reviewed exception."
+        },
+        "overrideExpiresAt": {
+          "type": "string",
+          "description": "Optional runtime override expiration timestamp (RFC3339)."
+        },
+        "owner": {
+          "type": "string",
+          "description": "Optional owner metadata used when synthesizing policy artifacts."
+        },
+        "policyChangeJson": {
+          "type": "string",
+          "description": "Optional policy change override JSON payload."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Policy exception request ID."
+        },
+        "reviewDecision": {
+          "type": "string",
+          "description": "Review outcome: approve, deny, request_changes, approve_with_modification."
+        },
+        "reviewNotes": {
+          "type": "string",
+          "description": "Optional review notes."
+        },
+        "reviewedBy": {
+          "type": "string",
+          "description": "Reviewer identity."
+        },
+        "status": {
+          "type": "string",
+          "description": "Resulting policy exception status."
+        },
+        "targetEnvironment": {
+          "type": "string",
+          "description": "Optional target environment (for example prod or staging)."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID from provider configuration."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Updated timestamp after review."
+        }
+      },
+      "required": [
+        "appliedPolicyChangeJson",
+        "requestId",
+        "reviewDecision",
+        "reviewedBy",
+        "status",
+        "tenantId",
+        "updatedAt"
+      ],
+      "inputProperties": {
+        "overrideExpiresAt": {
+          "type": "string",
+          "description": "Optional runtime override expiration timestamp (RFC3339)."
+        },
+        "owner": {
+          "type": "string",
+          "description": "Optional owner metadata used when synthesizing policy artifacts."
+        },
+        "policyChangeJson": {
+          "type": "string",
+          "description": "Optional policy change override JSON payload."
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Policy exception request ID."
+        },
+        "reviewDecision": {
+          "type": "string",
+          "description": "Review outcome: approve, deny, request_changes, approve_with_modification."
+        },
+        "reviewNotes": {
+          "type": "string",
+          "description": "Optional review notes."
+        },
+        "reviewedBy": {
+          "type": "string",
+          "description": "Reviewer identity."
+        },
+        "targetEnvironment": {
+          "type": "string",
+          "description": "Optional target environment (for example prod or staging)."
+        }
+      },
+      "requiredInputs": [
+        "requestId",
+        "reviewDecision",
+        "reviewedBy"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering PolicyExceptionReview resources.\n",
+        "properties": {
+          "appliedPolicyChangeJson": {
+            "type": "string",
+            "description": "Policy change metadata present on the reviewed exception."
+          },
+          "overrideExpiresAt": {
+            "type": "string",
+            "description": "Optional runtime override expiration timestamp (RFC3339)."
+          },
+          "owner": {
+            "type": "string",
+            "description": "Optional owner metadata used when synthesizing policy artifacts."
+          },
+          "policyChangeJson": {
+            "type": "string",
+            "description": "Optional policy change override JSON payload."
+          },
+          "requestId": {
+            "type": "string",
+            "description": "Policy exception request ID."
+          },
+          "reviewDecision": {
+            "type": "string",
+            "description": "Review outcome: approve, deny, request_changes, approve_with_modification."
+          },
+          "reviewNotes": {
+            "type": "string",
+            "description": "Optional review notes."
+          },
+          "reviewedBy": {
+            "type": "string",
+            "description": "Reviewer identity."
+          },
+          "status": {
+            "type": "string",
+            "description": "Resulting policy exception status."
+          },
+          "targetEnvironment": {
+            "type": "string",
+            "description": "Optional target environment (for example prod or staging)."
+          },
+          "tenantId": {
+            "type": "string",
+            "description": "Tenant ID from provider configuration."
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Updated timestamp after review."
+          }
+        },
+        "type": "object"
+      }
+    },
     "thoth:governance/policySync:PolicySync": {
       "properties": {
         "appliedAgentsJson": {
@@ -6198,6 +6771,210 @@
           },
           "id": {
             "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "dataJson",
+          "total",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:governance/getPolicyChangeArtifact:getPolicyChangeArtifact": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getPolicyChangeArtifact.\n",
+        "properties": {
+          "requestId": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "requestId"
+        ]
+      },
+      "outputs": {
+        "description": "A collection of values returned by getPolicyChangeArtifact.\n",
+        "properties": {
+          "artifactId": {
+            "type": "string"
+          },
+          "dataJson": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "requestId": {
+            "type": "string"
+          },
+          "targetEnvironment": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "artifactId",
+          "dataJson",
+          "requestId",
+          "targetEnvironment",
+          "updatedAt",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:governance/getPolicyChangeArtifacts:getPolicyChangeArtifacts": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getPolicyChangeArtifacts.\n",
+        "properties": {
+          "limit": {
+            "type": "integer"
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "targetEnvironment": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "description": "A collection of values returned by getPolicyChangeArtifacts.\n",
+        "properties": {
+          "dataJson": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "targetEnvironment": {
+            "type": "string"
+          },
+          "total": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "dataJson",
+          "total",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:governance/getPolicyException:getPolicyException": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getPolicyException.\n",
+        "properties": {
+          "requestId": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "requestId"
+        ]
+      },
+      "outputs": {
+        "description": "A collection of values returned by getPolicyException.\n",
+        "properties": {
+          "dataJson": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "requestId": {
+            "type": "string"
+          },
+          "requestedBy": {
+            "type": "string"
+          },
+          "reviewedBy": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "dataJson",
+          "requestId",
+          "requestedBy",
+          "reviewedBy",
+          "status",
+          "updatedAt",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:governance/getPolicyExceptions:getPolicyExceptions": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getPolicyExceptions.\n",
+        "properties": {
+          "limit": {
+            "type": "integer"
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "requestedBy": {
+            "type": "string"
+          },
+          "reviewedBy": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "description": "A collection of values returned by getPolicyExceptions.\n",
+        "properties": {
+          "dataJson": {
+            "type": "string"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "offset": {
+            "type": "integer"
+          },
+          "requestedBy": {
+            "type": "string"
+          },
+          "reviewedBy": {
             "type": "string"
           },
           "status": {
