@@ -5,8 +5,78 @@ resources from Pulumi programs.
 
 This package is published as:
 
+- **Node.js:** `@atensec/pulumi-thoth`
 - **Python:** `pulumi-thoth`
-- **.NET:** `AtenSecurity.Pulumi.Thoth`
+- **.NET:** `AtenSecurity.Pulumi.Thoth.Thoth`
 
 For installation and configuration instructions, see
 [`installation-configuration`](./installation-configuration.md).
+
+## Minimal examples
+
+### Node.js
+
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as thoth from "@atensec/pulumi-thoth";
+
+const cfg = new pulumi.Config();
+const provider = new thoth.Provider("thoth", {
+  tenantId: cfg.require("tenantId"),
+});
+
+new thoth.governance.GovernanceSettings(
+  "baseline-governance",
+  {
+    complianceProfile: "soc2",
+    shadowLow: "allow",
+    shadowMedium: "step_up",
+    shadowHigh: "block",
+    shadowCritical: "block",
+  },
+  { provider }
+);
+```
+
+### Python
+
+```python
+import pulumi
+import pulumi_thoth as thoth
+
+cfg = pulumi.Config()
+provider = thoth.Provider("thoth", tenant_id=cfg.require("tenantId"))
+
+thoth.governance.GovernanceSettings(
+    "baseline-governance",
+    compliance_profile="soc2",
+    shadow_low="allow",
+    shadow_medium="step_up",
+    shadow_high="block",
+    shadow_critical="block",
+    opts=pulumi.ResourceOptions(provider=provider),
+)
+```
+
+### C#
+
+```csharp
+using AtenSecurity.Pulumi.Thoth;
+using AtenSecurity.Pulumi.Thoth.Governance;
+using Pulumi;
+
+var config = new Config();
+var provider = new Provider("thoth", new ProviderArgs
+{
+    TenantId = config.Require("tenantId"),
+});
+
+_ = new GovernanceSettings("baseline-governance", new GovernanceSettingsArgs
+{
+    ComplianceProfile = "soc2",
+    ShadowLow = "allow",
+    ShadowMedium = "step_up",
+    ShadowHigh = "block",
+    ShadowCritical = "block",
+}, new CustomResourceOptions { Provider = provider });
+```
