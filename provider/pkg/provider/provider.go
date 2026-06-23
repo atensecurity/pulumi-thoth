@@ -61,8 +61,15 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_pam_settings":        {Tok: makeResource("governance", "PamSettings")},
 			"thoth_policy_sync":         {Tok: makeResource("governance", "PolicySync")},
 			"thoth_policy_bundle":       {Tok: makeResource("governance", "PolicyBundle")},
-			"thoth_approval_decision":   {Tok: makeResource("governance", "ApprovalDecision")},
-			"thoth_pack_assignment":     {Tok: makeResource("governance", "PackAssignment")},
+			"thoth_policy_exception":    {Tok: makeResource("governance", "PolicyException")},
+			"thoth_policy_exception_review": {
+				Tok: makeResource("governance", "PolicyExceptionReview"),
+			},
+			"thoth_policy_change_artifact_apply": {
+				Tok: makeResource("governance", "PolicyChangeArtifactApply"),
+			},
+			"thoth_approval_decision": {Tok: makeResource("governance", "ApprovalDecision")},
+			"thoth_pack_assignment":   {Tok: makeResource("governance", "PackAssignment")},
 			"thoth_pack_assignment_bulk": {
 				Tok: makeResource("governance", "PackAssignmentBulk"),
 			},
@@ -182,6 +189,18 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			"thoth_governance_evidence_slos": {
 				Tok: makeDataSource("governance", "getEvidenceSlos"),
+			},
+			"thoth_policy_exception": {
+				Tok: makeDataSource("governance", "getPolicyException"),
+			},
+			"thoth_policy_exceptions": {
+				Tok: makeDataSource("governance", "getPolicyExceptions"),
+			},
+			"thoth_policy_change_artifact": {
+				Tok: makeDataSource("governance", "getPolicyChangeArtifact"),
+			},
+			"thoth_policy_change_artifacts": {
+				Tok: makeDataSource("governance", "getPolicyChangeArtifacts"),
 			},
 			"thoth_api_key_metrics": {Tok: makeDataSource("access", "getApiKeyMetrics")},
 			"thoth_mdm_providers":   {Tok: makeDataSource("mdm", "getProviders")},
