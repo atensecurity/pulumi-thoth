@@ -6128,8 +6128,29 @@
           "days": {
             "type": "integer"
           },
+          "eventEstimatedFallbacks": {
+            "type": "integer"
+          },
+          "flatRateFallbacks": {
+            "type": "integer"
+          },
           "id": {
             "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "pricedWithCatalogCount": {
+            "type": "integer"
+          },
+          "pricingSha256": {
+            "type": "string"
+          },
+          "pricingSource": {
+            "type": "string"
+          },
+          "pricingUpdatedAt": {
+            "type": "string"
+          },
+          "pricingVersion": {
             "type": "string"
           },
           "rate": {
@@ -6137,10 +6158,24 @@
           },
           "responseJson": {
             "type": "string"
+          },
+          "unresolvedModels": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
           }
         },
         "required": [
+          "eventEstimatedFallbacks",
+          "flatRateFallbacks",
+          "pricedWithCatalogCount",
+          "pricingSha256",
+          "pricingSource",
+          "pricingUpdatedAt",
+          "pricingVersion",
           "responseJson",
+          "unresolvedModels",
           "id"
         ],
         "type": "object"
