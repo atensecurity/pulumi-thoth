@@ -1,0 +1,12 @@
+config:
+  pulumi-thoth-python:tenantId: tenant-demo
+  pulumi-thoth-python:apexDomain: atensecurity.com
+  pulumi-thoth-python:webhookUrl: https://example.invalid/thoth/webhook
+  pulumi-thoth-python:regulatoryRegimes:
+    - soc2
+  pulumi-thoth-python:jamfBaseUrl: https://jamf.example.invalid
+  pulumi-thoth-python:jamfClientId: jamf-client-id
+  pulumi-thoth-python:webhookSecret:
+    secure: replace-me
+  pulumi-thoth-python:jamfClientSecret:
+    secure: replace-me

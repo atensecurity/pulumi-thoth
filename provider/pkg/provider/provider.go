@@ -53,6 +53,7 @@ func Provider() tfbridge.ProviderInfo {
 		Publisher:  "Aten Security",
 		Version:    version.Version,
 		GitHubOrg:  "atensecurity",
+		PluginDownloadURL: PluginDownloadURL(),
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"thoth_billing_overage_cap": {Tok: makeResource("billing", "OverageCap")},
 			"thoth_governance_settings": {Tok: makeResource("governance", "GovernanceSettings")},
@@ -175,6 +176,12 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_governance_cost_report": {
 				Tok: makeDataSource("governance", "getCostReport"),
 			},
+			"thoth_governance_executive_summary": {
+				Tok: makeDataSource("governance", "getExecutiveSummary"),
+			},
+			"thoth_governance_board_incident_summary": {
+				Tok: makeDataSource("governance", "getBoardIncidentSummary"),
+			},
 			"thoth_report_data": {
 				Tok: makeDataSource("governance", "getReportData"),
 			},
@@ -223,6 +230,12 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_mcp_inventory_report": {
 				Tok: makeDataSource("mcp", "getInventoryReport"),
 			},
+			"thoth_mcp_inventory_digest": {
+				Tok: makeDataSource("mcp", "getInventoryDigest"),
+			},
+		},
+		JavaScript: &tfbridge.JavaScriptInfo{
+			PackageName: "@atensec/pulumi-thoth",
 		},
 		Python: &tfbridge.PythonInfo{
 			PackageName: "pulumi_thoth",
@@ -231,11 +244,12 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		CSharp: &tfbridge.CSharpInfo{
-			RootNamespace: "AtenSecurity.Pulumi.Thoth",
+			RootNamespace: "AtenSecurity.Pulumi",
 			PackageReferences: map[string]string{
 				"Pulumi": "3.*",
 			},
 		},
+		MetadataInfo: tfbridge.NewProviderMetadata([]byte("{}")),
 	}
 }
 

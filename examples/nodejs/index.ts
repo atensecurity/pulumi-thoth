@@ -1,20 +1,19 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as fs from "fs";
-import * as thoth from "@atensec/pulumi-thoth";
+import * as thoth from "@atensec/pulumi-thoth/bin";
 
 const cfg = new pulumi.Config();
 
 const tenantId = cfg.require("tenantId");
+const apexDomain = cfg.get("apexDomain");
 const webhookUrl = cfg.require("webhookUrl");
 const webhookSecret = cfg.requireSecret("webhookSecret");
 const regulatoryRegimes = cfg.getObject<string[]>("regulatoryRegimes") ?? ["soc2"];
-const violationId = cfg.get("violationId") ?? "vio-example-001";
-const requestedBy = cfg.get("requestedBy") ?? "udev-example";
-const securityReviewer = cfg.get("securityReviewer") ?? "usec-example";
 
 // Auth is resolved from THOTH_API_KEY (org-scoped).
 const provider = new thoth.Provider("thoth", {
   tenantId,
+  apexDomain,
 });
 
 const governanceSettings = new thoth.governance.GovernanceSettings(
@@ -46,11 +45,15 @@ const mdmProvider = new thoth.mdm.Provider(
     providerName: "jamf",
     name: "Jamf Pro",
     enabled: true,
-    configJson: JSON.stringify({
-      base_url: cfg.require("jamfBaseUrl"),
-      client_id: cfg.require("jamfClientId"),
-      client_secret: cfg.requireSecret("jamfClientSecret"),
-    }),
+    configJson: pulumi
+      .all([cfg.require("jamfBaseUrl"), cfg.require("jamfClientId"), cfg.requireSecret("jamfClientSecret")])
+      .apply(([baseUrl, clientId, clientSecret]) =>
+        JSON.stringify({
+          base_url: baseUrl,
+          client_id: clientId,
+          client_secret: clientSecret,
+        })
+      ),
   },
   { provider }
 );
@@ -103,58 +106,9 @@ const leastPrivilegeCedar = new thoth.governance.PolicyBundle(
   { provider }
 );
 
-const policyException = new thoth.governance.PolicyException(
-  "crm-export-exception",
-  {
-    violationId,
-    agentId: "crm-agent",
-    toolName: "export_records",
-    requestedBy,
-    businessJustification: "Month-end reconciliation export workflow",
-    frequencyEstimate: "weekly",
-    dataSensitivity: "financial",
-    alternativesConsidered: "Manual export path is too slow",
-  },
-  { provider }
-);
-
-const policyExceptionReview = new thoth.governance.PolicyExceptionReview(
-  "crm-export-exception-review",
-  {
-    requestId: policyException.requestId,
-    reviewDecision: "approve",
-    reviewedBy: securityReviewer,
-    reviewNotes: "Approved for controlled rollout using govapi apply channel.",
-    owner: "security-platform",
-    targetEnvironment: "prod",
-  },
-  { provider }
-);
-
-const policyChangeApply = new thoth.governance.PolicyChangeArtifactApply(
-  "crm-export-exception-apply",
-  {
-    requestId: policyException.requestId,
-    appliedBy: securityReviewer,
-    applyChannel: "govapi",
-    policyFormat: "rego",
-    bundleName: "exception-crm-export",
-    bundleDescription: "Policy exception artifact promotion",
-    assignments: ["all"],
-    enforcementMode: "enforce",
-    status: "active",
-  },
-  {
-    provider,
-    dependsOn: [policyExceptionReview],
-  }
-);
-
 export const tenant = governanceSettings.tenantId;
 export const mdmSyncJobId = mdmSync.id;
 export const mcpVendorId = mcpVendorOpenAi.vendorId;
-export const policyExceptionRequestId = policyException.requestId;
-export const policyPatchApplyId = policyChangeApply.id;
 export const policyBundleIds = {
   standardDlpOpa: standardDlpOpa.id,
   leastPrivilegeCedar: leastPrivilegeCedar.id,

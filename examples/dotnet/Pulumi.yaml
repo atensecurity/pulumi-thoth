@@ -1,0 +1,3 @@
+name: pulumi-thoth-dotnet
+runtime: dotnet
+description: Pulumi Thoth provider example (.NET)

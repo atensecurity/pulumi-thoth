@@ -6,11 +6,10 @@
   https://www.npmjs.com/package/@atensec/pulumi-thoth
 - Python: `pulumi-thoth`
   https://pypi.org/project/pulumi-thoth/
-- .NET: `AtenSecurity.Pulumi.Thoth.Thoth`
-  https://www.nuget.org/packages/AtenSecurity.Pulumi.Thoth.Thoth
+- .NET: `AtenSecurity.Pulumi.Thoth`
+  https://www.nuget.org/packages/AtenSecurity.Pulumi.Thoth
 
 This package currently supports Node.js, Python, and .NET SDKs.
-Go SDK generation/publication is currently not enabled for this provider line.
 
 ## Install
 
@@ -29,7 +28,7 @@ pip install pulumi pulumi-thoth
 ### .NET
 
 ```bash
-dotnet add package AtenSecurity.Pulumi.Thoth.Thoth
+dotnet add package AtenSecurity.Pulumi.Thoth
 ```
 
 ## Install provider plugin

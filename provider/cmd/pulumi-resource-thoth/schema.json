@@ -13,6 +13,7 @@
   "license": "Apache-2.0",
   "attribution": "This Pulumi package is based on the [`thoth` Terraform Provider](https://github.com/atensecurity/terraform-provider-thoth).",
   "repository": "https://github.com/atensecurity/pulumi-thoth",
+  "pluginDownloadURL": "github://api.github.com/atensecurity/pulumi-thoth",
   "publisher": "Aten Security",
   "meta": {
     "moduleFormat": "(.*)(?:/[^/]*)"
@@ -23,9 +24,10 @@
         "Pulumi": "3.*"
       },
       "compatibility": "tfbridge20",
-      "rootNamespace": "AtenSecurity.Pulumi.Thoth"
+      "rootNamespace": "AtenSecurity.Pulumi"
     },
     "nodejs": {
+      "packageName": "@atensec/pulumi-thoth",
       "packageDescription": "Pulumi provider for Aten Security Thoth AI governance control plane.",
       "readme": "> This provider is a derived work of the [Terraform Provider](https://github.com/atensecurity/terraform-provider-thoth)\n> distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n> first check the [`pulumi-thoth` repo](https://github.com/atensecurity/pulumi-thoth/issues); however, if that doesn't turn up anything,\n> please consult the source [`terraform-provider-thoth` repo](https://github.com/atensecurity/terraform-provider-thoth/issues).",
       "compatibility": "tfbridge20",
@@ -6109,6 +6111,41 @@
         "type": "object"
       }
     },
+    "thoth:governance/getBoardIncidentSummary:getBoardIncidentSummary": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getBoardIncidentSummary.\n",
+        "properties": {
+          "violationId": {
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "violationId"
+        ]
+      },
+      "outputs": {
+        "description": "A collection of values returned by getBoardIncidentSummary.\n",
+        "properties": {
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "violationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "responseJson",
+          "violationId",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
     "thoth:governance/getCostReport:getCostReport": {
       "inputs": {
         "description": "A collection of arguments for invoking getCostReport.\n",
@@ -6476,6 +6513,43 @@
           "recordsChecked",
           "responseJson",
           "verified",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:governance/getExecutiveSummary:getExecutiveSummary": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getExecutiveSummary.\n",
+        "properties": {
+          "days": {
+            "type": "integer"
+          },
+          "rate": {
+            "type": "number"
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "description": "A collection of values returned by getExecutiveSummary.\n",
+        "properties": {
+          "days": {
+            "type": "integer"
+          },
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "rate": {
+            "type": "number"
+          },
+          "responseJson": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "responseJson",
           "id"
         ],
         "type": "object"
@@ -7297,6 +7371,61 @@
         "required": [
           "dataJson",
           "total",
+          "id"
+        ],
+        "type": "object"
+      }
+    },
+    "thoth:mcp/getInventoryDigest:getInventoryDigest": {
+      "inputs": {
+        "description": "A collection of arguments for invoking getInventoryDigest.\n",
+        "properties": {
+          "windowHours": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "outputs": {
+        "description": "A collection of values returned by getInventoryDigest.\n",
+        "properties": {
+          "id": {
+            "description": "The provider-assigned unique ID for this managed resource.",
+            "type": "string"
+          },
+          "recommendedActions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "responseJson": {
+            "type": "string"
+          },
+          "topUnapprovedEndpointsJson": {
+            "type": "string"
+          },
+          "totalEndpoints": {
+            "type": "integer"
+          },
+          "unapprovedCalls": {
+            "type": "integer"
+          },
+          "unapprovedEndpoints": {
+            "type": "integer"
+          },
+          "windowHours": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "recommendedActions",
+          "responseJson",
+          "topUnapprovedEndpointsJson",
+          "totalEndpoints",
+          "unapprovedCalls",
+          "unapprovedEndpoints",
+          "windowHours",
           "id"
         ],
         "type": "object"

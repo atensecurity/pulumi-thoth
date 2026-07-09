@@ -7,7 +7,7 @@ This package is published as:
 
 - **Node.js:** `@atensec/pulumi-thoth`
 - **Python:** `pulumi-thoth`
-- **.NET:** `AtenSecurity.Pulumi.Thoth.Thoth`
+- **.NET:** `AtenSecurity.Pulumi.Thoth`
 
 For installation and configuration instructions, see
 [`installation-configuration`](./installation-configuration.md).

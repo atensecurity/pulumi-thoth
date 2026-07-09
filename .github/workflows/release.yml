@@ -152,7 +152,7 @@ jobs:
           fi
 
           cat > sdk/dotnet/README.md <<'DOC'
-          # AtenSecurity.Pulumi.Thoth.Thoth
+          # AtenSecurity.Pulumi.Thoth
 
           Pulumi provider SDK for the Aten Security Thoth AI governance control plane.
           DOC

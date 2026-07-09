@@ -67,8 +67,10 @@ make test
 
 ## Examples
 
+- Complete usage guide: `examples/README.md`
 - Python: `examples/python`
 - Node.js: `examples/nodejs`
+- .NET: `examples/dotnet`
 
 ## Published SDKs
 
@@ -76,7 +78,7 @@ Current public package releases are:
 
 - Node.js: `@atensec/pulumi-thoth` (npm)
 - Python: `pulumi-thoth` (PyPI)
-- .NET: `AtenSecurity.Pulumi.Thoth.Thoth` (NuGet)
+- .NET: `AtenSecurity.Pulumi.Thoth` (NuGet)
 - Release line: `v0.1.12`
 
 ## Release
