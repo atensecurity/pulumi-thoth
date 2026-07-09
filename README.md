@@ -79,7 +79,7 @@ Current public package releases are:
 - Node.js: `@atensec/pulumi-thoth` (npm)
 - Python: `pulumi-thoth` (PyPI)
 - .NET: `AtenSecurity.Pulumi.Thoth` (NuGet)
-- Release line: `v0.1.12`
+- Release line: `v0.1.13`
 
 ## Release
 

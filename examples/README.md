@@ -33,7 +33,7 @@ pulumi stack init dev
 pulumi preview
 ```
 
-`npm install` runs a `postinstall` fixup for `@atensec/pulumi-thoth@0.1.12`
+`npm install` runs a `postinstall` fixup for `@atensec/pulumi-thoth@0.1.13`
 so Node 24+ can load the package runtime correctly.
 
 ## Python
@@ -62,6 +62,6 @@ pulumi preview
 
 ## Notes
 
-- The examples use `v0.1.12` package versions to match the current published
+- The examples use `v0.1.13` package versions to match the current published
   release line.
 - `pulumi preview` requires valid tenant/config/API credentials.

@@ -2,6 +2,31 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.13 - 2026-07-09
+
+### Changed
+
+- Updated Terraform provider bridge dependency pin to
+  `github.com/atensecurity/terraform-provider-thoth v0.1.13`.
+- Bumped Pulumi release defaults/examples to `0.1.13`:
+  - `Makefile` default `VERSION`
+  - README release line and manual plugin-install command docs
+  - Node.js and .NET example package references
+- Updated Pulumi bridge language metadata so Node.js SDK publishing is declared
+  as `@atensec/pulumi-thoth` (matching npm publication and registry install
+  instructions).
+- Corrected .NET namespace configuration to avoid doubled NuGet identity
+  rendering in generated metadata/docs.
+- Added explicit plugin download URL + bridge metadata wiring in provider
+  metadata for release consistency.
+
+### Added
+
+- Added complete cross-language examples under `examples/` for Node.js, Python,
+  and .NET with matching stack config templates.
+- Added code examples to `docs/_index.md` for Node.js, Python, and .NET quick
+  starts.
+
 ## 0.1.12 - 2026-06-10
 
 ### Changed
