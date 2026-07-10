@@ -2,6 +2,16 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.14 - 2026-07-10
+
+### Fixed
+
+- Added required YAML front-matter blocks to:
+  - `docs/_index.md`
+  - `docs/installation-configuration.md`
+- This unblocks Pulumi registry metadata generation (`resourcedocsgen metadata from-github`)
+  and future nightly community-package refreshes.
+
 ## 0.1.13 - 2026-07-09
 
 ### Changed

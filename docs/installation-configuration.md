@@ -43,7 +43,7 @@ Pulumi installs plugins automatically during `pulumi up`, but you can install
 the provider plugin manually:
 
 ```bash
-pulumi plugin install resource thoth 0.1.13 --server github://api.github.com/atensecurity/pulumi-thoth
+pulumi plugin install resource thoth 0.1.14 --server github://api.github.com/atensecurity/pulumi-thoth
 ```
 
 ## Configure provider credentials
