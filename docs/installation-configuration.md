@@ -1,3 +1,9 @@
+---
+title: Thoth Installation & Configuration
+meta_desc: Install and configure the Thoth Pulumi provider for runtime authorization of AI agents.
+layout: package
+---
+
 # Installation & Configuration
 
 ## Published SDKs

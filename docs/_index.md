@@ -1,3 +1,9 @@
+---
+title: Thoth
+meta_desc: Manage Aten Security Thoth resources with Pulumi - runtime authorization and enforcement for AI agents.
+layout: package
+---
+
 # Thoth Provider
 
 The Thoth Pulumi provider lets you manage Aten Security Thoth governance
