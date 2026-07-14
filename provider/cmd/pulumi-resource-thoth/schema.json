@@ -6,6 +6,7 @@
     "pulumi",
     "thoth",
     "atensecurity",
+    "category/utility",
     "governance",
     "ai"
   ],
@@ -13,6 +14,7 @@
   "license": "Apache-2.0",
   "attribution": "This Pulumi package is based on the [`thoth` Terraform Provider](https://github.com/atensecurity/terraform-provider-thoth).",
   "repository": "https://github.com/atensecurity/pulumi-thoth",
+  "logoUrl": "https://raw.githubusercontent.com/atensecurity/pulumi-thoth/main/docs/logo.png",
   "pluginDownloadURL": "github://api.github.com/atensecurity/pulumi-thoth",
   "publisher": "Aten Security",
   "meta": {
