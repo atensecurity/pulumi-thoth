@@ -16,7 +16,7 @@ This package is published as:
 - **.NET:** `AtenSecurity.Pulumi.Thoth`
 
 For installation and configuration instructions, see
-[`installation-configuration`](./installation-configuration.md).
+[`installation-configuration`](./installation-configuration).
 
 ## Minimal examples
 

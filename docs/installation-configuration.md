@@ -8,12 +8,9 @@ layout: package
 
 ## Published SDKs
 
-- Node.js: `@atensec/pulumi-thoth`
-  https://www.npmjs.com/package/@atensec/pulumi-thoth
-- Python: `pulumi-thoth`
-  https://pypi.org/project/pulumi-thoth/
-- .NET: `AtenSecurity.Pulumi.Thoth`
-  https://www.nuget.org/packages/AtenSecurity.Pulumi.Thoth
+- Node.js: [`@atensec/pulumi-thoth`](https://www.npmjs.com/package/@atensec/pulumi-thoth)
+- Python: [`pulumi-thoth`](https://pypi.org/project/pulumi-thoth/)
+- .NET: [`AtenSecurity.Pulumi.Thoth`](https://www.nuget.org/packages/AtenSecurity.Pulumi.Thoth)
 
 This package currently supports Node.js, Python, and .NET SDKs.
 
@@ -43,7 +40,7 @@ Pulumi installs plugins automatically during `pulumi up`, but you can install
 the provider plugin manually:
 
 ```bash
-pulumi plugin install resource thoth 0.1.14 --server github://api.github.com/atensecurity/pulumi-thoth
+pulumi plugin install resource thoth 0.1.15 --server github://api.github.com/atensecurity/pulumi-thoth
 ```
 
 ## Configure provider credentials

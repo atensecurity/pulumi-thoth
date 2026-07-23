@@ -2,6 +2,23 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.15 - 2026-07-23
+
+### Changed
+
+- Updated Terraform provider bridge dependency pin to
+  `github.com/atensecurity/terraform-provider-thoth v0.1.15`.
+- Bumped Pulumi release defaults/docs to `0.1.15`:
+  - `Makefile` default `VERSION`
+  - plugin install command in `docs/installation-configuration.md`
+
+### Fixed
+
+- Updated docs for Pulumi Registry lint compatibility:
+  - extensionless internal cross-link in `docs/_index.md`
+  - markdown SDK links (no bare URLs) in
+    `docs/installation-configuration.md`
+
 ## 0.1.14 - 2026-07-10
 
 ### Fixed

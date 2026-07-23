@@ -1,7 +1,7 @@
 PROVIDER          := thoth
 PROVIDER_BIN      := pulumi-resource-$(PROVIDER)
 TFGEN_BIN         := pulumi-tfgen-$(PROVIDER)
-VERSION           ?= 0.1.13
+VERSION           ?= 0.1.15
 PROVIDER_DIR      := provider
 RESOURCE_CMD_DIR  := $(PROVIDER_DIR)/cmd/pulumi-resource-$(PROVIDER)
 SCHEMA_OUT_DIR    := $(RESOURCE_CMD_DIR)
