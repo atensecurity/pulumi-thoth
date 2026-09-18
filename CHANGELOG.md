@@ -2,6 +2,35 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.16 - 2026-09-18
+
+### Added
+
+- Bridged the Terraform provider's 0.1.16 surface. `GovernanceSettings` gains the
+  executable compliance declaration (`declaredRegulatoryRegimes`,
+  `complianceEnforcementMode`) with computed canonical regimes, coverage,
+  revision and propagation bound, and `McpVendor` gains manifest signature,
+  capability, runtime identity and egress attributes. See the
+  `terraform-provider-thoth` 0.1.16 changelog for the full surface and its
+  upgrade note.
+
+### Changed
+
+- Updated Terraform provider bridge dependency pin to
+  `github.com/atensecurity/terraform-provider-thoth v0.1.16`.
+- Bumped Pulumi release defaults/docs to `0.1.16`:
+  - `Makefile` default `VERSION`
+  - plugin install command in `docs/installation-configuration.md`
+
+### Upgrade note
+
+Applying a compliance declaration requires a running enforcer that reports the
+same catalogue and evaluator identity the bridged provider pins and reports
+transactional declaration support. Otherwise the update fails with
+`Compliance capability mismatch` and changes nothing. A service with tenant
+declarations disabled refuses these fields by design; every other resource is
+unaffected.
+
 ## 0.1.15 - 2026-07-23
 
 ### Changed
