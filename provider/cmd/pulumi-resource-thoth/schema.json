@@ -4225,6 +4225,73 @@
         "type": "object"
       }
     },
+    "thoth:governance/toolClassification:ToolClassification": {
+      "properties": {
+        "classes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Reviewed effects: read, write, delete, execute, export, external_call, bulk_operation, credential_access, sensitive_data_access."
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "toolName": {
+          "type": "string",
+          "description": "Exact tool name; wildcards are refused."
+        }
+      },
+      "required": [
+        "classes",
+        "createdAt",
+        "createdBy",
+        "toolName"
+      ],
+      "inputProperties": {
+        "classes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Reviewed effects: read, write, delete, execute, export, external_call, bulk_operation, credential_access, sensitive_data_access."
+        },
+        "toolName": {
+          "type": "string",
+          "description": "Exact tool name; wildcards are refused."
+        }
+      },
+      "requiredInputs": [
+        "classes",
+        "toolName"
+      ],
+      "stateInputs": {
+        "description": "Input properties used for looking up and filtering ToolClassification resources.\n",
+        "properties": {
+          "classes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Reviewed effects: read, write, delete, execute, export, external_call, bulk_operation, credential_access, sensitive_data_access."
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "toolName": {
+            "type": "string",
+            "description": "Exact tool name; wildcards are refused."
+          }
+        },
+        "type": "object"
+      }
+    },
     "thoth:governance/webhookSettings:WebhookSettings": {
       "properties": {
         "tenantId": {
