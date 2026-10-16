@@ -2,6 +2,36 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.17 - 2026-10-16
+
+### Added
+
+- Bridged the Terraform provider's 0.1.17 surface. `governance.ToolClassification`
+  declares the reviewed effects of one exact tool name (`read`, `write`,
+  `delete`, `execute`, `export`, `external_call`, `bulk_operation`,
+  `credential_access`, `sensitive_data_access`). The enforcer classifies calls to
+  that tool from the declaration; request bodies cannot set classes. See the
+  `terraform-provider-thoth` 0.1.17 changelog for details.
+
+### Changed
+
+- Updated Terraform provider bridge dependency pin to
+  `github.com/atensecurity/terraform-provider-thoth v0.1.17`.
+- Bumped Pulumi release defaults/docs to `0.1.17`:
+  - `Makefile` default `VERSION`
+  - plugin install command in `docs/installation-configuration.md`
+
+### Security
+
+- Updated indirect dependencies, including `golang.org/x/net`,
+  `golang.org/x/crypto` and `golang.org/x/mod`.
+
+### Upgrade note
+
+`ToolClassification` needs a Thoth service that serves
+`/:tenant-id/thoth/tool-classifications`. Against an older service, the update
+fails. Every other resource is unchanged.
+
 ## 0.1.16 - 2026-09-18
 
 ### Added
