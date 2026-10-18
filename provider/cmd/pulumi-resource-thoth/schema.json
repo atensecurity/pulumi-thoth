@@ -2763,7 +2763,15 @@
                 },
                 "packId": {
                     "type": "string",
-                    "description": "Compliance pack identifier."
+                    "description": "Compliance pack or governance profile identifier."
+                },
+                "profileParametersJson": {
+                    "type": "string",
+                    "description": "Paid profile parameters: payment/refund approval amount USD and approved remote hosts."
+                },
+                "profileVersion": {
+                    "type": "string",
+                    "description": "Pinned profile version. Updating it explicitly approves the version change."
                 },
                 "regulation": {
                     "type": "string",
@@ -2795,6 +2803,7 @@
                 "appliedAt",
                 "appliedBy",
                 "packId",
+                "profileVersion",
                 "regulation",
                 "revokedAt",
                 "ruleVersion",
@@ -2832,7 +2841,15 @@
                 },
                 "packId": {
                     "type": "string",
-                    "description": "Compliance pack identifier."
+                    "description": "Compliance pack or governance profile identifier."
+                },
+                "profileParametersJson": {
+                    "type": "string",
+                    "description": "Paid profile parameters: payment/refund approval amount USD and approved remote hosts."
+                },
+                "profileVersion": {
+                    "type": "string",
+                    "description": "Pinned profile version. Updating it explicitly approves the version change."
                 },
                 "trustFloor": {
                     "type": "number",
@@ -2884,7 +2901,15 @@
                     },
                     "packId": {
                         "type": "string",
-                        "description": "Compliance pack identifier."
+                        "description": "Compliance pack or governance profile identifier."
+                    },
+                    "profileParametersJson": {
+                        "type": "string",
+                        "description": "Paid profile parameters: payment/refund approval amount USD and approved remote hosts."
+                    },
+                    "profileVersion": {
+                        "type": "string",
+                        "description": "Pinned profile version. Updating it explicitly approves the version change."
                     },
                     "regulation": {
                         "type": "string",
