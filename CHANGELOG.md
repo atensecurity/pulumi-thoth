@@ -2,6 +2,32 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.18 - 2026-10-18
+
+### Added
+
+- Bridged the Terraform provider's 0.1.18 surface. `PackAssignment` accepts the
+  governance profiles `safe-default`, `coding-agent`, `finance-operations` and
+  `customer-support` as `packId`, with `profileVersion` to pin the version and
+  `profileParametersJson` for paid-plan parameters. While `profileVersion` is
+  set, profile changes made through the resource are approved. See the
+  `terraform-provider-thoth` 0.1.18 changelog for details.
+
+### Changed
+
+- Updated Terraform provider bridge dependency pin to
+  `github.com/atensecurity/terraform-provider-thoth v0.1.18`.
+- Bumped Pulumi release defaults/docs to `0.1.18`:
+  - `Makefile` default `VERSION`
+  - plugin install command in `docs/installation-configuration.md`
+
+### Upgrade note
+
+Profiles need a Thoth service with agent profiles. Trial tenants can choose one
+profile and cannot set parameters. Removing a profile assignment returns the
+agent to `safe-default`, and `safe-default` itself cannot be removed. Compliance
+pack assignments are unchanged.
+
 ## 0.1.17 - 2026-10-16
 
 ### Added
