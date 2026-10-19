@@ -4399,6 +4399,10 @@
         },
         "thoth:governance/toolClassification:ToolClassification": {
             "properties": {
+                "agentId": {
+                    "type": "string",
+                    "description": "Optional agent scope; omit for tenant-wide authority. Changing scope replaces the declaration."
+                },
                 "classes": {
                     "type": "array",
                     "items": {
@@ -4424,6 +4428,10 @@
                 "toolName"
             ],
             "inputProperties": {
+                "agentId": {
+                    "type": "string",
+                    "description": "Optional agent scope; omit for tenant-wide authority. Changing scope replaces the declaration."
+                },
                 "classes": {
                     "type": "array",
                     "items": {
@@ -4443,6 +4451,10 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering ToolClassification resources.\n",
                 "properties": {
+                    "agentId": {
+                        "type": "string",
+                        "description": "Optional agent scope; omit for tenant-wide authority. Changing scope replaces the declaration."
+                    },
                     "classes": {
                         "type": "array",
                         "items": {

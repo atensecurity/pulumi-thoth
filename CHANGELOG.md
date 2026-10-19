@@ -2,6 +2,17 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.19 - 2026-10-19
+
+### Changed
+
+- Updated the Terraform provider bridge to `v0.1.19`, including optional
+  agent-scoped tool classifications and the webhook, SIEM and PAM secret
+  readback fixes. Redacted credentials preserve configured state rather than
+  causing repeated updates. Imported redacted credentials remain unset until
+  explicitly configured.
+- Updated the build default and plugin installation example to `0.1.19`.
+
 ## 0.1.18 - 2026-10-18
 
 ### Added
