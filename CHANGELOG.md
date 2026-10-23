@@ -2,7 +2,7 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
-## Unreleased
+## 0.1.20 - 2026-10-23
 
 ### Fixed
 
