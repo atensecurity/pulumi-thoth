@@ -62,7 +62,7 @@
             },
             "apiBaseUrl": {
                 "type": "string",
-                "description": "GovAPI base URL override. When omitted, provider derives https://grid.\u003ctenant_id\u003e.\u003capex_domain\u003e."
+                "description": "GovAPI base URL override. When omitted, a trial or self-serve workspace (a 32-character workspace ID) uses https://api.atensecurity.com and a dedicated tenant derives https://grid.\u003ctenant_id\u003e.\u003capex_domain\u003e."
             },
             "insecureSkipTlsVerify": {
                 "type": "boolean",
@@ -150,7 +150,7 @@
             },
             "apiBaseUrl": {
                 "type": "string",
-                "description": "GovAPI base URL override. When omitted, provider derives https://grid.\u003ctenant_id\u003e.\u003capex_domain\u003e."
+                "description": "GovAPI base URL override. When omitted, a trial or self-serve workspace (a 32-character workspace ID) uses https://api.atensecurity.com and a dedicated tenant derives https://grid.\u003ctenant_id\u003e.\u003capex_domain\u003e."
             },
             "insecureSkipTlsVerify": {
                 "type": "boolean",
@@ -202,7 +202,7 @@
             },
             "apiBaseUrl": {
                 "type": "string",
-                "description": "GovAPI base URL override. When omitted, provider derives https://grid.\u003ctenant_id\u003e.\u003capex_domain\u003e."
+                "description": "GovAPI base URL override. When omitted, a trial or self-serve workspace (a 32-character workspace ID) uses https://api.atensecurity.com and a dedicated tenant derives https://grid.\u003ctenant_id\u003e.\u003capex_domain\u003e."
             },
             "insecureSkipTlsVerify": {
                 "type": "boolean",

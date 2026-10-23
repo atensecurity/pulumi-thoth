@@ -51,7 +51,8 @@ If provider auth fields are omitted, exporting `THOTH_API_KEY` is supported.
 Use an org-scoped key.
 `THOTH_TENANT_ID` is supported as the tenant fallback.
 
-When `apiBaseUrl` is omitted, endpoint is derived as:
+When `apiBaseUrl` is omitted, a trial or self-serve workspace (a 32-character
+workspace ID) uses `https://api.atensecurity.com`, and a dedicated tenant derives:
 
 `https://grid.<tenant_id>.<apex_domain>`
 
