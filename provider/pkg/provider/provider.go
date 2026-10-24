@@ -59,6 +59,7 @@ func Provider() tfbridge.ProviderInfo {
 		Resources: map[string]*tfbridge.ResourceInfo{
 			"thoth_billing_overage_cap": {Tok: makeResource("billing", "OverageCap")},
 			"thoth_governance_settings": {Tok: makeResource("governance", "GovernanceSettings")},
+			"thoth_data_handling":       {Tok: makeResource("governance", "DataHandling")},
 			"thoth_webhook_settings":    {Tok: makeResource("governance", "WebhookSettings")},
 			"thoth_siem_settings":       {Tok: makeResource("governance", "SiemSettings")},
 			"thoth_pam_settings":        {Tok: makeResource("governance", "PamSettings")},
@@ -101,6 +102,7 @@ func Provider() tfbridge.ProviderInfo {
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			"thoth_approvals": {Tok: makeDataSource("governance", "getApprovals")},
+			"thoth_decisions": {Tok: makeDataSource("governance", "getDecisions")},
 			"thoth_api_key_authorization": {
 				Tok: makeDataSource("access", "getApiKeyAuthorization"),
 			},

@@ -2,6 +2,16 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## 0.1.21 - 2026-10-24
+
+### Added
+
+- Updated the Terraform provider bridge to `v0.1.21`: the `thoth.governance.DataHandling` resource
+  (what Thoth keeps of tool arguments and prompts; defaults hash arguments, drop prompts)
+  and the `thoth.governance.getDecisions` function (recorded enforcement decisions with the decisions
+  view filters).
+- Updated the build default and plugin installation example to `0.1.21`.
+
 ## 0.1.20 - 2026-10-23
 
 ### Fixed

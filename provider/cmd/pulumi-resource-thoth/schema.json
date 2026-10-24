@@ -130,6 +130,68 @@
                     ]
                 }
             }
+        },
+        "thoth:governance/getDecisionsDecision:getDecisionsDecision": {
+            "properties": {
+                "agentId": {
+                    "type": "string",
+                    "description": "The agent.\n"
+                },
+                "at": {
+                    "type": "string",
+                    "description": "When the decision was made (RFC 3339).\n"
+                },
+                "decision": {
+                    "type": "string",
+                    "description": "The enforcer's decision: ALLOW, STEP_UP or BLOCK.\n"
+                },
+                "holdStatus": {
+                    "type": "string",
+                    "description": "For a held action, the approval status.\n"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "Activity ID; read the full record with thothctl or the\u003cspan pulumi-lang-nodejs=\" explainDecision \" pulumi-lang-dotnet=\" ExplainDecision \" pulumi-lang-go=\" explainDecision \" pulumi-lang-python=\" explain_decision \" pulumi-lang-yaml=\" explainDecision \" pulumi-lang-java=\" explainDecision \"\u003e explainDecision \u003c/span\u003eMCP tool.\n"
+                },
+                "link": {
+                    "type": "string",
+                    "description": "Dashboard path for this decision.\n"
+                },
+                "outcome": {
+                    "type": "string",
+                    "description": "allowed,\u003cspan pulumi-lang-nodejs=\" needsApproval \" pulumi-lang-dotnet=\" NeedsApproval \" pulumi-lang-go=\" needsApproval \" pulumi-lang-python=\" needs_approval \" pulumi-lang-yaml=\" needsApproval \" pulumi-lang-java=\" needsApproval \"\u003e needsApproval \u003c/span\u003eor blocked, after any approval.\n"
+                },
+                "reasonCode": {
+                    "type": "string",
+                    "description": "Why: the deterministic reason code.\n"
+                },
+                "resolution": {
+                    "type": "string",
+                    "description": "approved, denied or expired, when a hold was resolved.\n"
+                },
+                "toolName": {
+                    "type": "string",
+                    "description": "The tool the agent called.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "agentId",
+                "at",
+                "decision",
+                "holdStatus",
+                "id",
+                "link",
+                "outcome",
+                "reasonCode",
+                "resolution",
+                "toolName"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredInputs": []
+                }
+            }
         }
     },
     "provider": {
@@ -1916,6 +1978,55 @@
                     "tenantId": {
                         "type": "string",
                         "description": "Tenant ID from provider configuration."
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "thoth:governance/dataHandling:DataHandling": {
+            "properties": {
+                "prompts": {
+                    "type": "string",
+                    "description": "Prompts, model output and tool results: \u003cspan pulumi-lang-nodejs=\"`store`\" pulumi-lang-dotnet=\"`Store`\" pulumi-lang-go=\"`store`\" pulumi-lang-python=\"`store`\" pulumi-lang-yaml=\"`store`\" pulumi-lang-java=\"`store`\"\u003e`store`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`hash`\" pulumi-lang-dotnet=\"`Hash`\" pulumi-lang-go=\"`hash`\" pulumi-lang-python=\"`hash`\" pulumi-lang-yaml=\"`hash`\" pulumi-lang-java=\"`hash`\"\u003e`hash`\u003c/span\u003e the whole text with a workspace-keyed HMAC, or \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e. Default \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e."
+                },
+                "tenantId": {
+                    "type": "string",
+                    "description": "Tenant ID resolved from provider configuration."
+                },
+                "toolArguments": {
+                    "type": "string",
+                    "description": "Tool arguments: \u003cspan pulumi-lang-nodejs=\"`store`\" pulumi-lang-dotnet=\"`Store`\" pulumi-lang-go=\"`store`\" pulumi-lang-python=\"`store`\" pulumi-lang-yaml=\"`store`\" pulumi-lang-java=\"`store`\"\u003e`store`\u003c/span\u003e as sent, \u003cspan pulumi-lang-nodejs=\"`hash`\" pulumi-lang-dotnet=\"`Hash`\" pulumi-lang-go=\"`hash`\" pulumi-lang-python=\"`hash`\" pulumi-lang-yaml=\"`hash`\" pulumi-lang-java=\"`hash`\"\u003e`hash`\u003c/span\u003e each value with a workspace-keyed HMAC (argument names kept), \u003cspan pulumi-lang-nodejs=\"`redact`\" pulumi-lang-dotnet=\"`Redact`\" pulumi-lang-go=\"`redact`\" pulumi-lang-python=\"`redact`\" pulumi-lang-yaml=\"`redact`\" pulumi-lang-java=\"`redact`\"\u003e`redact`\u003c/span\u003e each value to its type, or \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e. Default \u003cspan pulumi-lang-nodejs=\"`hash`\" pulumi-lang-dotnet=\"`Hash`\" pulumi-lang-go=\"`hash`\" pulumi-lang-python=\"`hash`\" pulumi-lang-yaml=\"`hash`\" pulumi-lang-java=\"`hash`\"\u003e`hash`\u003c/span\u003e."
+                }
+            },
+            "required": [
+                "prompts",
+                "tenantId",
+                "toolArguments"
+            ],
+            "inputProperties": {
+                "prompts": {
+                    "type": "string",
+                    "description": "Prompts, model output and tool results: \u003cspan pulumi-lang-nodejs=\"`store`\" pulumi-lang-dotnet=\"`Store`\" pulumi-lang-go=\"`store`\" pulumi-lang-python=\"`store`\" pulumi-lang-yaml=\"`store`\" pulumi-lang-java=\"`store`\"\u003e`store`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`hash`\" pulumi-lang-dotnet=\"`Hash`\" pulumi-lang-go=\"`hash`\" pulumi-lang-python=\"`hash`\" pulumi-lang-yaml=\"`hash`\" pulumi-lang-java=\"`hash`\"\u003e`hash`\u003c/span\u003e the whole text with a workspace-keyed HMAC, or \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e. Default \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e."
+                },
+                "toolArguments": {
+                    "type": "string",
+                    "description": "Tool arguments: \u003cspan pulumi-lang-nodejs=\"`store`\" pulumi-lang-dotnet=\"`Store`\" pulumi-lang-go=\"`store`\" pulumi-lang-python=\"`store`\" pulumi-lang-yaml=\"`store`\" pulumi-lang-java=\"`store`\"\u003e`store`\u003c/span\u003e as sent, \u003cspan pulumi-lang-nodejs=\"`hash`\" pulumi-lang-dotnet=\"`Hash`\" pulumi-lang-go=\"`hash`\" pulumi-lang-python=\"`hash`\" pulumi-lang-yaml=\"`hash`\" pulumi-lang-java=\"`hash`\"\u003e`hash`\u003c/span\u003e each value with a workspace-keyed HMAC (argument names kept), \u003cspan pulumi-lang-nodejs=\"`redact`\" pulumi-lang-dotnet=\"`Redact`\" pulumi-lang-go=\"`redact`\" pulumi-lang-python=\"`redact`\" pulumi-lang-yaml=\"`redact`\" pulumi-lang-java=\"`redact`\"\u003e`redact`\u003c/span\u003e each value to its type, or \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e. Default \u003cspan pulumi-lang-nodejs=\"`hash`\" pulumi-lang-dotnet=\"`Hash`\" pulumi-lang-go=\"`hash`\" pulumi-lang-python=\"`hash`\" pulumi-lang-yaml=\"`hash`\" pulumi-lang-java=\"`hash`\"\u003e`hash`\u003c/span\u003e."
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering DataHandling resources.\n",
+                "properties": {
+                    "prompts": {
+                        "type": "string",
+                        "description": "Prompts, model output and tool results: \u003cspan pulumi-lang-nodejs=\"`store`\" pulumi-lang-dotnet=\"`Store`\" pulumi-lang-go=\"`store`\" pulumi-lang-python=\"`store`\" pulumi-lang-yaml=\"`store`\" pulumi-lang-java=\"`store`\"\u003e`store`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`hash`\" pulumi-lang-dotnet=\"`Hash`\" pulumi-lang-go=\"`hash`\" pulumi-lang-python=\"`hash`\" pulumi-lang-yaml=\"`hash`\" pulumi-lang-java=\"`hash`\"\u003e`hash`\u003c/span\u003e the whole text with a workspace-keyed HMAC, or \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e. Default \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e."
+                    },
+                    "tenantId": {
+                        "type": "string",
+                        "description": "Tenant ID resolved from provider configuration."
+                    },
+                    "toolArguments": {
+                        "type": "string",
+                        "description": "Tool arguments: \u003cspan pulumi-lang-nodejs=\"`store`\" pulumi-lang-dotnet=\"`Store`\" pulumi-lang-go=\"`store`\" pulumi-lang-python=\"`store`\" pulumi-lang-yaml=\"`store`\" pulumi-lang-java=\"`store`\"\u003e`store`\u003c/span\u003e as sent, \u003cspan pulumi-lang-nodejs=\"`hash`\" pulumi-lang-dotnet=\"`Hash`\" pulumi-lang-go=\"`hash`\" pulumi-lang-python=\"`hash`\" pulumi-lang-yaml=\"`hash`\" pulumi-lang-java=\"`hash`\"\u003e`hash`\u003c/span\u003e each value with a workspace-keyed HMAC (argument names kept), \u003cspan pulumi-lang-nodejs=\"`redact`\" pulumi-lang-dotnet=\"`Redact`\" pulumi-lang-go=\"`redact`\" pulumi-lang-python=\"`redact`\" pulumi-lang-yaml=\"`redact`\" pulumi-lang-java=\"`redact`\"\u003e`redact`\u003c/span\u003e each value to its type, or \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e. Default \u003cspan pulumi-lang-nodejs=\"`hash`\" pulumi-lang-dotnet=\"`Hash`\" pulumi-lang-go=\"`hash`\" pulumi-lang-python=\"`hash`\" pulumi-lang-yaml=\"`hash`\" pulumi-lang-java=\"`hash`\"\u003e`hash`\u003c/span\u003e."
                     }
                 },
                 "type": "object"
@@ -6619,6 +6730,86 @@
                 },
                 "required": [
                     "responseJson",
+                    "id"
+                ],
+                "type": "object"
+            }
+        },
+        "thoth:governance/getDecisions:getDecisions": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getDecisions.\n",
+                "properties": {
+                    "agentId": {
+                        "type": "string"
+                    },
+                    "maxResults": {
+                        "type": "integer"
+                    },
+                    "outcome": {
+                        "type": "string"
+                    },
+                    "reasonCode": {
+                        "type": "string"
+                    },
+                    "ruleId": {
+                        "type": "string"
+                    },
+                    "since": {
+                        "type": "string"
+                    },
+                    "toolName": {
+                        "type": "string"
+                    },
+                    "until": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getDecisions.\n",
+                "properties": {
+                    "agentId": {
+                        "type": "string"
+                    },
+                    "decisions": {
+                        "items": {
+                            "$ref": "#/types/thoth:governance/getDecisionsDecision:getDecisionsDecision"
+                        },
+                        "type": "array"
+                    },
+                    "id": {
+                        "description": "The provider-assigned unique ID for this managed resource.",
+                        "type": "string"
+                    },
+                    "maxResults": {
+                        "type": "integer"
+                    },
+                    "outcome": {
+                        "type": "string"
+                    },
+                    "reasonCode": {
+                        "type": "string"
+                    },
+                    "ruleId": {
+                        "type": "string"
+                    },
+                    "since": {
+                        "type": "string"
+                    },
+                    "toolName": {
+                        "type": "string"
+                    },
+                    "truncated": {
+                        "type": "boolean"
+                    },
+                    "until": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "decisions",
+                    "truncated",
                     "id"
                 ],
                 "type": "object"
