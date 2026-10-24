@@ -4572,6 +4572,10 @@
         },
         "thoth:governance/toolClassification:ToolClassification": {
             "properties": {
+                "actingPrivilege": {
+                    "type": "string",
+                    "description": "Privilege of the identity (credential) the tool acts with: standard, elevated or admin. Sent with each decision in the SIEM decision stream; does not change enforcement."
+                },
                 "agentId": {
                     "type": "string",
                     "description": "Optional agent scope; omit for tenant-wide authority. Changing scope replaces the declaration."
@@ -4589,6 +4593,10 @@
                 "createdBy": {
                     "type": "string"
                 },
+                "targetSensitivity": {
+                    "type": "string",
+                    "description": "How sensitive the tool's target is: public, internal, confidential or restricted. Sent with each decision in the SIEM decision stream; does not change enforcement."
+                },
                 "toolName": {
                     "type": "string",
                     "description": "Exact tool name; wildcards are refused."
@@ -4601,6 +4609,10 @@
                 "toolName"
             ],
             "inputProperties": {
+                "actingPrivilege": {
+                    "type": "string",
+                    "description": "Privilege of the identity (credential) the tool acts with: standard, elevated or admin. Sent with each decision in the SIEM decision stream; does not change enforcement."
+                },
                 "agentId": {
                     "type": "string",
                     "description": "Optional agent scope; omit for tenant-wide authority. Changing scope replaces the declaration."
@@ -4611,6 +4623,10 @@
                         "type": "string"
                     },
                     "description": "Reviewed effects: read, write, delete, execute, export, external_call, bulk_operation, credential_access, sensitive_data_access."
+                },
+                "targetSensitivity": {
+                    "type": "string",
+                    "description": "How sensitive the tool's target is: public, internal, confidential or restricted. Sent with each decision in the SIEM decision stream; does not change enforcement."
                 },
                 "toolName": {
                     "type": "string",
@@ -4624,6 +4640,10 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering ToolClassification resources.\n",
                 "properties": {
+                    "actingPrivilege": {
+                        "type": "string",
+                        "description": "Privilege of the identity (credential) the tool acts with: standard, elevated or admin. Sent with each decision in the SIEM decision stream; does not change enforcement."
+                    },
                     "agentId": {
                         "type": "string",
                         "description": "Optional agent scope; omit for tenant-wide authority. Changing scope replaces the declaration."
@@ -4640,6 +4660,10 @@
                     },
                     "createdBy": {
                         "type": "string"
+                    },
+                    "targetSensitivity": {
+                        "type": "string",
+                        "description": "How sensitive the tool's target is: public, internal, confidential or restricted. Sent with each decision in the SIEM decision stream; does not change enforcement."
                     },
                     "toolName": {
                         "type": "string",
