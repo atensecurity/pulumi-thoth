@@ -62,6 +62,9 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_data_handling":       {Tok: makeResource("governance", "DataHandling")},
 			"thoth_webhook_settings":    {Tok: makeResource("governance", "WebhookSettings")},
 			"thoth_siem_settings":       {Tok: makeResource("governance", "SiemSettings")},
+			"thoth_siem_decision_stream": {
+				Tok: makeResource("governance", "SiemDecisionStream"),
+			},
 			"thoth_pam_settings":        {Tok: makeResource("governance", "PamSettings")},
 			"thoth_policy_sync":         {Tok: makeResource("governance", "PolicySync")},
 			"thoth_policy_bundle":       {Tok: makeResource("governance", "PolicyBundle")},

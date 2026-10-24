@@ -2,6 +2,13 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## Unreleased
+
+### Added
+
+- `thoth.governance.SiemDecisionStream` resource (bridged from `thoth_siem_decision_stream`):
+  which enforcement decisions are sent to the workspace's SIEM destination.
+
 ## 0.1.21 - 2026-10-24
 
 ### Added

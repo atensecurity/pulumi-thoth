@@ -4413,6 +4413,68 @@
                 "type": "object"
             }
         },
+        "thoth:governance/siemDecisionStream:SiemDecisionStream": {
+            "properties": {
+                "allowSampleRate": {
+                    "type": "number",
+                    "description": "With `decisions = \"all\"`, the share of `ALLOW` decisions sent, from 0 to 1 (default 1). Holds and blocks are never sampled."
+                },
+                "decisions": {
+                    "type": "string",
+                    "description": "\u003cspan pulumi-lang-nodejs=\"`nonAllow`\" pulumi-lang-dotnet=\"`NonAllow`\" pulumi-lang-go=\"`nonAllow`\" pulumi-lang-python=\"`non_allow`\" pulumi-lang-yaml=\"`nonAllow`\" pulumi-lang-java=\"`nonAllow`\"\u003e`nonAllow`\u003c/span\u003e sends holds and blocks (default); \u003cspan pulumi-lang-nodejs=\"`all`\" pulumi-lang-dotnet=\"`All`\" pulumi-lang-go=\"`all`\" pulumi-lang-python=\"`all`\" pulumi-lang-yaml=\"`all`\" pulumi-lang-java=\"`all`\"\u003e`all`\u003c/span\u003e sends every decision."
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Whether decisions are sent. Default \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e."
+                },
+                "tenantId": {
+                    "type": "string",
+                    "description": "Tenant ID resolved from provider configuration."
+                }
+            },
+            "required": [
+                "allowSampleRate",
+                "decisions",
+                "enabled",
+                "tenantId"
+            ],
+            "inputProperties": {
+                "allowSampleRate": {
+                    "type": "number",
+                    "description": "With `decisions = \"all\"`, the share of `ALLOW` decisions sent, from 0 to 1 (default 1). Holds and blocks are never sampled."
+                },
+                "decisions": {
+                    "type": "string",
+                    "description": "\u003cspan pulumi-lang-nodejs=\"`nonAllow`\" pulumi-lang-dotnet=\"`NonAllow`\" pulumi-lang-go=\"`nonAllow`\" pulumi-lang-python=\"`non_allow`\" pulumi-lang-yaml=\"`nonAllow`\" pulumi-lang-java=\"`nonAllow`\"\u003e`nonAllow`\u003c/span\u003e sends holds and blocks (default); \u003cspan pulumi-lang-nodejs=\"`all`\" pulumi-lang-dotnet=\"`All`\" pulumi-lang-go=\"`all`\" pulumi-lang-python=\"`all`\" pulumi-lang-yaml=\"`all`\" pulumi-lang-java=\"`all`\"\u003e`all`\u003c/span\u003e sends every decision."
+                },
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Whether decisions are sent. Default \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e."
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering SiemDecisionStream resources.\n",
+                "properties": {
+                    "allowSampleRate": {
+                        "type": "number",
+                        "description": "With `decisions = \"all\"`, the share of `ALLOW` decisions sent, from 0 to 1 (default 1). Holds and blocks are never sampled."
+                    },
+                    "decisions": {
+                        "type": "string",
+                        "description": "\u003cspan pulumi-lang-nodejs=\"`nonAllow`\" pulumi-lang-dotnet=\"`NonAllow`\" pulumi-lang-go=\"`nonAllow`\" pulumi-lang-python=\"`non_allow`\" pulumi-lang-yaml=\"`nonAllow`\" pulumi-lang-java=\"`nonAllow`\"\u003e`nonAllow`\u003c/span\u003e sends holds and blocks (default); \u003cspan pulumi-lang-nodejs=\"`all`\" pulumi-lang-dotnet=\"`All`\" pulumi-lang-go=\"`all`\" pulumi-lang-python=\"`all`\" pulumi-lang-yaml=\"`all`\" pulumi-lang-java=\"`all`\"\u003e`all`\u003c/span\u003e sends every decision."
+                    },
+                    "enabled": {
+                        "type": "boolean",
+                        "description": "Whether decisions are sent. Default \u003cspan pulumi-lang-nodejs=\"`true`\" pulumi-lang-dotnet=\"`True`\" pulumi-lang-go=\"`true`\" pulumi-lang-python=\"`true`\" pulumi-lang-yaml=\"`true`\" pulumi-lang-java=\"`true`\"\u003e`true`\u003c/span\u003e."
+                    },
+                    "tenantId": {
+                        "type": "string",
+                        "description": "Tenant ID resolved from provider configuration."
+                    }
+                },
+                "type": "object"
+            }
+        },
         "thoth:governance/siemSettings:SiemSettings": {
             "properties": {
                 "siemProvider": {
