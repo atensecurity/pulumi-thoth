@@ -2,16 +2,18 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
-## Unreleased
+## 0.1.22 - 2026-10-24
 
 ### Added
 
+- Updated the Terraform provider bridge to `v0.1.22`, adding the resources below.
 - `thoth.governance.SiemDecisionStream` resource (bridged from `thoth_siem_decision_stream`):
   which enforcement decisions are sent to the workspace's SIEM destination.
 - `thoth.governance.ToolClassification` gains optional `targetSensitivity` and
   `actingPrivilege`, sent with each decision in the SIEM decision stream.
 - `thoth.governance.AgentEnforcement` resource (bridged from `thoth_agent_enforcement`): an
   agent's mode, `observe` or `enforce`.
+- Updated the build default and plugin installation example to `0.1.22`.
 
 ## 0.1.21 - 2026-10-24
 
