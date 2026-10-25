@@ -1903,6 +1903,92 @@
                 "type": "object"
             }
         },
+        "thoth:governance/agent:Agent": {
+            "properties": {
+                "agentId": {
+                    "type": "string",
+                    "description": "The agent ID the agent's SDK or proxy sends."
+                },
+                "approvedScopes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Tool names the agent is meant to use; the rules weigh calls outside it as out of scope."
+                },
+                "displayName": {
+                    "type": "string",
+                    "description": "The name shown in the dashboard and reports. Defaults to the agent ID."
+                },
+                "ownerEmail": {
+                    "type": "string",
+                    "description": "The person responsible for the agent."
+                },
+                "status": {
+                    "type": "string",
+                    "description": "\u003cspan pulumi-lang-nodejs=\"`active`\" pulumi-lang-dotnet=\"`Active`\" pulumi-lang-go=\"`active`\" pulumi-lang-python=\"`active`\" pulumi-lang-yaml=\"`active`\" pulumi-lang-java=\"`active`\"\u003e`active`\u003c/span\u003e, or \u003cspan pulumi-lang-nodejs=\"`quarantined`\" pulumi-lang-dotnet=\"`Quarantined`\" pulumi-lang-go=\"`quarantined`\" pulumi-lang-python=\"`quarantined`\" pulumi-lang-yaml=\"`quarantined`\" pulumi-lang-java=\"`quarantined`\"\u003e`quarantined`\u003c/span\u003e when Thoth denies the agent's actions."
+                }
+            },
+            "required": [
+                "agentId",
+                "approvedScopes",
+                "displayName",
+                "status"
+            ],
+            "inputProperties": {
+                "agentId": {
+                    "type": "string",
+                    "description": "The agent ID the agent's SDK or proxy sends."
+                },
+                "approvedScopes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Tool names the agent is meant to use; the rules weigh calls outside it as out of scope."
+                },
+                "displayName": {
+                    "type": "string",
+                    "description": "The name shown in the dashboard and reports. Defaults to the agent ID."
+                },
+                "ownerEmail": {
+                    "type": "string",
+                    "description": "The person responsible for the agent."
+                }
+            },
+            "requiredInputs": [
+                "agentId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Agent resources.\n",
+                "properties": {
+                    "agentId": {
+                        "type": "string",
+                        "description": "The agent ID the agent's SDK or proxy sends."
+                    },
+                    "approvedScopes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Tool names the agent is meant to use; the rules weigh calls outside it as out of scope."
+                    },
+                    "displayName": {
+                        "type": "string",
+                        "description": "The name shown in the dashboard and reports. Defaults to the agent ID."
+                    },
+                    "ownerEmail": {
+                        "type": "string",
+                        "description": "The person responsible for the agent."
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "\u003cspan pulumi-lang-nodejs=\"`active`\" pulumi-lang-dotnet=\"`Active`\" pulumi-lang-go=\"`active`\" pulumi-lang-python=\"`active`\" pulumi-lang-yaml=\"`active`\" pulumi-lang-java=\"`active`\"\u003e`active`\u003c/span\u003e, or \u003cspan pulumi-lang-nodejs=\"`quarantined`\" pulumi-lang-dotnet=\"`Quarantined`\" pulumi-lang-go=\"`quarantined`\" pulumi-lang-python=\"`quarantined`\" pulumi-lang-yaml=\"`quarantined`\" pulumi-lang-java=\"`quarantined`\"\u003e`quarantined`\u003c/span\u003e when Thoth denies the agent's actions."
+                    }
+                },
+                "type": "object"
+            }
+        },
         "thoth:governance/agentEnforcement:AgentEnforcement": {
             "properties": {
                 "agentId": {

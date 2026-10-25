@@ -68,6 +68,9 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_agent_enforcement": {
 				Tok: makeResource("governance", "AgentEnforcement"),
 			},
+			"thoth_agent": {
+				Tok: makeResource("governance", "Agent"),
+			},
 			"thoth_pam_settings":        {Tok: makeResource("governance", "PamSettings")},
 			"thoth_policy_sync":         {Tok: makeResource("governance", "PolicySync")},
 			"thoth_policy_bundle":       {Tok: makeResource("governance", "PolicyBundle")},

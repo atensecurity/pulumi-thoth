@@ -2,6 +2,13 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## Unreleased
+
+### Added
+
+- `thoth.governance.Agent` resource (bridged from `thoth_agent`): registers an agent with its
+  display name, owner and approved scope.
+
 ## 0.1.22 - 2026-10-24
 
 ### Added
