@@ -2,10 +2,11 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
-## Unreleased
+## 0.1.23 - 2026-10-25
 
 ### Added
 
+- Updated the Terraform provider bridge to `v0.1.23`, adding the resource below.
 - `thoth.governance.Agent` resource (bridged from `thoth_agent`): registers an agent with its
   display name, owner and approved scope.
 
