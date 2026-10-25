@@ -10,6 +10,8 @@ All notable changes to `pulumi-thoth` are documented in this file.
   which enforcement decisions are sent to the workspace's SIEM destination.
 - `thoth.governance.ToolClassification` gains optional `targetSensitivity` and
   `actingPrivilege`, sent with each decision in the SIEM decision stream.
+- `thoth.governance.AgentEnforcement` resource (bridged from `thoth_agent_enforcement`): an
+  agent's mode, `observe` or `enforce`.
 
 ## 0.1.21 - 2026-10-24
 

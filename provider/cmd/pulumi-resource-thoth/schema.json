@@ -1903,6 +1903,63 @@
                 "type": "object"
             }
         },
+        "thoth:governance/agentEnforcement:AgentEnforcement": {
+            "properties": {
+                "agentId": {
+                    "type": "string",
+                    "description": "The registered agent."
+                },
+                "enforcementMode": {
+                    "type": "string",
+                    "description": "\u003cspan pulumi-lang-nodejs=\"`observe`\" pulumi-lang-dotnet=\"`Observe`\" pulumi-lang-go=\"`observe`\" pulumi-lang-python=\"`observe`\" pulumi-lang-yaml=\"`observe`\" pulumi-lang-java=\"`observe`\"\u003e`observe`\u003c/span\u003e (evaluate and record, allow everything) or \u003cspan pulumi-lang-nodejs=\"`enforce`\" pulumi-lang-dotnet=\"`Enforce`\" pulumi-lang-go=\"`enforce`\" pulumi-lang-python=\"`enforce`\" pulumi-lang-yaml=\"`enforce`\" pulumi-lang-java=\"`enforce`\"\u003e`enforce`\u003c/span\u003e (decisions apply)."
+                },
+                "highRiskAction": {
+                    "type": "string",
+                    "description": "While enforcing, what a high model risk score does: \u003cspan pulumi-lang-nodejs=\"`hold`\" pulumi-lang-dotnet=\"`Hold`\" pulumi-lang-go=\"`hold`\" pulumi-lang-python=\"`hold`\" pulumi-lang-yaml=\"`hold`\" pulumi-lang-java=\"`hold`\"\u003e`hold`\u003c/span\u003e the action for approval (default) or \u003cspan pulumi-lang-nodejs=\"`deny`\" pulumi-lang-dotnet=\"`Deny`\" pulumi-lang-go=\"`deny`\" pulumi-lang-python=\"`deny`\" pulumi-lang-yaml=\"`deny`\" pulumi-lang-java=\"`deny`\"\u003e`deny`\u003c/span\u003e it. Rules decide either way; a score can only make a decision stricter."
+                }
+            },
+            "required": [
+                "agentId",
+                "enforcementMode",
+                "highRiskAction"
+            ],
+            "inputProperties": {
+                "agentId": {
+                    "type": "string",
+                    "description": "The registered agent."
+                },
+                "enforcementMode": {
+                    "type": "string",
+                    "description": "\u003cspan pulumi-lang-nodejs=\"`observe`\" pulumi-lang-dotnet=\"`Observe`\" pulumi-lang-go=\"`observe`\" pulumi-lang-python=\"`observe`\" pulumi-lang-yaml=\"`observe`\" pulumi-lang-java=\"`observe`\"\u003e`observe`\u003c/span\u003e (evaluate and record, allow everything) or \u003cspan pulumi-lang-nodejs=\"`enforce`\" pulumi-lang-dotnet=\"`Enforce`\" pulumi-lang-go=\"`enforce`\" pulumi-lang-python=\"`enforce`\" pulumi-lang-yaml=\"`enforce`\" pulumi-lang-java=\"`enforce`\"\u003e`enforce`\u003c/span\u003e (decisions apply)."
+                },
+                "highRiskAction": {
+                    "type": "string",
+                    "description": "While enforcing, what a high model risk score does: \u003cspan pulumi-lang-nodejs=\"`hold`\" pulumi-lang-dotnet=\"`Hold`\" pulumi-lang-go=\"`hold`\" pulumi-lang-python=\"`hold`\" pulumi-lang-yaml=\"`hold`\" pulumi-lang-java=\"`hold`\"\u003e`hold`\u003c/span\u003e the action for approval (default) or \u003cspan pulumi-lang-nodejs=\"`deny`\" pulumi-lang-dotnet=\"`Deny`\" pulumi-lang-go=\"`deny`\" pulumi-lang-python=\"`deny`\" pulumi-lang-yaml=\"`deny`\" pulumi-lang-java=\"`deny`\"\u003e`deny`\u003c/span\u003e it. Rules decide either way; a score can only make a decision stricter."
+                }
+            },
+            "requiredInputs": [
+                "agentId",
+                "enforcementMode"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AgentEnforcement resources.\n",
+                "properties": {
+                    "agentId": {
+                        "type": "string",
+                        "description": "The registered agent."
+                    },
+                    "enforcementMode": {
+                        "type": "string",
+                        "description": "\u003cspan pulumi-lang-nodejs=\"`observe`\" pulumi-lang-dotnet=\"`Observe`\" pulumi-lang-go=\"`observe`\" pulumi-lang-python=\"`observe`\" pulumi-lang-yaml=\"`observe`\" pulumi-lang-java=\"`observe`\"\u003e`observe`\u003c/span\u003e (evaluate and record, allow everything) or \u003cspan pulumi-lang-nodejs=\"`enforce`\" pulumi-lang-dotnet=\"`Enforce`\" pulumi-lang-go=\"`enforce`\" pulumi-lang-python=\"`enforce`\" pulumi-lang-yaml=\"`enforce`\" pulumi-lang-java=\"`enforce`\"\u003e`enforce`\u003c/span\u003e (decisions apply)."
+                    },
+                    "highRiskAction": {
+                        "type": "string",
+                        "description": "While enforcing, what a high model risk score does: \u003cspan pulumi-lang-nodejs=\"`hold`\" pulumi-lang-dotnet=\"`Hold`\" pulumi-lang-go=\"`hold`\" pulumi-lang-python=\"`hold`\" pulumi-lang-yaml=\"`hold`\" pulumi-lang-java=\"`hold`\"\u003e`hold`\u003c/span\u003e the action for approval (default) or \u003cspan pulumi-lang-nodejs=\"`deny`\" pulumi-lang-dotnet=\"`Deny`\" pulumi-lang-go=\"`deny`\" pulumi-lang-python=\"`deny`\" pulumi-lang-yaml=\"`deny`\" pulumi-lang-java=\"`deny`\"\u003e`deny`\u003c/span\u003e it. Rules decide either way; a score can only make a decision stricter."
+                    }
+                },
+                "type": "object"
+            }
+        },
         "thoth:governance/approvalDecision:ApprovalDecision": {
             "properties": {
                 "approvalId": {
