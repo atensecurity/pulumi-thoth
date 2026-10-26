@@ -2977,6 +2977,95 @@
                 "type": "object"
             }
         },
+        "thoth:governance/orgSecuritySettings:OrgSecuritySettings": {
+            "properties": {
+                "ipAllowlists": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "CIDR ranges people and API keys may connect from, at most 100. Empty allows any network. Write each range in canonical form, such as `203.0.113.7/32` or `198.51.100.0/24`. The list must include the address this Terraform run connects from, or GovAPI refuses it."
+                },
+                "requireMfa": {
+                    "type": "boolean",
+                    "description": "Require a second factor on every sign-in session (dashboard, thothctl and MCP). Sessions without one are asked to verify; API keys are not affected. Default \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e."
+                },
+                "sessionTimeoutMinutes": {
+                    "type": "integer",
+                    "description": "How long a sign-in lasts before people must sign in again, from 15 to 43200 (30 days). It is an absolute lifetime, not an idle timeout. Default 720 (12 hours)."
+                },
+                "tenantId": {
+                    "type": "string",
+                    "description": "Tenant ID resolved from provider configuration."
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "Last update timestamp returned by GovAPI."
+                },
+                "updatedBy": {
+                    "type": "string",
+                    "description": "Who last saved the policy, as GovAPI recorded it."
+                }
+            },
+            "required": [
+                "ipAllowlists",
+                "requireMfa",
+                "sessionTimeoutMinutes",
+                "tenantId",
+                "updatedAt",
+                "updatedBy"
+            ],
+            "inputProperties": {
+                "ipAllowlists": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "CIDR ranges people and API keys may connect from, at most 100. Empty allows any network. Write each range in canonical form, such as `203.0.113.7/32` or `198.51.100.0/24`. The list must include the address this Terraform run connects from, or GovAPI refuses it."
+                },
+                "requireMfa": {
+                    "type": "boolean",
+                    "description": "Require a second factor on every sign-in session (dashboard, thothctl and MCP). Sessions without one are asked to verify; API keys are not affected. Default \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e."
+                },
+                "sessionTimeoutMinutes": {
+                    "type": "integer",
+                    "description": "How long a sign-in lasts before people must sign in again, from 15 to 43200 (30 days). It is an absolute lifetime, not an idle timeout. Default 720 (12 hours)."
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering OrgSecuritySettings resources.\n",
+                "properties": {
+                    "ipAllowlists": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "CIDR ranges people and API keys may connect from, at most 100. Empty allows any network. Write each range in canonical form, such as `203.0.113.7/32` or `198.51.100.0/24`. The list must include the address this Terraform run connects from, or GovAPI refuses it."
+                    },
+                    "requireMfa": {
+                        "type": "boolean",
+                        "description": "Require a second factor on every sign-in session (dashboard, thothctl and MCP). Sessions without one are asked to verify; API keys are not affected. Default \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e."
+                    },
+                    "sessionTimeoutMinutes": {
+                        "type": "integer",
+                        "description": "How long a sign-in lasts before people must sign in again, from 15 to 43200 (30 days). It is an absolute lifetime, not an idle timeout. Default 720 (12 hours)."
+                    },
+                    "tenantId": {
+                        "type": "string",
+                        "description": "Tenant ID resolved from provider configuration."
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "Last update timestamp returned by GovAPI."
+                    },
+                    "updatedBy": {
+                        "type": "string",
+                        "description": "Who last saved the policy, as GovAPI recorded it."
+                    }
+                },
+                "type": "object"
+            }
+        },
         "thoth:governance/packAssignment:PackAssignment": {
             "properties": {
                 "agentId": {
@@ -4050,7 +4139,8 @@
                 },
                 "holdToken": {
                     "type": "string",
-                    "description": "Optional hold token when exception is tied to STEP_UP workflow."
+                    "description": "Optional hold token when exception is tied to STEP_UP workflow. Write-only: the API never returns it.",
+                    "secret": true
                 },
                 "policyChangeJson": {
                     "type": "string",
@@ -4136,7 +4226,8 @@
                 },
                 "holdToken": {
                     "type": "string",
-                    "description": "Optional hold token when exception is tied to STEP_UP workflow."
+                    "description": "Optional hold token when exception is tied to STEP_UP workflow. Write-only: the API never returns it.",
+                    "secret": true
                 },
                 "requestId": {
                     "type": "string",
@@ -4191,7 +4282,8 @@
                     },
                     "holdToken": {
                         "type": "string",
-                        "description": "Optional hold token when exception is tied to STEP_UP workflow."
+                        "description": "Optional hold token when exception is tied to STEP_UP workflow. Write-only: the API never returns it.",
+                        "secret": true
                     },
                     "policyChangeJson": {
                         "type": "string",

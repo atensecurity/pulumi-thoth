@@ -2,6 +2,18 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## Unreleased
+
+### Added
+
+- `thoth.governance.OrgSecuritySettings` resource (bridged from `thoth_org_security_settings`):
+  require a second factor, limit how long a sign-in lasts, and restrict the networks people and
+  API keys may connect from.
+
+### Changed
+
+- `thoth.governance.PolicyException.holdToken` is now secret, matching the Terraform provider.
+
 ## 0.1.23 - 2026-10-25
 
 ### Added
