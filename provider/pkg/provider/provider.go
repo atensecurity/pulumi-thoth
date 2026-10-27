@@ -71,6 +71,9 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_agent": {
 				Tok: makeResource("governance", "Agent"),
 			},
+			"thoth_model_artifact": {
+				Tok: makeResource("governance", "ModelArtifact"),
+			},
 			"thoth_org_security_settings": {
 				Tok: makeResource("governance", "OrgSecuritySettings"),
 			},
@@ -216,6 +219,9 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			"thoth_policy_exception": {
 				Tok: makeDataSource("governance", "getPolicyException"),
+			},
+			"thoth_model_artifacts": {
+				Tok: makeDataSource("governance", "getModelArtifacts"),
 			},
 			"thoth_policy_exceptions": {
 				Tok: makeDataSource("governance", "getPolicyExceptions"),

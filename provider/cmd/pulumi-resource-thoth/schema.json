@@ -131,6 +131,67 @@
                 }
             }
         },
+        "thoth:governance/ModelArtifactProvenance:ModelArtifactProvenance": {
+            "properties": {
+                "certificateIdentity": {
+                    "type": "string",
+                    "description": "Signing certificate identity (connected profile).\n"
+                },
+                "certificateOidcIssuer": {
+                    "type": "string",
+                    "description": "Signing certificate OIDC issuer (connected profile).\n"
+                },
+                "evidenceRef": {
+                    "type": "string",
+                    "description": "Other evidence reference.\n"
+                },
+                "intotoAttestationRef": {
+                    "type": "string",
+                    "description": "in-toto attestation reference.\n"
+                },
+                "manualStatus": {
+                    "type": "string",
+                    "description": "With\u003cspan pulumi-lang-nodejs=\" verificationMode \" pulumi-lang-dotnet=\" VerificationMode \" pulumi-lang-go=\" verificationMode \" pulumi-lang-python=\" verification_mode \" pulumi-lang-yaml=\" verificationMode \" pulumi-lang-java=\" verificationMode \"\u003e verificationMode \u003c/span\u003e= \"manual\": the status an admin attests (verified, failed, revoked or pending). Recorded as a manual attestation, not a verification by Thoth.\n"
+                },
+                "publicKeyRef": {
+                    "type": "string",
+                    "description": "Public key reference (sovereign profile).\n"
+                },
+                "signatureBundleRef": {
+                    "type": "string",
+                    "description": "Signature bundle reference.\n"
+                },
+                "transparencyLogUri": {
+                    "type": "string",
+                    "description": "Transparency log entry URI.\n"
+                },
+                "verificationMode": {
+                    "type": "string",
+                    "description": "sigstore_keyless (connected),\u003cspan pulumi-lang-nodejs=\" tenantManagedKeys \" pulumi-lang-dotnet=\" TenantManagedKeys \" pulumi-lang-go=\" tenantManagedKeys \" pulumi-lang-python=\" tenant_managed_keys \" pulumi-lang-yaml=\" tenantManagedKeys \" pulumi-lang-java=\" tenantManagedKeys \"\u003e tenantManagedKeys \u003c/span\u003e(sovereign) or manual. Defaults to the profile's mode.\n"
+                }
+            },
+            "type": "object"
+        },
+        "thoth:governance/ModelArtifactScreening:ModelArtifactScreening": {
+            "properties": {
+                "notes": {
+                    "type": "string",
+                    "description": "Screening notes.\n"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "passed, failed or pending.\n"
+                },
+                "tool": {
+                    "type": "string",
+                    "description": "The screening tool.\n"
+                }
+            },
+            "type": "object",
+            "required": [
+                "status"
+            ]
+        },
         "thoth:governance/getDecisionsDecision:getDecisionsDecision": {
             "properties": {
                 "agentId": {
@@ -2972,6 +3033,228 @@
                     "updatedAt": {
                         "type": "string",
                         "description": "Last update timestamp returned by GovAPI."
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "thoth:governance/modelArtifact:ModelArtifact": {
+            "properties": {
+                "activate": {
+                    "type": "boolean",
+                    "description": "Activate the artifact. Needs verified provenance and a passed screening or a waiver. Cannot be undone."
+                },
+                "activatedAt": {
+                    "type": "string",
+                    "description": "When the artifact was activated."
+                },
+                "artifactId": {
+                    "type": "string",
+                    "description": "Artifact ID. Generated when unset. A registered ID cannot be reused."
+                },
+                "artifactUri": {
+                    "type": "string",
+                    "description": "Where the artifact is stored."
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "When the artifact was registered."
+                },
+                "digestSha256": {
+                    "type": "string",
+                    "description": "SHA-256 digest of the artifact. Provenance evidence must name it."
+                },
+                "lifecycleStatus": {
+                    "type": "string",
+                    "description": "registered, screened, waived, active or rejected."
+                },
+                "modelName": {
+                    "type": "string",
+                    "description": "Model name."
+                },
+                "modelProvider": {
+                    "type": "string",
+                    "description": "Model provider, such as openai or huggingface."
+                },
+                "provenance": {
+                    "$ref": "#/types/thoth:governance/ModelArtifactProvenance:ModelArtifactProvenance",
+                    "description": "Provenance verification, run on create and whenever this block changes. Thoth checks the evidence against the profile and its allowlists, and checks signatures cryptographically only when the workspace has signature verification turned on. A failed verification marks the artifact rejected."
+                },
+                "provenanceError": {
+                    "type": "string",
+                    "description": "Why provenance verification failed, when it did."
+                },
+                "provenanceProfile": {
+                    "type": "string",
+                    "description": "connected (Sigstore keyless, the default) or sovereign (tenant-managed keys, no public transparency log)."
+                },
+                "provenanceStatus": {
+                    "type": "string",
+                    "description": "pending, verified, failed or revoked."
+                },
+                "screening": {
+                    "$ref": "#/types/thoth:governance/ModelArtifactScreening:ModelArtifactScreening",
+                    "description": "Screening result, recorded on create and whenever this block changes."
+                },
+                "screeningStatus": {
+                    "type": "string",
+                    "description": "pending, passed or failed."
+                },
+                "signingStatus": {
+                    "type": "string",
+                    "description": "Signing status at registration, such as signed or unsigned. Thoth sets it to verified when provenance verifies."
+                },
+                "version": {
+                    "type": "string",
+                    "description": "Artifact version."
+                },
+                "waiverReason": {
+                    "type": "string",
+                    "description": "Waive screening, with this reason. A waiver cannot be withdrawn."
+                }
+            },
+            "required": [
+                "activate",
+                "activatedAt",
+                "artifactId",
+                "artifactUri",
+                "createdAt",
+                "lifecycleStatus",
+                "modelName",
+                "modelProvider",
+                "provenanceError",
+                "provenanceStatus",
+                "screeningStatus"
+            ],
+            "inputProperties": {
+                "activate": {
+                    "type": "boolean",
+                    "description": "Activate the artifact. Needs verified provenance and a passed screening or a waiver. Cannot be undone."
+                },
+                "artifactId": {
+                    "type": "string",
+                    "description": "Artifact ID. Generated when unset. A registered ID cannot be reused."
+                },
+                "artifactUri": {
+                    "type": "string",
+                    "description": "Where the artifact is stored."
+                },
+                "digestSha256": {
+                    "type": "string",
+                    "description": "SHA-256 digest of the artifact. Provenance evidence must name it."
+                },
+                "modelName": {
+                    "type": "string",
+                    "description": "Model name."
+                },
+                "modelProvider": {
+                    "type": "string",
+                    "description": "Model provider, such as openai or huggingface."
+                },
+                "provenance": {
+                    "$ref": "#/types/thoth:governance/ModelArtifactProvenance:ModelArtifactProvenance",
+                    "description": "Provenance verification, run on create and whenever this block changes. Thoth checks the evidence against the profile and its allowlists, and checks signatures cryptographically only when the workspace has signature verification turned on. A failed verification marks the artifact rejected."
+                },
+                "provenanceProfile": {
+                    "type": "string",
+                    "description": "connected (Sigstore keyless, the default) or sovereign (tenant-managed keys, no public transparency log)."
+                },
+                "screening": {
+                    "$ref": "#/types/thoth:governance/ModelArtifactScreening:ModelArtifactScreening",
+                    "description": "Screening result, recorded on create and whenever this block changes."
+                },
+                "signingStatus": {
+                    "type": "string",
+                    "description": "Signing status at registration, such as signed or unsigned. Thoth sets it to verified when provenance verifies."
+                },
+                "version": {
+                    "type": "string",
+                    "description": "Artifact version."
+                },
+                "waiverReason": {
+                    "type": "string",
+                    "description": "Waive screening, with this reason. A waiver cannot be withdrawn."
+                }
+            },
+            "requiredInputs": [
+                "artifactUri",
+                "modelName",
+                "modelProvider"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ModelArtifact resources.\n",
+                "properties": {
+                    "activate": {
+                        "type": "boolean",
+                        "description": "Activate the artifact. Needs verified provenance and a passed screening or a waiver. Cannot be undone."
+                    },
+                    "activatedAt": {
+                        "type": "string",
+                        "description": "When the artifact was activated."
+                    },
+                    "artifactId": {
+                        "type": "string",
+                        "description": "Artifact ID. Generated when unset. A registered ID cannot be reused."
+                    },
+                    "artifactUri": {
+                        "type": "string",
+                        "description": "Where the artifact is stored."
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "When the artifact was registered."
+                    },
+                    "digestSha256": {
+                        "type": "string",
+                        "description": "SHA-256 digest of the artifact. Provenance evidence must name it."
+                    },
+                    "lifecycleStatus": {
+                        "type": "string",
+                        "description": "registered, screened, waived, active or rejected."
+                    },
+                    "modelName": {
+                        "type": "string",
+                        "description": "Model name."
+                    },
+                    "modelProvider": {
+                        "type": "string",
+                        "description": "Model provider, such as openai or huggingface."
+                    },
+                    "provenance": {
+                        "$ref": "#/types/thoth:governance/ModelArtifactProvenance:ModelArtifactProvenance",
+                        "description": "Provenance verification, run on create and whenever this block changes. Thoth checks the evidence against the profile and its allowlists, and checks signatures cryptographically only when the workspace has signature verification turned on. A failed verification marks the artifact rejected."
+                    },
+                    "provenanceError": {
+                        "type": "string",
+                        "description": "Why provenance verification failed, when it did."
+                    },
+                    "provenanceProfile": {
+                        "type": "string",
+                        "description": "connected (Sigstore keyless, the default) or sovereign (tenant-managed keys, no public transparency log)."
+                    },
+                    "provenanceStatus": {
+                        "type": "string",
+                        "description": "pending, verified, failed or revoked."
+                    },
+                    "screening": {
+                        "$ref": "#/types/thoth:governance/ModelArtifactScreening:ModelArtifactScreening",
+                        "description": "Screening result, recorded on create and whenever this block changes."
+                    },
+                    "screeningStatus": {
+                        "type": "string",
+                        "description": "pending, passed or failed."
+                    },
+                    "signingStatus": {
+                        "type": "string",
+                        "description": "Signing status at registration, such as signed or unsigned. Thoth sets it to verified when provenance verifies."
+                    },
+                    "version": {
+                        "type": "string",
+                        "description": "Artifact version."
+                    },
+                    "waiverReason": {
+                        "type": "string",
+                        "description": "Waive screening, with this reason. A waiver cannot be withdrawn."
                     }
                 },
                 "type": "object"
@@ -7613,6 +7896,41 @@
                     "riskScore",
                     "sessionId",
                     "telemetrySummaryJson",
+                    "id"
+                ],
+                "type": "object"
+            }
+        },
+        "thoth:governance/getModelArtifacts:getModelArtifacts": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getModelArtifacts.\n",
+                "properties": {
+                    "lifecycleStatus": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getModelArtifacts.\n",
+                "properties": {
+                    "dataJson": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "The provider-assigned unique ID for this managed resource.",
+                        "type": "string"
+                    },
+                    "lifecycleStatus": {
+                        "type": "string"
+                    },
+                    "total": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "dataJson",
+                    "total",
                     "id"
                 ],
                 "type": "object"

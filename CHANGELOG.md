@@ -6,6 +6,9 @@ All notable changes to `pulumi-thoth` are documented in this file.
 
 ### Added
 
+- `thoth.governance.ModelArtifact` resource and `getModelArtifacts` function (bridged from
+  `thoth_model_artifact` and `thoth_model_artifacts`): the model artifact registry and its
+  activation gate.
 - `thoth.governance.OrgSecuritySettings` resource (bridged from `thoth_org_security_settings`):
   require a second factor, limit how long a sign-in lasts, and restrict the networks people and
   API keys may connect from.
