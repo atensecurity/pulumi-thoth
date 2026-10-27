@@ -5112,6 +5112,138 @@
                 "type": "object"
             }
         },
+        "thoth:governance/slackApprovals:SlackApprovals": {
+            "properties": {
+                "channelId": {
+                    "type": "string",
+                    "description": "The Slack channel ID (such as C0123456789) held actions are posted to. Unset keeps the current channel."
+                },
+                "ready": {
+                    "type": "boolean",
+                    "description": "Whether Slack approvals are ready: a channel and at least one reviewer who can act."
+                },
+                "reviewerEmails": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Who may approve held actions in Slack, at most 50. Each must be a verified, active member of the organization. An empty set allows no one."
+                },
+                "slackWorkspaceId": {
+                    "type": "string",
+                    "description": "The connected Slack workspace."
+                }
+            },
+            "required": [
+                "channelId",
+                "ready",
+                "reviewerEmails",
+                "slackWorkspaceId"
+            ],
+            "inputProperties": {
+                "channelId": {
+                    "type": "string",
+                    "description": "The Slack channel ID (such as C0123456789) held actions are posted to. Unset keeps the current channel."
+                },
+                "reviewerEmails": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Who may approve held actions in Slack, at most 50. Each must be a verified, active member of the organization. An empty set allows no one."
+                }
+            },
+            "requiredInputs": [
+                "reviewerEmails"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering SlackApprovals resources.\n",
+                "properties": {
+                    "channelId": {
+                        "type": "string",
+                        "description": "The Slack channel ID (such as C0123456789) held actions are posted to. Unset keeps the current channel."
+                    },
+                    "ready": {
+                        "type": "boolean",
+                        "description": "Whether Slack approvals are ready: a channel and at least one reviewer who can act."
+                    },
+                    "reviewerEmails": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Who may approve held actions in Slack, at most 50. Each must be a verified, active member of the organization. An empty set allows no one."
+                    },
+                    "slackWorkspaceId": {
+                        "type": "string",
+                        "description": "The connected Slack workspace."
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "thoth:governance/teamMember:TeamMember": {
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "The person's email address."
+                },
+                "role": {
+                    "type": "string",
+                    "description": "admin, or viewer on self-serve and trial workspaces and member on dedicated ones. On self-serve and trial workspaces invitees join as viewers, and a role other than viewer is applied by the first apply after they join."
+                },
+                "status": {
+                    "type": "string",
+                    "description": "invited, or the membership status (active once they join)."
+                },
+                "userId": {
+                    "type": "string",
+                    "description": "The person's user ID once they have joined."
+                }
+            },
+            "required": [
+                "email",
+                "role",
+                "status",
+                "userId"
+            ],
+            "inputProperties": {
+                "email": {
+                    "type": "string",
+                    "description": "The person's email address."
+                },
+                "role": {
+                    "type": "string",
+                    "description": "admin, or viewer on self-serve and trial workspaces and member on dedicated ones. On self-serve and trial workspaces invitees join as viewers, and a role other than viewer is applied by the first apply after they join."
+                }
+            },
+            "requiredInputs": [
+                "email",
+                "role"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering TeamMember resources.\n",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "The person's email address."
+                    },
+                    "role": {
+                        "type": "string",
+                        "description": "admin, or viewer on self-serve and trial workspaces and member on dedicated ones. On self-serve and trial workspaces invitees join as viewers, and a role other than viewer is applied by the first apply after they join."
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "invited, or the membership status (active once they join)."
+                    },
+                    "userId": {
+                        "type": "string",
+                        "description": "The person's user ID once they have joined."
+                    }
+                },
+                "type": "object"
+            }
+        },
         "thoth:governance/toolClassification:ToolClassification": {
             "properties": {
                 "actingPrivilege": {

@@ -6,6 +6,8 @@ All notable changes to `pulumi-thoth` are documented in this file.
 
 ### Added
 
+- `thoth.governance.TeamMember` and `thoth.governance.SlackApprovals` resources (bridged from
+  `thoth_team_member` and `thoth_slack_approvals`). Both need `useThothctlSession`.
 - Provider configuration `useThothctlSession` (and `thothctlSessionFile`): act as the person
   signed in with `thothctl auth login`, as in the Terraform provider.
 - `thoth.governance.ModelArtifact` resource and `getModelArtifacts` function (bridged from
