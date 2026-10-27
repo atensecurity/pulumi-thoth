@@ -6,6 +6,8 @@ All notable changes to `pulumi-thoth` are documented in this file.
 
 ### Added
 
+- Provider configuration `useThothctlSession` (and `thothctlSessionFile`): act as the person
+  signed in with `thothctl auth login`, as in the Terraform provider.
 - `thoth.governance.ModelArtifact` resource and `getModelArtifacts` function (bridged from
   `thoth_model_artifact` and `thoth_model_artifacts`): the model artifact registry and its
   activation gate.

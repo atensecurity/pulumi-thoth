@@ -96,6 +96,14 @@
             "tenantId": {
                 "type": "string",
                 "description": "Tenant slug used in GovAPI route scoping. If omitted, provider reads THOTH_TENANT_ID."
+            },
+            "thothctlSessionFile": {
+                "type": "string",
+                "description": "The thothctl session to use. Defaults to the one `thothctl auth login` saved for this workspace and GovAPI (~/.thoth/sessions/)."
+            },
+            "useThothctlSession": {
+                "type": "boolean",
+                "description": "Act as the person signed in with `thothctl auth login`, renewing the session as thothctl does. Needed for changes that belong to a person (Slack reviewers, team members). Changes that need a recent second factor use the proof from `thothctl auth step-up`. Also read from THOTH_USE_THOTHCTL_SESSION=true."
             }
         }
     },
@@ -307,6 +315,14 @@
             "tenantId": {
                 "type": "string",
                 "description": "Tenant slug used in GovAPI route scoping. If omitted, provider reads THOTH_TENANT_ID."
+            },
+            "thothctlSessionFile": {
+                "type": "string",
+                "description": "The thothctl session to use. Defaults to the one `thothctl auth login` saved for this workspace and GovAPI (~/.thoth/sessions/)."
+            },
+            "useThothctlSession": {
+                "type": "boolean",
+                "description": "Act as the person signed in with `thothctl auth login`, renewing the session as thothctl does. Needed for changes that belong to a person (Slack reviewers, team members). Changes that need a recent second factor use the proof from `thothctl auth step-up`. Also read from THOTH_USE_THOTHCTL_SESSION=true."
             }
         },
         "inputProperties": {
@@ -359,6 +375,14 @@
             "tenantId": {
                 "type": "string",
                 "description": "Tenant slug used in GovAPI route scoping. If omitted, provider reads THOTH_TENANT_ID."
+            },
+            "thothctlSessionFile": {
+                "type": "string",
+                "description": "The thothctl session to use. Defaults to the one `thothctl auth login` saved for this workspace and GovAPI (~/.thoth/sessions/)."
+            },
+            "useThothctlSession": {
+                "type": "boolean",
+                "description": "Act as the person signed in with `thothctl auth login`, renewing the session as thothctl does. Needed for changes that belong to a person (Slack reviewers, team members). Changes that need a recent second factor use the proof from `thothctl auth step-up`. Also read from THOTH_USE_THOTHCTL_SESSION=true."
             }
         },
         "methods": {
