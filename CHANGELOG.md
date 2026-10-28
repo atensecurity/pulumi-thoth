@@ -13,6 +13,8 @@ All notable changes to `pulumi-thoth` are documented in this file.
 - `thoth.governance.ModelArtifact` resource and `getModelArtifacts` function (bridged from
   `thoth_model_artifact` and `thoth_model_artifacts`): the model artifact registry and its
   activation gate.
+- `thoth.governance.Policy` resource (bridged from `thoth_policy`): a policy rule in dev or prod.
+  A rule created with a key that is not an org admin's stays pending until an org admin approves it.
 - `thoth.governance.OrgSecuritySettings` resource (bridged from `thoth_org_security_settings`):
   require a second factor, limit how long a sign-in lasts, and restrict the networks people and
   API keys may connect from.

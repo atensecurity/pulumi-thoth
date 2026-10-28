@@ -84,6 +84,7 @@ func Provider() tfbridge.ProviderInfo {
 				Tok: makeResource("governance", "OrgSecuritySettings"),
 			},
 			"thoth_pam_settings":     {Tok: makeResource("governance", "PamSettings")},
+			"thoth_policy":           {Tok: makeResource("governance", "Policy")},
 			"thoth_policy_sync":      {Tok: makeResource("governance", "PolicySync")},
 			"thoth_policy_bundle":    {Tok: makeResource("governance", "PolicyBundle")},
 			"thoth_policy_exception": {Tok: makeResource("governance", "PolicyException")},
