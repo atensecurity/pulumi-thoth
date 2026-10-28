@@ -2,7 +2,9 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
-## Unreleased
+## 0.1.23 - 2026-10-28
+
+Version 0.1.23 was prepared on 25 October but never published; this release contains it and everything since, bridged from Terraform provider 0.1.23.
 
 ### Added
 
@@ -18,18 +20,13 @@ All notable changes to `pulumi-thoth` are documented in this file.
 - `thoth.governance.OrgSecuritySettings` resource (bridged from `thoth_org_security_settings`):
   require a second factor, limit how long a sign-in lasts, and restrict the networks people and
   API keys may connect from.
+- Updated the Terraform provider bridge to `v0.1.23`.
+- `thoth.governance.Agent` resource (bridged from `thoth_agent`): registers an agent with its
+  display name, owner and approved scope.
 
 ### Changed
 
 - `thoth.governance.PolicyException.holdToken` is now secret, matching the Terraform provider.
-
-## 0.1.23 - 2026-10-25
-
-### Added
-
-- Updated the Terraform provider bridge to `v0.1.23`, adding the resource below.
-- `thoth.governance.Agent` resource (bridged from `thoth_agent`): registers an agent with its
-  display name, owner and approved scope.
 
 ## 0.1.22 - 2026-10-24
 
