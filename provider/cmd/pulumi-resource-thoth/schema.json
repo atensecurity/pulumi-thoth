@@ -7616,6 +7616,79 @@
                 "type": "object"
             }
         },
+        "thoth:governance/getAgentObserveSummary:getAgentObserveSummary": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getAgentObserveSummary.\n",
+                "properties": {
+                    "agentId": {
+                        "type": "string"
+                    },
+                    "days": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "agentId"
+                ]
+            },
+            "outputs": {
+                "description": "A collection of values returned by getAgentObserveSummary.\n",
+                "properties": {
+                    "agentId": {
+                        "type": "string"
+                    },
+                    "byDecisionJson": {
+                        "type": "string"
+                    },
+                    "days": {
+                        "type": "integer"
+                    },
+                    "examplesJson": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "The provider-assigned unique ID for this managed resource.",
+                        "type": "string"
+                    },
+                    "mode": {
+                        "type": "string"
+                    },
+                    "next": {
+                        "type": "string"
+                    },
+                    "observed": {
+                        "type": "integer"
+                    },
+                    "readinessChecksJson": {
+                        "type": "string"
+                    },
+                    "readyToEnforce": {
+                        "type": "boolean"
+                    },
+                    "topRulesJson": {
+                        "type": "string"
+                    },
+                    "wouldChange": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "agentId",
+                    "byDecisionJson",
+                    "examplesJson",
+                    "mode",
+                    "next",
+                    "observed",
+                    "readinessChecksJson",
+                    "readyToEnforce",
+                    "topRulesJson",
+                    "wouldChange",
+                    "id"
+                ],
+                "type": "object"
+            }
+        },
         "thoth:governance/getApprovals:getApprovals": {
             "inputs": {
                 "description": "A collection of arguments for invoking getApprovals.\n",

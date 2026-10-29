@@ -9,6 +9,8 @@ All notable changes to `pulumi-thoth` are documented in this file.
 - `thoth.governance.EvidencePack` resource and `thoth.governance.getEvidencePacks` (bridged from
   `thoth_evidence_pack` and `thoth_evidence_packs`): build a signed evidence pack for a period and
   list the workspace's packs.
+- `thoth.governance.getAgentObserveSummary` (bridged from `thoth_agent_observe_summary`): what
+  enforcing would have changed for an agent in observe, and whether it is ready to enforce.
 
 ## 0.1.23 - 2026-10-28
 
