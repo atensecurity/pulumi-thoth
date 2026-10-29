@@ -2,6 +2,14 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## Unreleased
+
+### Added
+
+- `thoth.governance.EvidencePack` resource and `thoth.governance.getEvidencePacks` (bridged from
+  `thoth_evidence_pack` and `thoth_evidence_packs`): build a signed evidence pack for a period and
+  list the workspace's packs.
+
 ## 0.1.23 - 2026-10-28
 
 Version 0.1.23 was prepared on 25 October but never published; this release contains it and everything since, bridged from Terraform provider 0.1.23.

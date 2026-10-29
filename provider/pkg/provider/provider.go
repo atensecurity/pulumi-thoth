@@ -102,6 +102,7 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			"thoth_webhook_test":      {Tok: makeResource("governance", "WebhookTest")},
 			"thoth_evidence_backfill": {Tok: makeResource("governance", "EvidenceBackfill")},
+			"thoth_evidence_pack":     {Tok: makeResource("governance", "EvidencePack")},
 			"thoth_decision_field_backfill": {
 				Tok: makeResource("governance", "DecisionFieldBackfill"),
 			},
@@ -166,6 +167,9 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			"thoth_evidence_bundle": {
 				Tok: makeDataSource("governance", "getEvidenceBundle"),
+			},
+			"thoth_evidence_packs": {
+				Tok: makeDataSource("governance", "getEvidencePacks"),
 			},
 			"thoth_session_forensics": {
 				Tok: makeDataSource("governance", "getSessionForensics"),

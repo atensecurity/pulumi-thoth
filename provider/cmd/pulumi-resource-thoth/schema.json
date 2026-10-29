@@ -2615,6 +2615,136 @@
                 "type": "object"
             }
         },
+        "thoth:governance/evidencePack:EvidencePack": {
+            "properties": {
+                "completedAt": {
+                    "type": "string",
+                    "description": "When the build finished."
+                },
+                "createdAt": {
+                    "type": "string",
+                    "description": "When the pack was queued."
+                },
+                "error": {
+                    "type": "string",
+                    "description": "Why a build failed."
+                },
+                "partCount": {
+                    "type": "integer",
+                    "description": "Number of signed parts in a ready pack."
+                },
+                "periodEnd": {
+                    "type": "string",
+                    "description": "RFC 3339 end of the period, exclusive: at most 31 days after the start, and already passed."
+                },
+                "periodStart": {
+                    "type": "string",
+                    "description": "RFC 3339 start of the period, with period_end. Default: the previous calendar month."
+                },
+                "status": {
+                    "type": "string",
+                    "description": "queued, building, ready or failed."
+                },
+                "totalsJson": {
+                    "type": "string",
+                    "description": "What the pack holds (attestations, chain events, parts) as JSON."
+                },
+                "trigger": {
+                    "type": "string",
+                    "description": "Change this value to build another pack."
+                },
+                "waitForReady": {
+                    "type": "boolean",
+                    "description": "Wait until the pack is ready or failed (default true). A failed build is an error."
+                },
+                "waitTimeoutMinutes": {
+                    "type": "integer",
+                    "description": "How long to wait (1-120, default 30)."
+                }
+            },
+            "required": [
+                "completedAt",
+                "createdAt",
+                "error",
+                "partCount",
+                "periodEnd",
+                "periodStart",
+                "status",
+                "totalsJson"
+            ],
+            "inputProperties": {
+                "periodEnd": {
+                    "type": "string",
+                    "description": "RFC 3339 end of the period, exclusive: at most 31 days after the start, and already passed."
+                },
+                "periodStart": {
+                    "type": "string",
+                    "description": "RFC 3339 start of the period, with period_end. Default: the previous calendar month."
+                },
+                "trigger": {
+                    "type": "string",
+                    "description": "Change this value to build another pack."
+                },
+                "waitForReady": {
+                    "type": "boolean",
+                    "description": "Wait until the pack is ready or failed (default true). A failed build is an error."
+                },
+                "waitTimeoutMinutes": {
+                    "type": "integer",
+                    "description": "How long to wait (1-120, default 30)."
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering EvidencePack resources.\n",
+                "properties": {
+                    "completedAt": {
+                        "type": "string",
+                        "description": "When the build finished."
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "description": "When the pack was queued."
+                    },
+                    "error": {
+                        "type": "string",
+                        "description": "Why a build failed."
+                    },
+                    "partCount": {
+                        "type": "integer",
+                        "description": "Number of signed parts in a ready pack."
+                    },
+                    "periodEnd": {
+                        "type": "string",
+                        "description": "RFC 3339 end of the period, exclusive: at most 31 days after the start, and already passed."
+                    },
+                    "periodStart": {
+                        "type": "string",
+                        "description": "RFC 3339 start of the period, with period_end. Default: the previous calendar month."
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "queued, building, ready or failed."
+                    },
+                    "totalsJson": {
+                        "type": "string",
+                        "description": "What the pack holds (attestations, chain events, parts) as JSON."
+                    },
+                    "trigger": {
+                        "type": "string",
+                        "description": "Change this value to build another pack."
+                    },
+                    "waitForReady": {
+                        "type": "boolean",
+                        "description": "Wait until the pack is ready or failed (default true). A failed build is an error."
+                    },
+                    "waitTimeoutMinutes": {
+                        "type": "integer",
+                        "description": "How long to wait (1-120, default 30)."
+                    }
+                },
+                "type": "object"
+            }
+        },
         "thoth:governance/governanceSettings:GovernanceSettings": {
             "properties": {
                 "canonicalRegimes": {
@@ -7878,6 +8008,41 @@
                 "required": [
                     "dataJson",
                     "responseJson",
+                    "total",
+                    "id"
+                ],
+                "type": "object"
+            }
+        },
+        "thoth:governance/getEvidencePacks:getEvidencePacks": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getEvidencePacks.\n",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getEvidencePacks.\n",
+                "properties": {
+                    "dataJson": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "The provider-assigned unique ID for this managed resource.",
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "total": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "dataJson",
                     "total",
                     "id"
                 ],
