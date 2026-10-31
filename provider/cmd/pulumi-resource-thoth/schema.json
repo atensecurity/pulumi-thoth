@@ -2076,6 +2076,14 @@
         },
         "thoth:governance/agentEnforcement:AgentEnforcement": {
             "properties": {
+                "afterDecline": {
+                    "type": "string",
+                    "description": "What a person declining one of this agent's held actions does. \u003cspan pulumi-lang-nodejs=\"`raise`\" pulumi-lang-dotnet=\"`Raise`\" pulumi-lang-go=\"`raise`\" pulumi-lang-python=\"`raise`\" pulumi-lang-yaml=\"`raise`\" pulumi-lang-java=\"`raise`\"\u003e`raise`\u003c/span\u003e (default): its next actions of the same kind need approval for \u003cspan pulumi-lang-nodejs=\"`afterDeclineMinutes`\" pulumi-lang-dotnet=\"`AfterDeclineMinutes`\" pulumi-lang-go=\"`afterDeclineMinutes`\" pulumi-lang-python=\"`after_decline_minutes`\" pulumi-lang-yaml=\"`afterDeclineMinutes`\" pulumi-lang-java=\"`afterDeclineMinutes`\"\u003e`afterDeclineMinutes`\u003c/span\u003e, in every session. \u003cspan pulumi-lang-nodejs=\"`stop`\" pulumi-lang-dotnet=\"`Stop`\" pulumi-lang-go=\"`stop`\" pulumi-lang-python=\"`stop`\" pulumi-lang-yaml=\"`stop`\" pulumi-lang-java=\"`stop`\"\u003e`stop`\u003c/span\u003e: the session the declined action was in is isolated until a person releases it. \u003cspan pulumi-lang-nodejs=\"`quarantine`\" pulumi-lang-dotnet=\"`Quarantine`\" pulumi-lang-go=\"`quarantine`\" pulumi-lang-python=\"`quarantine`\" pulumi-lang-yaml=\"`quarantine`\" pulumi-lang-java=\"`quarantine`\"\u003e`quarantine`\u003c/span\u003e: the agent is quarantined. A policy deny quarantines the agent whatever this says."
+                },
+                "afterDeclineMinutes": {
+                    "type": "integer",
+                    "description": "With \u003cspan pulumi-lang-nodejs=\"`afterDecline`\" pulumi-lang-dotnet=\"`AfterDecline`\" pulumi-lang-go=\"`afterDecline`\" pulumi-lang-python=\"`after_decline`\" pulumi-lang-yaml=\"`afterDecline`\" pulumi-lang-java=\"`afterDecline`\"\u003e`afterDecline`\u003c/span\u003e set to \u003cspan pulumi-lang-nodejs=\"`raise`\" pulumi-lang-dotnet=\"`Raise`\" pulumi-lang-go=\"`raise`\" pulumi-lang-python=\"`raise`\" pulumi-lang-yaml=\"`raise`\" pulumi-lang-java=\"`raise`\"\u003e`raise`\u003c/span\u003e, how long the agent's same-kind actions need approval: 5 to 1440 minutes (default 30). Ignored for \u003cspan pulumi-lang-nodejs=\"`stop`\" pulumi-lang-dotnet=\"`Stop`\" pulumi-lang-go=\"`stop`\" pulumi-lang-python=\"`stop`\" pulumi-lang-yaml=\"`stop`\" pulumi-lang-java=\"`stop`\"\u003e`stop`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`quarantine`\" pulumi-lang-dotnet=\"`Quarantine`\" pulumi-lang-go=\"`quarantine`\" pulumi-lang-python=\"`quarantine`\" pulumi-lang-yaml=\"`quarantine`\" pulumi-lang-java=\"`quarantine`\"\u003e`quarantine`\u003c/span\u003e."
+                },
                 "agentId": {
                     "type": "string",
                     "description": "The registered agent."
@@ -2090,11 +2098,21 @@
                 }
             },
             "required": [
+                "afterDecline",
+                "afterDeclineMinutes",
                 "agentId",
                 "enforcementMode",
                 "highRiskAction"
             ],
             "inputProperties": {
+                "afterDecline": {
+                    "type": "string",
+                    "description": "What a person declining one of this agent's held actions does. \u003cspan pulumi-lang-nodejs=\"`raise`\" pulumi-lang-dotnet=\"`Raise`\" pulumi-lang-go=\"`raise`\" pulumi-lang-python=\"`raise`\" pulumi-lang-yaml=\"`raise`\" pulumi-lang-java=\"`raise`\"\u003e`raise`\u003c/span\u003e (default): its next actions of the same kind need approval for \u003cspan pulumi-lang-nodejs=\"`afterDeclineMinutes`\" pulumi-lang-dotnet=\"`AfterDeclineMinutes`\" pulumi-lang-go=\"`afterDeclineMinutes`\" pulumi-lang-python=\"`after_decline_minutes`\" pulumi-lang-yaml=\"`afterDeclineMinutes`\" pulumi-lang-java=\"`afterDeclineMinutes`\"\u003e`afterDeclineMinutes`\u003c/span\u003e, in every session. \u003cspan pulumi-lang-nodejs=\"`stop`\" pulumi-lang-dotnet=\"`Stop`\" pulumi-lang-go=\"`stop`\" pulumi-lang-python=\"`stop`\" pulumi-lang-yaml=\"`stop`\" pulumi-lang-java=\"`stop`\"\u003e`stop`\u003c/span\u003e: the session the declined action was in is isolated until a person releases it. \u003cspan pulumi-lang-nodejs=\"`quarantine`\" pulumi-lang-dotnet=\"`Quarantine`\" pulumi-lang-go=\"`quarantine`\" pulumi-lang-python=\"`quarantine`\" pulumi-lang-yaml=\"`quarantine`\" pulumi-lang-java=\"`quarantine`\"\u003e`quarantine`\u003c/span\u003e: the agent is quarantined. A policy deny quarantines the agent whatever this says."
+                },
+                "afterDeclineMinutes": {
+                    "type": "integer",
+                    "description": "With \u003cspan pulumi-lang-nodejs=\"`afterDecline`\" pulumi-lang-dotnet=\"`AfterDecline`\" pulumi-lang-go=\"`afterDecline`\" pulumi-lang-python=\"`after_decline`\" pulumi-lang-yaml=\"`afterDecline`\" pulumi-lang-java=\"`afterDecline`\"\u003e`afterDecline`\u003c/span\u003e set to \u003cspan pulumi-lang-nodejs=\"`raise`\" pulumi-lang-dotnet=\"`Raise`\" pulumi-lang-go=\"`raise`\" pulumi-lang-python=\"`raise`\" pulumi-lang-yaml=\"`raise`\" pulumi-lang-java=\"`raise`\"\u003e`raise`\u003c/span\u003e, how long the agent's same-kind actions need approval: 5 to 1440 minutes (default 30). Ignored for \u003cspan pulumi-lang-nodejs=\"`stop`\" pulumi-lang-dotnet=\"`Stop`\" pulumi-lang-go=\"`stop`\" pulumi-lang-python=\"`stop`\" pulumi-lang-yaml=\"`stop`\" pulumi-lang-java=\"`stop`\"\u003e`stop`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`quarantine`\" pulumi-lang-dotnet=\"`Quarantine`\" pulumi-lang-go=\"`quarantine`\" pulumi-lang-python=\"`quarantine`\" pulumi-lang-yaml=\"`quarantine`\" pulumi-lang-java=\"`quarantine`\"\u003e`quarantine`\u003c/span\u003e."
+                },
                 "agentId": {
                     "type": "string",
                     "description": "The registered agent."
@@ -2115,6 +2133,14 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering AgentEnforcement resources.\n",
                 "properties": {
+                    "afterDecline": {
+                        "type": "string",
+                        "description": "What a person declining one of this agent's held actions does. \u003cspan pulumi-lang-nodejs=\"`raise`\" pulumi-lang-dotnet=\"`Raise`\" pulumi-lang-go=\"`raise`\" pulumi-lang-python=\"`raise`\" pulumi-lang-yaml=\"`raise`\" pulumi-lang-java=\"`raise`\"\u003e`raise`\u003c/span\u003e (default): its next actions of the same kind need approval for \u003cspan pulumi-lang-nodejs=\"`afterDeclineMinutes`\" pulumi-lang-dotnet=\"`AfterDeclineMinutes`\" pulumi-lang-go=\"`afterDeclineMinutes`\" pulumi-lang-python=\"`after_decline_minutes`\" pulumi-lang-yaml=\"`afterDeclineMinutes`\" pulumi-lang-java=\"`afterDeclineMinutes`\"\u003e`afterDeclineMinutes`\u003c/span\u003e, in every session. \u003cspan pulumi-lang-nodejs=\"`stop`\" pulumi-lang-dotnet=\"`Stop`\" pulumi-lang-go=\"`stop`\" pulumi-lang-python=\"`stop`\" pulumi-lang-yaml=\"`stop`\" pulumi-lang-java=\"`stop`\"\u003e`stop`\u003c/span\u003e: the session the declined action was in is isolated until a person releases it. \u003cspan pulumi-lang-nodejs=\"`quarantine`\" pulumi-lang-dotnet=\"`Quarantine`\" pulumi-lang-go=\"`quarantine`\" pulumi-lang-python=\"`quarantine`\" pulumi-lang-yaml=\"`quarantine`\" pulumi-lang-java=\"`quarantine`\"\u003e`quarantine`\u003c/span\u003e: the agent is quarantined. A policy deny quarantines the agent whatever this says."
+                    },
+                    "afterDeclineMinutes": {
+                        "type": "integer",
+                        "description": "With \u003cspan pulumi-lang-nodejs=\"`afterDecline`\" pulumi-lang-dotnet=\"`AfterDecline`\" pulumi-lang-go=\"`afterDecline`\" pulumi-lang-python=\"`after_decline`\" pulumi-lang-yaml=\"`afterDecline`\" pulumi-lang-java=\"`afterDecline`\"\u003e`afterDecline`\u003c/span\u003e set to \u003cspan pulumi-lang-nodejs=\"`raise`\" pulumi-lang-dotnet=\"`Raise`\" pulumi-lang-go=\"`raise`\" pulumi-lang-python=\"`raise`\" pulumi-lang-yaml=\"`raise`\" pulumi-lang-java=\"`raise`\"\u003e`raise`\u003c/span\u003e, how long the agent's same-kind actions need approval: 5 to 1440 minutes (default 30). Ignored for \u003cspan pulumi-lang-nodejs=\"`stop`\" pulumi-lang-dotnet=\"`Stop`\" pulumi-lang-go=\"`stop`\" pulumi-lang-python=\"`stop`\" pulumi-lang-yaml=\"`stop`\" pulumi-lang-java=\"`stop`\"\u003e`stop`\u003c/span\u003e and \u003cspan pulumi-lang-nodejs=\"`quarantine`\" pulumi-lang-dotnet=\"`Quarantine`\" pulumi-lang-go=\"`quarantine`\" pulumi-lang-python=\"`quarantine`\" pulumi-lang-yaml=\"`quarantine`\" pulumi-lang-java=\"`quarantine`\"\u003e`quarantine`\u003c/span\u003e."
+                    },
                     "agentId": {
                         "type": "string",
                         "description": "The registered agent."

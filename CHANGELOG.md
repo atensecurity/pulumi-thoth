@@ -11,6 +11,9 @@ All notable changes to `pulumi-thoth` are documented in this file.
   list the workspace's packs.
 - `thoth.governance.getAgentObserveSummary` (bridged from `thoth_agent_observe_summary`): what
   enforcing would have changed for an agent in observe, and whether it is ready to enforce.
+- `thoth.governance.AgentEnforcement` gains `afterDecline` (`raise`, the default; `stop`; or
+  `quarantine`) and `afterDeclineMinutes` (5 to 1440, default 30), bridged from
+  `thoth_agent_enforcement`: what a person declining one of the agent's held actions does.
 
 ## 0.1.23 - 2026-10-28
 
