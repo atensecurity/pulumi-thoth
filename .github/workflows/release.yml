@@ -11,6 +11,11 @@ on:
         description: "Release tag (for example 0.1.0, 0.1.0-rc1, v0.1.0)"
         required: true
         type: string
+      nuget_only:
+        description: "Publish only the NuGet package of an existing release (after a failed NuGet publish); the GitHub release, npm, PyPI and the Go SDK are left alone"
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -219,6 +224,7 @@ jobs:
     needs:
       - prepare
       - validate_build_sdks
+    if: ${{ !inputs.nuget_only }}
     steps:
       - name: Checkout git history
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
@@ -359,7 +365,14 @@ jobs:
       - prepare
       - validate_build_sdks
       - release_provider
-    if: ${{ needs.prepare.outputs.is_rc != 'true' }}
+    # After a successful provider release, or on its own (nuget_only), when the
+    # provider release is deliberately skipped.
+    if: >-
+      ${{ !cancelled()
+      && needs.prepare.outputs.is_rc != 'true'
+      && needs.validate_build_sdks.result == 'success'
+      && (needs.release_provider.result == 'success'
+      || (inputs.nuget_only && needs.release_provider.result == 'skipped')) }}
     steps:
       - name: Download release inputs artifact
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
@@ -371,16 +384,37 @@ jobs:
         with:
           dotnet-version: "8.0.x"
 
+      # Trusted publishing: nuget.org exchanges this workflow's GitHub identity
+      # for a short-lived API key, so no long-lived key has to be stored or
+      # renewed. It needs a trusted-publishing policy for atensecurity/pulumi-thoth
+      # and release.yml on nuget.org, and the workflow's id-token permission.
+      - name: Get a short-lived NuGet API key
+        id: nuget_login
+        continue-on-error: true
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
+        with:
+          # The nuget.org profile name that owns the policy (not an email).
+          user: ${{ vars.NUGET_USER || 'atensecurity' }}
+
       - name: Build and publish NuGet package
         working-directory: sdk/dotnet
         env:
+          NUGET_TRUSTED_KEY: ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
           NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
           RELEASE_VERSION: ${{ needs.prepare.outputs.release_version }}
         run: |
           set -euo pipefail
 
-          if [[ -z "${NUGET_TOKEN:-}" ]]; then
-            echo "::error::Missing NUGET_TOKEN secret."
+          # Prefer the short-lived trusted-publishing key; fall back to the
+          # stored token while one still exists.
+          if [[ -n "${NUGET_TRUSTED_KEY:-}" ]]; then
+            NUGET_API_KEY="${NUGET_TRUSTED_KEY}"
+            echo "Publishing with a short-lived trusted-publishing key."
+          elif [[ -n "${NUGET_TOKEN:-}" ]]; then
+            NUGET_API_KEY="${NUGET_TOKEN}"
+            echo "::warning::Trusted publishing was not available; using the stored NUGET_TOKEN."
+          else
+            echo "::error::No NuGet credential: trusted publishing did not return a key and NUGET_TOKEN is not set."
             exit 1
           fi
 
@@ -402,7 +436,7 @@ jobs:
             -p:GeneratePackageOnBuild=false \
             -o ./artifacts
           dotnet nuget push ./artifacts/*.nupkg \
-            --api-key "${NUGET_TOKEN}" \
+            --api-key "${NUGET_API_KEY}" \
             --source "https://api.nuget.org/v3/index.json" \
             --skip-duplicate
 
