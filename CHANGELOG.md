@@ -2,7 +2,7 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
-## Unreleased
+## 0.1.24 - 2026-11-05
 
 ### Added
 
@@ -22,6 +22,7 @@ All notable changes to `pulumi-thoth` are documented in this file.
 
 ### Changed
 
+- Updated the Terraform provider bridge to `v0.1.24`.
 - Every Terraform resource and data source now has a Pulumi mapping, and a test fails when one
   is added without it. The schema is regenerated, which also brings the `rulesJson` description
   on `Policy` up to date.
