@@ -6,6 +6,11 @@ All notable changes to `pulumi-thoth` are documented in this file.
 
 ### Added
 
+- `thoth.governance.RecipientPolicy` resource (bridged from `thoth_recipient_policy`): the
+  outside-recipient guard. `mode` is `observe` (the default: Thoth records what it would hold),
+  `enforce` (sends, shares and invitations addressed outside the workspace step up for approval)
+  or `off`, with `internalDomains`, `allowedExternalDomains` and `allowedDestinations`. Needs the
+  server from production v0.6.32 or later.
 - `thoth.governance.EvidencePack` resource and `thoth.governance.getEvidencePacks` (bridged from
   `thoth_evidence_pack` and `thoth_evidence_packs`): build a signed evidence pack for a period and
   list the workspace's packs.
@@ -14,6 +19,19 @@ All notable changes to `pulumi-thoth` are documented in this file.
 - `thoth.governance.AgentEnforcement` gains `afterDecline` (`raise`, the default; `stop`; or
   `quarantine`) and `afterDeclineMinutes` (5 to 1440, default 30), bridged from
   `thoth_agent_enforcement`: what a person declining one of the agent's held actions does.
+
+### Changed
+
+- Every Terraform resource and data source now has a Pulumi mapping, and a test fails when one
+  is added without it. The schema is regenerated, which also brings the `rulesJson` description
+  on `Policy` up to date.
+- Registering an agent (`thoth.governance.Agent`) needs an admin on every workspace, and setting
+  its mode while registering needs a recent second factor when acting as a person; API keys are
+  exempt. This is enforced by the server from production v0.6.31 or later.
+
+### Security
+
+- Updated `golang.org/x/net` to v0.62.0, a security update.
 
 ## 0.1.23 - 2026-10-28
 

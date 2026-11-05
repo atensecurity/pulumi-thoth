@@ -4186,7 +4186,7 @@
                 },
                 "rulesJson": {
                     "type": "string",
-                    "description": "The rule's conditions as a JSON object, for example with jsonencode()."
+                    "description": "What the rule matches, as a JSON object (for example with jsonencode()) with one of tool, tool_names, model_name, model_provider, purpose, data_classification,\u003cspan pulumi-lang-nodejs=\" minTokenCount \" pulumi-lang-dotnet=\" MinTokenCount \" pulumi-lang-go=\" minTokenCount \" pulumi-lang-python=\" min_token_count \" pulumi-lang-yaml=\" minTokenCount \" pulumi-lang-java=\" minTokenCount \"\u003e minTokenCount \u003c/span\u003eor min_estimated_cost_usd, or the overlay keys\u003cspan pulumi-lang-nodejs=\" blockedTools \" pulumi-lang-dotnet=\" BlockedTools \" pulumi-lang-go=\" blockedTools \" pulumi-lang-python=\" blocked_tools \" pulumi-lang-yaml=\" blockedTools \" pulumi-lang-java=\" blockedTools \"\u003e blockedTools \u003c/span\u003eand allowed_tools. A rule with none of these is refused, because Thoth would never apply it."
                 },
                 "status": {
                     "type": "string",
@@ -4248,7 +4248,7 @@
                 },
                 "rulesJson": {
                     "type": "string",
-                    "description": "The rule's conditions as a JSON object, for example with jsonencode()."
+                    "description": "What the rule matches, as a JSON object (for example with jsonencode()) with one of tool, tool_names, model_name, model_provider, purpose, data_classification,\u003cspan pulumi-lang-nodejs=\" minTokenCount \" pulumi-lang-dotnet=\" MinTokenCount \" pulumi-lang-go=\" minTokenCount \" pulumi-lang-python=\" min_token_count \" pulumi-lang-yaml=\" minTokenCount \" pulumi-lang-java=\" minTokenCount \"\u003e minTokenCount \u003c/span\u003eor min_estimated_cost_usd, or the overlay keys\u003cspan pulumi-lang-nodejs=\" blockedTools \" pulumi-lang-dotnet=\" BlockedTools \" pulumi-lang-go=\" blockedTools \" pulumi-lang-python=\" blocked_tools \" pulumi-lang-yaml=\" blockedTools \" pulumi-lang-java=\" blockedTools \"\u003e blockedTools \u003c/span\u003eand allowed_tools. A rule with none of these is refused, because Thoth would never apply it."
                 },
                 "type": {
                     "type": "string",
@@ -4301,7 +4301,7 @@
                     },
                     "rulesJson": {
                         "type": "string",
-                        "description": "The rule's conditions as a JSON object, for example with jsonencode()."
+                        "description": "What the rule matches, as a JSON object (for example with jsonencode()) with one of tool, tool_names, model_name, model_provider, purpose, data_classification,\u003cspan pulumi-lang-nodejs=\" minTokenCount \" pulumi-lang-dotnet=\" MinTokenCount \" pulumi-lang-go=\" minTokenCount \" pulumi-lang-python=\" min_token_count \" pulumi-lang-yaml=\" minTokenCount \" pulumi-lang-java=\" minTokenCount \"\u003e minTokenCount \u003c/span\u003eor min_estimated_cost_usd, or the overlay keys\u003cspan pulumi-lang-nodejs=\" blockedTools \" pulumi-lang-dotnet=\" BlockedTools \" pulumi-lang-go=\" blockedTools \" pulumi-lang-python=\" blocked_tools \" pulumi-lang-yaml=\" blockedTools \" pulumi-lang-java=\" blockedTools \"\u003e blockedTools \u003c/span\u003eand allowed_tools. A rule with none of these is refused, because Thoth would never apply it."
                     },
                     "status": {
                         "type": "string",
@@ -5282,6 +5282,117 @@
                     "waitForCompletion": {
                         "type": "boolean",
                         "description": "Poll status until terminal state."
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "thoth:governance/recipientPolicy:RecipientPolicy": {
+            "properties": {
+                "allowedDestinations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Named destinations that are not addresses, such as `patient-portal`, that need no approval."
+                },
+                "allowedExternalDomains": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Customer and partner domains a plain send may go to without approval. Forwards, shares and exports to them still step up."
+                },
+                "internalDomains": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The workspace's own domains. Empty (the default) uses the workspace's sign-in domains. Subdomains are included."
+                },
+                "internalDomainsSource": {
+                    "type": "string",
+                    "description": "\u003cspan pulumi-lang-nodejs=\"`setting`\" pulumi-lang-dotnet=\"`Setting`\" pulumi-lang-go=\"`setting`\" pulumi-lang-python=\"`setting`\" pulumi-lang-yaml=\"`setting`\" pulumi-lang-java=\"`setting`\"\u003e`setting`\u003c/span\u003e when \u003cspan pulumi-lang-nodejs=\"`internalDomains`\" pulumi-lang-dotnet=\"`InternalDomains`\" pulumi-lang-go=\"`internalDomains`\" pulumi-lang-python=\"`internal_domains`\" pulumi-lang-yaml=\"`internalDomains`\" pulumi-lang-java=\"`internalDomains`\"\u003e`internalDomains`\u003c/span\u003e is set, \u003cspan pulumi-lang-nodejs=\"`signInDomains`\" pulumi-lang-dotnet=\"`SignInDomains`\" pulumi-lang-go=\"`signInDomains`\" pulumi-lang-python=\"`sign_in_domains`\" pulumi-lang-yaml=\"`signInDomains`\" pulumi-lang-java=\"`signInDomains`\"\u003e`signInDomains`\u003c/span\u003e when it is empty."
+                },
+                "mode": {
+                    "type": "string",
+                    "description": "\u003cspan pulumi-lang-nodejs=\"`observe`\" pulumi-lang-dotnet=\"`Observe`\" pulumi-lang-go=\"`observe`\" pulumi-lang-python=\"`observe`\" pulumi-lang-yaml=\"`observe`\" pulumi-lang-java=\"`observe`\"\u003e`observe`\u003c/span\u003e records what the guard would hold without changing decisions, \u003cspan pulumi-lang-nodejs=\"`enforce`\" pulumi-lang-dotnet=\"`Enforce`\" pulumi-lang-go=\"`enforce`\" pulumi-lang-python=\"`enforce`\" pulumi-lang-yaml=\"`enforce`\" pulumi-lang-java=\"`enforce`\"\u003e`enforce`\u003c/span\u003e holds for approval, \u003cspan pulumi-lang-nodejs=\"`off`\" pulumi-lang-dotnet=\"`Off`\" pulumi-lang-go=\"`off`\" pulumi-lang-python=\"`off`\" pulumi-lang-yaml=\"`off`\" pulumi-lang-java=\"`off`\"\u003e`off`\u003c/span\u003e skips the check. Default \u003cspan pulumi-lang-nodejs=\"`observe`\" pulumi-lang-dotnet=\"`Observe`\" pulumi-lang-go=\"`observe`\" pulumi-lang-python=\"`observe`\" pulumi-lang-yaml=\"`observe`\" pulumi-lang-java=\"`observe`\"\u003e`observe`\u003c/span\u003e."
+                },
+                "tenantId": {
+                    "type": "string",
+                    "description": "Tenant ID resolved from provider configuration."
+                }
+            },
+            "required": [
+                "allowedDestinations",
+                "allowedExternalDomains",
+                "internalDomains",
+                "internalDomainsSource",
+                "mode",
+                "tenantId"
+            ],
+            "inputProperties": {
+                "allowedDestinations": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Named destinations that are not addresses, such as `patient-portal`, that need no approval."
+                },
+                "allowedExternalDomains": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Customer and partner domains a plain send may go to without approval. Forwards, shares and exports to them still step up."
+                },
+                "internalDomains": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The workspace's own domains. Empty (the default) uses the workspace's sign-in domains. Subdomains are included."
+                },
+                "mode": {
+                    "type": "string",
+                    "description": "\u003cspan pulumi-lang-nodejs=\"`observe`\" pulumi-lang-dotnet=\"`Observe`\" pulumi-lang-go=\"`observe`\" pulumi-lang-python=\"`observe`\" pulumi-lang-yaml=\"`observe`\" pulumi-lang-java=\"`observe`\"\u003e`observe`\u003c/span\u003e records what the guard would hold without changing decisions, \u003cspan pulumi-lang-nodejs=\"`enforce`\" pulumi-lang-dotnet=\"`Enforce`\" pulumi-lang-go=\"`enforce`\" pulumi-lang-python=\"`enforce`\" pulumi-lang-yaml=\"`enforce`\" pulumi-lang-java=\"`enforce`\"\u003e`enforce`\u003c/span\u003e holds for approval, \u003cspan pulumi-lang-nodejs=\"`off`\" pulumi-lang-dotnet=\"`Off`\" pulumi-lang-go=\"`off`\" pulumi-lang-python=\"`off`\" pulumi-lang-yaml=\"`off`\" pulumi-lang-java=\"`off`\"\u003e`off`\u003c/span\u003e skips the check. Default \u003cspan pulumi-lang-nodejs=\"`observe`\" pulumi-lang-dotnet=\"`Observe`\" pulumi-lang-go=\"`observe`\" pulumi-lang-python=\"`observe`\" pulumi-lang-yaml=\"`observe`\" pulumi-lang-java=\"`observe`\"\u003e`observe`\u003c/span\u003e."
+                }
+            },
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering RecipientPolicy resources.\n",
+                "properties": {
+                    "allowedDestinations": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Named destinations that are not addresses, such as `patient-portal`, that need no approval."
+                    },
+                    "allowedExternalDomains": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Customer and partner domains a plain send may go to without approval. Forwards, shares and exports to them still step up."
+                    },
+                    "internalDomains": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The workspace's own domains. Empty (the default) uses the workspace's sign-in domains. Subdomains are included."
+                    },
+                    "internalDomainsSource": {
+                        "type": "string",
+                        "description": "\u003cspan pulumi-lang-nodejs=\"`setting`\" pulumi-lang-dotnet=\"`Setting`\" pulumi-lang-go=\"`setting`\" pulumi-lang-python=\"`setting`\" pulumi-lang-yaml=\"`setting`\" pulumi-lang-java=\"`setting`\"\u003e`setting`\u003c/span\u003e when \u003cspan pulumi-lang-nodejs=\"`internalDomains`\" pulumi-lang-dotnet=\"`InternalDomains`\" pulumi-lang-go=\"`internalDomains`\" pulumi-lang-python=\"`internal_domains`\" pulumi-lang-yaml=\"`internalDomains`\" pulumi-lang-java=\"`internalDomains`\"\u003e`internalDomains`\u003c/span\u003e is set, \u003cspan pulumi-lang-nodejs=\"`signInDomains`\" pulumi-lang-dotnet=\"`SignInDomains`\" pulumi-lang-go=\"`signInDomains`\" pulumi-lang-python=\"`sign_in_domains`\" pulumi-lang-yaml=\"`signInDomains`\" pulumi-lang-java=\"`signInDomains`\"\u003e`signInDomains`\u003c/span\u003e when it is empty."
+                    },
+                    "mode": {
+                        "type": "string",
+                        "description": "\u003cspan pulumi-lang-nodejs=\"`observe`\" pulumi-lang-dotnet=\"`Observe`\" pulumi-lang-go=\"`observe`\" pulumi-lang-python=\"`observe`\" pulumi-lang-yaml=\"`observe`\" pulumi-lang-java=\"`observe`\"\u003e`observe`\u003c/span\u003e records what the guard would hold without changing decisions, \u003cspan pulumi-lang-nodejs=\"`enforce`\" pulumi-lang-dotnet=\"`Enforce`\" pulumi-lang-go=\"`enforce`\" pulumi-lang-python=\"`enforce`\" pulumi-lang-yaml=\"`enforce`\" pulumi-lang-java=\"`enforce`\"\u003e`enforce`\u003c/span\u003e holds for approval, \u003cspan pulumi-lang-nodejs=\"`off`\" pulumi-lang-dotnet=\"`Off`\" pulumi-lang-go=\"`off`\" pulumi-lang-python=\"`off`\" pulumi-lang-yaml=\"`off`\" pulumi-lang-java=\"`off`\"\u003e`off`\u003c/span\u003e skips the check. Default \u003cspan pulumi-lang-nodejs=\"`observe`\" pulumi-lang-dotnet=\"`Observe`\" pulumi-lang-go=\"`observe`\" pulumi-lang-python=\"`observe`\" pulumi-lang-yaml=\"`observe`\" pulumi-lang-java=\"`observe`\"\u003e`observe`\u003c/span\u003e."
+                    },
+                    "tenantId": {
+                        "type": "string",
+                        "description": "Tenant ID resolved from provider configuration."
                     }
                 },
                 "type": "object"
