@@ -388,9 +388,11 @@ jobs:
       # for a short-lived API key, so no long-lived key has to be stored or
       # renewed. It needs a trusted-publishing policy for atensecurity/pulumi-thoth
       # and release.yml on nuget.org, and the workflow's id-token permission.
+      # There is no stored-token fallback: if this step fails, the job fails with
+      # nuget.org's own message (for example a wrong NUGET_USER, or a policy
+      # glob pattern that does not match the package ID).
       - name: Get a short-lived NuGet API key
         id: nuget_login
-        continue-on-error: true
         uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
         with:
           # Your nuget.org username (profile name, not an email): the account
@@ -401,24 +403,16 @@ jobs:
       - name: Build and publish NuGet package
         working-directory: sdk/dotnet
         env:
-          NUGET_TRUSTED_KEY: ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
-          NUGET_TOKEN: ${{ secrets.NUGET_TOKEN }}
+          NUGET_API_KEY: ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
           RELEASE_VERSION: ${{ needs.prepare.outputs.release_version }}
         run: |
           set -euo pipefail
 
-          # Prefer the short-lived trusted-publishing key; fall back to the
-          # stored token while one still exists.
-          if [[ -n "${NUGET_TRUSTED_KEY:-}" ]]; then
-            NUGET_API_KEY="${NUGET_TRUSTED_KEY}"
-            echo "Publishing with a short-lived trusted-publishing key."
-          elif [[ -n "${NUGET_TOKEN:-}" ]]; then
-            NUGET_API_KEY="${NUGET_TOKEN}"
-            echo "::warning::Trusted publishing was not available; using the stored NUGET_TOKEN."
-          else
-            echo "::error::No NuGet credential: trusted publishing did not return a key (check the NUGET_USER variable and the trusted-publishing policy on nuget.org) and NUGET_TOKEN is not set."
+          if [[ -z "${NUGET_API_KEY:-}" ]]; then
+            echo "::error::The NuGet login step returned no API key."
             exit 1
           fi
+          echo "Publishing with a short-lived trusted-publishing key."
 
           PROJECT_PATH="$(find . -maxdepth 2 -name '*.csproj' | head -n 1)"
           if [[ -z "${PROJECT_PATH}" ]]; then
