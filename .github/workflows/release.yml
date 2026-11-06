@@ -393,8 +393,10 @@ jobs:
         continue-on-error: true
         uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
         with:
-          # The nuget.org profile name that owns the policy (not an email).
-          user: ${{ vars.NUGET_USER || 'atensecurity' }}
+          # Your nuget.org username (profile name, not an email): the account
+          # whose Trusted Publishing page holds the policy. Set it as the
+          # repository variable NUGET_USER; there is deliberately no default.
+          user: ${{ vars.NUGET_USER }}
 
       - name: Build and publish NuGet package
         working-directory: sdk/dotnet
@@ -414,7 +416,7 @@ jobs:
             NUGET_API_KEY="${NUGET_TOKEN}"
             echo "::warning::Trusted publishing was not available; using the stored NUGET_TOKEN."
           else
-            echo "::error::No NuGet credential: trusted publishing did not return a key and NUGET_TOKEN is not set."
+            echo "::error::No NuGet credential: trusted publishing did not return a key (check the NUGET_USER variable and the trusted-publishing policy on nuget.org) and NUGET_TOKEN is not set."
             exit 1
           fi
 
