@@ -2239,9 +2239,24 @@
         },
         "thoth:governance/dataHandling:DataHandling": {
             "properties": {
+                "acceptLocalScan": {
+                    "type": "boolean",
+                    "description": "Whether Thoth relies on what a client's local scan reports about the argument values it withheld (\u003cspan pulumi-lang-nodejs=\"`clientFindings`\" pulumi-lang-dotnet=\"`ClientFindings`\" pulumi-lang-go=\"`clientFindings`\" pulumi-lang-python=\"`client_findings`\" pulumi-lang-yaml=\"`clientFindings`\" pulumi-lang-java=\"`clientFindings`\"\u003e`clientFindings`\u003c/span\u003e). Even then a report is used only for the checks it says it ran, from a scanner whose ruleset hash is in \u003cspan pulumi-lang-nodejs=\"`acceptedScannerRulesetHashes`\" pulumi-lang-dotnet=\"`AcceptedScannerRulesetHashes`\" pulumi-lang-go=\"`acceptedScannerRulesetHashes`\" pulumi-lang-python=\"`accepted_scanner_ruleset_hashes`\" pulumi-lang-yaml=\"`acceptedScannerRulesetHashes`\" pulumi-lang-java=\"`acceptedScannerRulesetHashes`\"\u003e`acceptedScannerRulesetHashes`\u003c/span\u003e, and it can only add holds, never remove one. The report is client-asserted. Default \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e."
+                },
+                "acceptedScannerRulesetHashes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Scanner rulesets whose reports Thoth may rely on, as lower-case sha256 hex hashes (at most 20). Has no effect unless \u003cspan pulumi-lang-nodejs=\"`acceptLocalScan`\" pulumi-lang-dotnet=\"`AcceptLocalScan`\" pulumi-lang-go=\"`acceptLocalScan`\" pulumi-lang-python=\"`accept_local_scan`\" pulumi-lang-yaml=\"`acceptLocalScan`\" pulumi-lang-java=\"`acceptLocalScan`\"\u003e`acceptLocalScan`\u003c/span\u003e is true. Default: none."
+                },
                 "prompts": {
                     "type": "string",
                     "description": "Prompts, model output and tool results: \u003cspan pulumi-lang-nodejs=\"`store`\" pulumi-lang-dotnet=\"`Store`\" pulumi-lang-go=\"`store`\" pulumi-lang-python=\"`store`\" pulumi-lang-yaml=\"`store`\" pulumi-lang-java=\"`store`\"\u003e`store`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`hash`\" pulumi-lang-dotnet=\"`Hash`\" pulumi-lang-go=\"`hash`\" pulumi-lang-python=\"`hash`\" pulumi-lang-yaml=\"`hash`\" pulumi-lang-java=\"`hash`\"\u003e`hash`\u003c/span\u003e the whole text with a workspace-keyed HMAC, or \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e. Default \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e."
+                },
+                "requireClientFindings": {
+                    "type": "boolean",
+                    "description": "Hold a client that withheld argument values and did not report what its local scan found for a check that applies (reason \u003cspan pulumi-lang-nodejs=\"`findingsMissing`\" pulumi-lang-dotnet=\"`FindingsMissing`\" pulumi-lang-go=\"`findingsMissing`\" pulumi-lang-python=\"`findings_missing`\" pulumi-lang-yaml=\"`findingsMissing`\" pulumi-lang-java=\"`findingsMissing`\"\u003e`findingsMissing`\u003c/span\u003e). In observe mode the hold is recorded, not applied. Default \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e."
                 },
                 "tenantId": {
                     "type": "string",
@@ -2253,14 +2268,32 @@
                 }
             },
             "required": [
+                "acceptLocalScan",
+                "acceptedScannerRulesetHashes",
                 "prompts",
+                "requireClientFindings",
                 "tenantId",
                 "toolArguments"
             ],
             "inputProperties": {
+                "acceptLocalScan": {
+                    "type": "boolean",
+                    "description": "Whether Thoth relies on what a client's local scan reports about the argument values it withheld (\u003cspan pulumi-lang-nodejs=\"`clientFindings`\" pulumi-lang-dotnet=\"`ClientFindings`\" pulumi-lang-go=\"`clientFindings`\" pulumi-lang-python=\"`client_findings`\" pulumi-lang-yaml=\"`clientFindings`\" pulumi-lang-java=\"`clientFindings`\"\u003e`clientFindings`\u003c/span\u003e). Even then a report is used only for the checks it says it ran, from a scanner whose ruleset hash is in \u003cspan pulumi-lang-nodejs=\"`acceptedScannerRulesetHashes`\" pulumi-lang-dotnet=\"`AcceptedScannerRulesetHashes`\" pulumi-lang-go=\"`acceptedScannerRulesetHashes`\" pulumi-lang-python=\"`accepted_scanner_ruleset_hashes`\" pulumi-lang-yaml=\"`acceptedScannerRulesetHashes`\" pulumi-lang-java=\"`acceptedScannerRulesetHashes`\"\u003e`acceptedScannerRulesetHashes`\u003c/span\u003e, and it can only add holds, never remove one. The report is client-asserted. Default \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e."
+                },
+                "acceptedScannerRulesetHashes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Scanner rulesets whose reports Thoth may rely on, as lower-case sha256 hex hashes (at most 20). Has no effect unless \u003cspan pulumi-lang-nodejs=\"`acceptLocalScan`\" pulumi-lang-dotnet=\"`AcceptLocalScan`\" pulumi-lang-go=\"`acceptLocalScan`\" pulumi-lang-python=\"`accept_local_scan`\" pulumi-lang-yaml=\"`acceptLocalScan`\" pulumi-lang-java=\"`acceptLocalScan`\"\u003e`acceptLocalScan`\u003c/span\u003e is true. Default: none."
+                },
                 "prompts": {
                     "type": "string",
                     "description": "Prompts, model output and tool results: \u003cspan pulumi-lang-nodejs=\"`store`\" pulumi-lang-dotnet=\"`Store`\" pulumi-lang-go=\"`store`\" pulumi-lang-python=\"`store`\" pulumi-lang-yaml=\"`store`\" pulumi-lang-java=\"`store`\"\u003e`store`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`hash`\" pulumi-lang-dotnet=\"`Hash`\" pulumi-lang-go=\"`hash`\" pulumi-lang-python=\"`hash`\" pulumi-lang-yaml=\"`hash`\" pulumi-lang-java=\"`hash`\"\u003e`hash`\u003c/span\u003e the whole text with a workspace-keyed HMAC, or \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e. Default \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e."
+                },
+                "requireClientFindings": {
+                    "type": "boolean",
+                    "description": "Hold a client that withheld argument values and did not report what its local scan found for a check that applies (reason \u003cspan pulumi-lang-nodejs=\"`findingsMissing`\" pulumi-lang-dotnet=\"`FindingsMissing`\" pulumi-lang-go=\"`findingsMissing`\" pulumi-lang-python=\"`findings_missing`\" pulumi-lang-yaml=\"`findingsMissing`\" pulumi-lang-java=\"`findingsMissing`\"\u003e`findingsMissing`\u003c/span\u003e). In observe mode the hold is recorded, not applied. Default \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e."
                 },
                 "toolArguments": {
                     "type": "string",
@@ -2270,9 +2303,24 @@
             "stateInputs": {
                 "description": "Input properties used for looking up and filtering DataHandling resources.\n",
                 "properties": {
+                    "acceptLocalScan": {
+                        "type": "boolean",
+                        "description": "Whether Thoth relies on what a client's local scan reports about the argument values it withheld (\u003cspan pulumi-lang-nodejs=\"`clientFindings`\" pulumi-lang-dotnet=\"`ClientFindings`\" pulumi-lang-go=\"`clientFindings`\" pulumi-lang-python=\"`client_findings`\" pulumi-lang-yaml=\"`clientFindings`\" pulumi-lang-java=\"`clientFindings`\"\u003e`clientFindings`\u003c/span\u003e). Even then a report is used only for the checks it says it ran, from a scanner whose ruleset hash is in \u003cspan pulumi-lang-nodejs=\"`acceptedScannerRulesetHashes`\" pulumi-lang-dotnet=\"`AcceptedScannerRulesetHashes`\" pulumi-lang-go=\"`acceptedScannerRulesetHashes`\" pulumi-lang-python=\"`accepted_scanner_ruleset_hashes`\" pulumi-lang-yaml=\"`acceptedScannerRulesetHashes`\" pulumi-lang-java=\"`acceptedScannerRulesetHashes`\"\u003e`acceptedScannerRulesetHashes`\u003c/span\u003e, and it can only add holds, never remove one. The report is client-asserted. Default \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e."
+                    },
+                    "acceptedScannerRulesetHashes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Scanner rulesets whose reports Thoth may rely on, as lower-case sha256 hex hashes (at most 20). Has no effect unless \u003cspan pulumi-lang-nodejs=\"`acceptLocalScan`\" pulumi-lang-dotnet=\"`AcceptLocalScan`\" pulumi-lang-go=\"`acceptLocalScan`\" pulumi-lang-python=\"`accept_local_scan`\" pulumi-lang-yaml=\"`acceptLocalScan`\" pulumi-lang-java=\"`acceptLocalScan`\"\u003e`acceptLocalScan`\u003c/span\u003e is true. Default: none."
+                    },
                     "prompts": {
                         "type": "string",
                         "description": "Prompts, model output and tool results: \u003cspan pulumi-lang-nodejs=\"`store`\" pulumi-lang-dotnet=\"`Store`\" pulumi-lang-go=\"`store`\" pulumi-lang-python=\"`store`\" pulumi-lang-yaml=\"`store`\" pulumi-lang-java=\"`store`\"\u003e`store`\u003c/span\u003e, \u003cspan pulumi-lang-nodejs=\"`hash`\" pulumi-lang-dotnet=\"`Hash`\" pulumi-lang-go=\"`hash`\" pulumi-lang-python=\"`hash`\" pulumi-lang-yaml=\"`hash`\" pulumi-lang-java=\"`hash`\"\u003e`hash`\u003c/span\u003e the whole text with a workspace-keyed HMAC, or \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e. Default \u003cspan pulumi-lang-nodejs=\"`drop`\" pulumi-lang-dotnet=\"`Drop`\" pulumi-lang-go=\"`drop`\" pulumi-lang-python=\"`drop`\" pulumi-lang-yaml=\"`drop`\" pulumi-lang-java=\"`drop`\"\u003e`drop`\u003c/span\u003e."
+                    },
+                    "requireClientFindings": {
+                        "type": "boolean",
+                        "description": "Hold a client that withheld argument values and did not report what its local scan found for a check that applies (reason \u003cspan pulumi-lang-nodejs=\"`findingsMissing`\" pulumi-lang-dotnet=\"`FindingsMissing`\" pulumi-lang-go=\"`findingsMissing`\" pulumi-lang-python=\"`findings_missing`\" pulumi-lang-yaml=\"`findingsMissing`\" pulumi-lang-java=\"`findingsMissing`\"\u003e`findingsMissing`\u003c/span\u003e). In observe mode the hold is recorded, not applied. Default \u003cspan pulumi-lang-nodejs=\"`false`\" pulumi-lang-dotnet=\"`False`\" pulumi-lang-go=\"`false`\" pulumi-lang-python=\"`false`\" pulumi-lang-yaml=\"`false`\" pulumi-lang-java=\"`false`\"\u003e`false`\u003c/span\u003e."
                     },
                     "tenantId": {
                         "type": "string",
