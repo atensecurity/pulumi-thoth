@@ -2,6 +2,16 @@
 
 All notable changes to `pulumi-thoth` are documented in this file.
 
+## Unreleased
+
+### Added
+
+- `thoth.governance.TenantApprovers` resource (bridged from `thoth_tenant_approvers`): who may
+  approve held actions on a workspace with no Slack workspace connected. `userIds` is a set of WorkOS
+  user IDs (at most 50); `revision`, `updatedBy` and `updatedAt` are outputs. Needs a signed-in admin
+  session, not an API key. Destroying it saves an empty list, so nobody can approve until a new list
+  is set.
+
 ## 0.1.24 - 2026-11-05
 
 ### Added

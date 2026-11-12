@@ -77,6 +77,9 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_slack_approvals": {
 				Tok: makeResource("governance", "SlackApprovals"),
 			},
+			"thoth_tenant_approvers": {
+				Tok: makeResource("governance", "TenantApprovers"),
+			},
 			"thoth_model_artifact": {
 				Tok: makeResource("governance", "ModelArtifact"),
 			},

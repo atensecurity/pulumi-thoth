@@ -5735,6 +5735,72 @@
                 "type": "object"
             }
         },
+        "thoth:governance/tenantApprovers:TenantApprovers": {
+            "properties": {
+                "revision": {
+                    "type": "integer",
+                    "description": "How many times the list has been saved. A save names the revision it read, so a change made at the same time elsewhere is refused rather than overwritten."
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "description": "When the list was last saved (RFC 3339). Empty until the list is first saved."
+                },
+                "updatedBy": {
+                    "type": "string",
+                    "description": "The user ID of the admin who last saved the list. Empty until the list is first saved."
+                },
+                "userIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "WorkOS user IDs (such as user_01H...) of the people who may approve held actions, at most 50. Each must be a verified, active member of the organization. An empty set allows no one."
+                }
+            },
+            "required": [
+                "revision",
+                "updatedAt",
+                "updatedBy",
+                "userIds"
+            ],
+            "inputProperties": {
+                "userIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "WorkOS user IDs (such as user_01H...) of the people who may approve held actions, at most 50. Each must be a verified, active member of the organization. An empty set allows no one."
+                }
+            },
+            "requiredInputs": [
+                "userIds"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering TenantApprovers resources.\n",
+                "properties": {
+                    "revision": {
+                        "type": "integer",
+                        "description": "How many times the list has been saved. A save names the revision it read, so a change made at the same time elsewhere is refused rather than overwritten."
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "description": "When the list was last saved (RFC 3339). Empty until the list is first saved."
+                    },
+                    "updatedBy": {
+                        "type": "string",
+                        "description": "The user ID of the admin who last saved the list. Empty until the list is first saved."
+                    },
+                    "userIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "WorkOS user IDs (such as user_01H...) of the people who may approve held actions, at most 50. Each must be a verified, active member of the organization. An empty set allows no one."
+                    }
+                },
+                "type": "object"
+            }
+        },
         "thoth:governance/toolClassification:ToolClassification": {
             "properties": {
                 "actingPrivilege": {
