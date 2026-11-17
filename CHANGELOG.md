@@ -6,6 +6,10 @@ All notable changes to `pulumi-thoth` are documented in this file.
 
 ### Added
 
+- `thoth.governance.Policy` gains `argumentConditions` (bridged from `thoth_policy`): up to five
+  numeric checks on a tool's arguments, each `argument`, `operator` (`gt`, `gte`, `lt`, `lte`, `eq`),
+  `value` and an optional `whenMissing`. A review or block rule fails closed on an omitted,
+  non-numeric or differently spelled argument.
 - `thoth.governance.TenantApprovers` resource (bridged from `thoth_tenant_approvers`): who may
   approve held actions on a workspace with no Slack workspace connected. `userIds` is a set of WorkOS
   user IDs (at most 50); `revision`, `updatedBy` and `updatedAt` are outputs. Needs a signed-in admin
