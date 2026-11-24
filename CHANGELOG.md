@@ -6,6 +6,11 @@ All notable changes to `pulumi-thoth` are documented in this file.
 
 ### Added
 
+- `thoth.governance.getToolInventory` (bridged from `thoth_tool_inventory`): the workspace's tools with
+  Thoth's advisory recommendation for each (risk, suggested classes, a suggested `STEP_UP` or `BLOCK`, the
+  reasons and a draft rule). Read-only; it writes no class, rule or decision. Reported descriptions and
+  schemas are left out of `dataJson`. Recommendations need an admin credential. The generated schema was
+  edited by hand because the provider does not build locally.
 - `thoth.governance.Policy` gains `argumentConditions` (bridged from `thoth_policy`): up to five
   numeric checks on a tool's arguments, each `argument`, `operator` (`gt`, `gte`, `lt`, `lte`, `eq`),
   `value` and an optional `whenMissing`. A review or block rule fails closed on an omitted,

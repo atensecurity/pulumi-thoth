@@ -180,6 +180,9 @@ func Provider() tfbridge.ProviderInfo {
 			"thoth_agent_observe_summary": {
 				Tok: makeDataSource("governance", "getAgentObserveSummary"),
 			},
+			"thoth_tool_inventory": {
+				Tok: makeDataSource("governance", "getToolInventory"),
+			},
 			"thoth_session_forensics": {
 				Tok: makeDataSource("governance", "getSessionForensics"),
 			},

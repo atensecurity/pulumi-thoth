@@ -9437,6 +9437,63 @@
                 "type": "object"
             }
         },
+        "thoth:governance/getToolInventory:getToolInventory": {
+            "inputs": {
+                "description": "A collection of arguments for invoking getToolInventory.\n",
+                "properties": {
+                    "needsClassification": {
+                        "description": "True: only tools with no declared class yet. False: only declared tools. Unset: all.\n",
+                        "type": "boolean"
+                    },
+                    "server": {
+                        "description": "Only tools whose name is mcp__<server>__<tool> for this server.\n",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "outputs": {
+                "description": "A collection of values returned by getToolInventory.\n",
+                "properties": {
+                    "dataJson": {
+                        "description": "Tools as a JSON array of {tool_name, source, agent_ids, first_seen, last_seen, confirmation_status, confirmed_classes, proposed_classes, observed, recommendation}. A tool's reported description, input schema and annotations are left out, since a tool author wrote them.\n",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "The provider-assigned unique ID for this managed resource.",
+                        "type": "string"
+                    },
+                    "needsClassification": {
+                        "description": "True: only tools with no declared class yet. False: only declared tools. Unset: all.\n",
+                        "type": "boolean"
+                    },
+                    "note": {
+                        "description": "The server's note on what the recommendations are.\n",
+                        "type": "string"
+                    },
+                    "recommendationsAvailable": {
+                        "description": "False when the credential is not an admin's, so tools carry no recommendation.\n",
+                        "type": "boolean"
+                    },
+                    "server": {
+                        "description": "Only tools whose name is mcp__<server>__<tool> for this server.\n",
+                        "type": "string"
+                    },
+                    "total": {
+                        "description": "Number of tools returned.\n",
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "dataJson",
+                    "note",
+                    "recommendationsAvailable",
+                    "total",
+                    "id"
+                ],
+                "type": "object"
+            }
+        },
         "thoth:governance/getTools:getTools": {
             "inputs": {
                 "description": "A collection of arguments for invoking getTools.\n",
