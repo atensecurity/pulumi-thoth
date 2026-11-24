@@ -2961,7 +2961,7 @@
                 },
                 "secretBrokerAuthBindingsJson": {
                     "type": "string",
-                    "description": "JSON array of auth binding objects (host_pattern, header, secret_ref, prefix)."
+                    "description": "JSON array of auth binding objects. Each has host_pattern, header, secret_ref (a reference to a stored secret, never the credential) and prefix (keep any trailing space, for example \"Bearer \"). A binding may also have id (a stable label for audit records) and agent_ids and tools (lists that limit the binding to those agents and tools; with neither, it applies to every agent and tool on its host)."
                 },
                 "secretBrokerEnabled": {
                     "type": "boolean",
@@ -2969,7 +2969,7 @@
                 },
                 "secretBrokerFailOnMissingSecret": {
                     "type": "boolean",
-                    "description": "Fail governed calls when referenced secret is unavailable."
+                    "description": "Fail governed calls when a referenced secret is unavailable. Leave it unset for the proxy default, which refuses the call when the broker is on. A false here is stored, but the proxy ignores a workspace false: only THOTH_SECRET_BROKER_FAIL_ON_MISSING_SECRET=false on the machine turns fail-closed off."
                 },
                 "secretBrokerProvider": {
                     "type": "string",
@@ -3098,7 +3098,7 @@
                 },
                 "secretBrokerAuthBindingsJson": {
                     "type": "string",
-                    "description": "JSON array of auth binding objects (host_pattern, header, secret_ref, prefix)."
+                    "description": "JSON array of auth binding objects. Each has host_pattern, header, secret_ref (a reference to a stored secret, never the credential) and prefix (keep any trailing space, for example \"Bearer \"). A binding may also have id (a stable label for audit records) and agent_ids and tools (lists that limit the binding to those agents and tools; with neither, it applies to every agent and tool on its host)."
                 },
                 "secretBrokerEnabled": {
                     "type": "boolean",
@@ -3106,7 +3106,7 @@
                 },
                 "secretBrokerFailOnMissingSecret": {
                     "type": "boolean",
-                    "description": "Fail governed calls when referenced secret is unavailable."
+                    "description": "Fail governed calls when a referenced secret is unavailable. Leave it unset for the proxy default, which refuses the call when the broker is on. A false here is stored, but the proxy ignores a workspace false: only THOTH_SECRET_BROKER_FAIL_ON_MISSING_SECRET=false on the machine turns fail-closed off."
                 },
                 "secretBrokerProvider": {
                     "type": "string",
@@ -3248,7 +3248,7 @@
                     },
                     "secretBrokerAuthBindingsJson": {
                         "type": "string",
-                        "description": "JSON array of auth binding objects (host_pattern, header, secret_ref, prefix)."
+                        "description": "JSON array of auth binding objects. Each has host_pattern, header, secret_ref (a reference to a stored secret, never the credential) and prefix (keep any trailing space, for example \"Bearer \"). A binding may also have id (a stable label for audit records) and agent_ids and tools (lists that limit the binding to those agents and tools; with neither, it applies to every agent and tool on its host)."
                     },
                     "secretBrokerEnabled": {
                         "type": "boolean",
@@ -3256,7 +3256,7 @@
                     },
                     "secretBrokerFailOnMissingSecret": {
                         "type": "boolean",
-                        "description": "Fail governed calls when referenced secret is unavailable."
+                        "description": "Fail governed calls when a referenced secret is unavailable. Leave it unset for the proxy default, which refuses the call when the broker is on. A false here is stored, but the proxy ignores a workspace false: only THOTH_SECRET_BROKER_FAIL_ON_MISSING_SECRET=false on the machine turns fail-closed off."
                     },
                     "secretBrokerProvider": {
                         "type": "string",
