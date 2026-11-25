@@ -2961,7 +2961,7 @@
                 },
                 "secretBrokerAuthBindingsJson": {
                     "type": "string",
-                    "description": "JSON array of auth binding objects. Each has host_pattern, header, secret_ref (a reference to a stored secret, never the credential) and prefix (keep any trailing space, for example \"Bearer \"). A binding may also have id (a stable label for audit records) and agent_ids and tools (lists that limit the binding to those agents and tools; with neither, it applies to every agent and tool on its host)."
+                    "description": "JSON array of auth binding objects. Each has host_pattern, header, secret_ref (a reference to a stored secret, never the credential) and prefix (keep any trailing space, for example \"Bearer \"). A binding may also have id (a stable label for audit records), agent_ids and tools (lists that limit the binding to those agents and tools; with neither, it applies to every agent and tool on its host) and upstream (the MCP gateway upstream the binding is for: a gateway is released a binding only when its agent_ids and tools are explicit and its upstream equals the request's upstream)."
                 },
                 "secretBrokerEnabled": {
                     "type": "boolean",
@@ -3098,7 +3098,7 @@
                 },
                 "secretBrokerAuthBindingsJson": {
                     "type": "string",
-                    "description": "JSON array of auth binding objects. Each has host_pattern, header, secret_ref (a reference to a stored secret, never the credential) and prefix (keep any trailing space, for example \"Bearer \"). A binding may also have id (a stable label for audit records) and agent_ids and tools (lists that limit the binding to those agents and tools; with neither, it applies to every agent and tool on its host)."
+                    "description": "JSON array of auth binding objects. Each has host_pattern, header, secret_ref (a reference to a stored secret, never the credential) and prefix (keep any trailing space, for example \"Bearer \"). A binding may also have id (a stable label for audit records), agent_ids and tools (lists that limit the binding to those agents and tools; with neither, it applies to every agent and tool on its host) and upstream (the MCP gateway upstream the binding is for: a gateway is released a binding only when its agent_ids and tools are explicit and its upstream equals the request's upstream)."
                 },
                 "secretBrokerEnabled": {
                     "type": "boolean",
@@ -3248,7 +3248,7 @@
                     },
                     "secretBrokerAuthBindingsJson": {
                         "type": "string",
-                        "description": "JSON array of auth binding objects. Each has host_pattern, header, secret_ref (a reference to a stored secret, never the credential) and prefix (keep any trailing space, for example \"Bearer \"). A binding may also have id (a stable label for audit records) and agent_ids and tools (lists that limit the binding to those agents and tools; with neither, it applies to every agent and tool on its host)."
+                        "description": "JSON array of auth binding objects. Each has host_pattern, header, secret_ref (a reference to a stored secret, never the credential) and prefix (keep any trailing space, for example \"Bearer \"). A binding may also have id (a stable label for audit records), agent_ids and tools (lists that limit the binding to those agents and tools; with neither, it applies to every agent and tool on its host) and upstream (the MCP gateway upstream the binding is for: a gateway is released a binding only when its agent_ids and tools are explicit and its upstream equals the request's upstream)."
                     },
                     "secretBrokerEnabled": {
                         "type": "boolean",
