@@ -4,6 +4,14 @@ All notable changes to `pulumi-thoth` are documented in this file.
 
 ## Unreleased
 
+### Changed
+
+- `thoth.governance.Policy`: descriptions now match the server. Every write through an API key waits for a
+  person, an org admin's key included: a new rule starts `pending`, and a change to what a live rule matches
+  or does puts it back to `pending`, where Thoth does not enforce it, until a signed-in org admin decides it.
+  `enabled` is true for anything not disabled, so a pending rule shows no preview difference; read `status`.
+  The generated schema was edited by hand because the provider does not build locally.
+
 ### Added
 
 - `thoth.governance.getToolInventory` (bridged from `thoth_tool_inventory`): the workspace's tools with

@@ -4256,7 +4256,7 @@
                 },
                 "enabled": {
                     "type": "boolean",
-                    "description": "Whether the rule applies. Turning a rule on needs an org admin's key; a pending rule stays pending until approved."
+                    "description": "Whether the rule applies once it is approved. It is true for every rule that is not disabled, a pending one included, so a rule waiting for approval shows no difference in a preview: read status. A pending rule stays pending until a signed-in org admin approves it, and an API key cannot approve its own change or turn on a rule its owner wrote (403)."
                 },
                 "enforcement": {
                     "type": "string",
@@ -4280,7 +4280,7 @@
                 },
                 "status": {
                     "type": "string",
-                    "description": "pending, active, disabled or rejected."
+                    "description": "pending, active, disabled or rejected. pending means Thoth is not enforcing the rule (or, for a change to a live rule, its new content) until a signed-in org admin approves it; the provider warns when it reads one."
                 },
                 "tenantId": {
                     "type": "string",
@@ -4329,7 +4329,7 @@
                 },
                 "enabled": {
                     "type": "boolean",
-                    "description": "Whether the rule applies. Turning a rule on needs an org admin's key; a pending rule stays pending until approved."
+                    "description": "Whether the rule applies once it is approved. It is true for every rule that is not disabled, a pending one included, so a rule waiting for approval shows no difference in a preview: read status. A pending rule stays pending until a signed-in org admin approves it, and an API key cannot approve its own change or turn on a rule its owner wrote (403)."
                 },
                 "enforcement": {
                     "type": "string",
@@ -4385,7 +4385,7 @@
                     },
                     "enabled": {
                         "type": "boolean",
-                        "description": "Whether the rule applies. Turning a rule on needs an org admin's key; a pending rule stays pending until approved."
+                        "description": "Whether the rule applies once it is approved. It is true for every rule that is not disabled, a pending one included, so a rule waiting for approval shows no difference in a preview: read status. A pending rule stays pending until a signed-in org admin approves it, and an API key cannot approve its own change or turn on a rule its owner wrote (403)."
                     },
                     "enforcement": {
                         "type": "string",
@@ -4409,7 +4409,7 @@
                     },
                     "status": {
                         "type": "string",
-                        "description": "pending, active, disabled or rejected."
+                        "description": "pending, active, disabled or rejected. pending means Thoth is not enforcing the rule (or, for a change to a live rule, its new content) until a signed-in org admin approves it; the provider warns when it reads one."
                     },
                     "tenantId": {
                         "type": "string",
