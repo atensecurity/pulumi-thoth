@@ -14,6 +14,13 @@ All notable changes to `pulumi-thoth` are documented in this file.
 
 ### Added
 
+- `thoth.access.EndpointApiKey` gains `kind`, `allowedAgents` and `allowedTools` (bridged from
+  `thoth_endpoint_api_key`): `kind` accepts only `mcp_gateway`, the runtime key of the customer-hosted MCP
+  gateway, which needs `permissions: ["execute"]` and both lists (exact agent ids on the endpoint; tools as
+  `<upstream>__<tool>` or a prefix ending in one `*`). The Terraform provider checks the rules at plan time;
+  whether a Pulumi preview reports them has not been verified. Changing any of the three replaces the key. The generated schema was edited
+  by hand because the provider does not build locally, and the bridge has not been run against the new
+  attributes, so treat this as unverified until a release builds and tests it.
 - `thoth.governance.getToolInventory` (bridged from `thoth_tool_inventory`): the workspace's tools with
   Thoth's advisory recommendation for each (risk, suggested classes, a suggested `STEP_UP` or `BLOCK`, the
   reasons and a draft rule). Read-only; it writes no class, rule or decision. Reported descriptions and

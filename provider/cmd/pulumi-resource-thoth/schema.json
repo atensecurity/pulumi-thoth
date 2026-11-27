@@ -603,6 +603,20 @@
                     "type": "boolean",
                     "description": "Whether key is currently active and not expired/revoked."
                 },
+                "allowedAgents": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Required when `kind` is `mcp_gateway`, rejected otherwise. Exact ids of agents under this endpoint (1 to 128 printable ASCII characters, no space, `*`, `/` or `\\`) that the key may act for. At most 64. The server lower-cases the ids; every id must already be on the endpoint. Changing it replaces the key."
+                },
+                "allowedTools": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Required when `kind` is `mcp_gateway`, rejected otherwise. Tools the key may ask about, each `\u003cupstream\u003e__\u003ctool\u003e` exactly, or `\u003cupstream\u003e__\u003ctool prefix\u003e*` with one trailing `*` after at least 3 characters. The upstream is letters, digits, `-` and `_` (no `__`, not ending in `_`); the tool is letters, digits and `_ - . :` and does not start with `_`; each part is at most 128 characters. At most 64. The server lower-cases the names. Changing it replaces the key."
+                },
                 "apiKey": {
                     "type": "string",
                     "description": "One-time plaintext API key (returned only on create).",
@@ -623,6 +637,10 @@
                 "keyId": {
                     "type": "string",
                     "description": "GovAPI key identifier."
+                },
+                "kind": {
+                    "type": "string",
+                    "description": "Key kind. Omit for an ordinary key. `mcp_gateway` issues the runtime key of the customer-hosted MCP gateway: it needs `permissions = [\"execute\"]` and both `allowedAgents` and `allowedTools`. Changing it replaces the key."
                 },
                 "lastUsedAt": {
                     "type": "string",
@@ -674,9 +692,27 @@
                 "tenantId"
             ],
             "inputProperties": {
+                "allowedAgents": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Required when `kind` is `mcp_gateway`, rejected otherwise. Exact ids of agents under this endpoint (1 to 128 printable ASCII characters, no space, `*`, `/` or `\\`) that the key may act for. At most 64. The server lower-cases the ids; every id must already be on the endpoint. Changing it replaces the key."
+                },
+                "allowedTools": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Required when `kind` is `mcp_gateway`, rejected otherwise. Tools the key may ask about, each `\u003cupstream\u003e__\u003ctool\u003e` exactly, or `\u003cupstream\u003e__\u003ctool prefix\u003e*` with one trailing `*` after at least 3 characters. The upstream is letters, digits, `-` and `_` (no `__`, not ending in `_`); the tool is letters, digits and `_ - . :` and does not start with `_`; each part is at most 128 characters. At most 64. The server lower-cases the names. Changing it replaces the key."
+                },
                 "jitReason": {
                     "type": "string",
                     "description": "Audit reason for just-in-time issuance."
+                },
+                "kind": {
+                    "type": "string",
+                    "description": "Key kind. Omit for an ordinary key. `mcp_gateway` issues the runtime key of the customer-hosted MCP gateway: it needs `permissions = [\"execute\"]` and both `allowedAgents` and `allowedTools`. Changing it replaces the key."
                 },
                 "name": {
                     "type": "string",
@@ -709,6 +745,20 @@
                         "type": "boolean",
                         "description": "Whether key is currently active and not expired/revoked."
                     },
+                    "allowedAgents": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Required when `kind` is `mcp_gateway`, rejected otherwise. Exact ids of agents under this endpoint (1 to 128 printable ASCII characters, no space, `*`, `/` or `\\`) that the key may act for. At most 64. The server lower-cases the ids; every id must already be on the endpoint. Changing it replaces the key."
+                    },
+                    "allowedTools": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Required when `kind` is `mcp_gateway`, rejected otherwise. Tools the key may ask about, each `\u003cupstream\u003e__\u003ctool\u003e` exactly, or `\u003cupstream\u003e__\u003ctool prefix\u003e*` with one trailing `*` after at least 3 characters. The upstream is letters, digits, `-` and `_` (no `__`, not ending in `_`); the tool is letters, digits and `_ - . :` and does not start with `_`; each part is at most 128 characters. At most 64. The server lower-cases the names. Changing it replaces the key."
+                    },
                     "apiKey": {
                         "type": "string",
                         "description": "One-time plaintext API key (returned only on create).",
@@ -729,6 +779,10 @@
                     "keyId": {
                         "type": "string",
                         "description": "GovAPI key identifier."
+                    },
+                    "kind": {
+                        "type": "string",
+                        "description": "Key kind. Omit for an ordinary key. `mcp_gateway` issues the runtime key of the customer-hosted MCP gateway: it needs `permissions = [\"execute\"]` and both `allowedAgents` and `allowedTools`. Changing it replaces the key."
                     },
                     "lastUsedAt": {
                         "type": "string",
