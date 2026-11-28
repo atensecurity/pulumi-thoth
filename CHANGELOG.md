@@ -38,6 +38,10 @@ All notable changes to `pulumi-thoth` are documented in this file.
 - `thoth.governance.DataHandling` gains `acceptLocalScan`, `acceptedScannerRulesetHashes` and `requireClientFindings`
   (bridged from `thoth_data_handling`): how Thoth treats what a client's own scan reports about argument values
   the client withheld. A report only adds holds.
+- `thoth.governance.DataHandling` gains `locked` (bridged from `thoth_data_handling`, default `false`): a one-way
+  lock for a workspace that handles protected health information. Locked, arguments and prompts are never kept
+  as sent, and the lock cannot be lifted through Pulumi or the API. Destroying the resource leaves a locked
+  workspace unchanged. Needs a server that stores the field.
 - `thoth.governance.GovernanceSettings`: a binding in `secretBrokerAuthBindingsJson` may set `upstream`, the MCP
   gateway upstream it is for (bridged from `thoth_governance_settings`).
 - `thoth.governance.PolicyBundle` (bridged from `thoth_policy_bundle`): a create, update or destroy made with an
