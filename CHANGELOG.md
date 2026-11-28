@@ -12,6 +12,11 @@ All notable changes to `pulumi-thoth` are documented in this file.
   `enabled` is true for anything not disabled, so a pending rule shows no preview difference; read `status`.
   The generated schema was edited by hand because the provider does not build locally.
 
+### Fixed
+
+- `thoth.governance.Agent`: `displayName`, `ownerEmail` and `approvedScope` no longer fail with an "inconsistent
+  result after apply" error (bridged from `thoth_agent`).
+
 ### Added
 
 - `thoth.access.EndpointApiKey` gains `kind`, `allowedAgents` and `allowedTools` (bridged from
@@ -30,9 +35,19 @@ All notable changes to `pulumi-thoth` are documented in this file.
   numeric checks on a tool's arguments, each `argument`, `operator` (`gt`, `gte`, `lt`, `lte`, `eq`),
   `value` and an optional `whenMissing`. A review or block rule fails closed on an omitted,
   non-numeric or differently spelled argument.
+- `thoth.governance.DataHandling` gains `acceptLocalScan`, `acceptedScannerRulesetHashes` and `requireClientFindings`
+  (bridged from `thoth_data_handling`): how Thoth treats what a client's own scan reports about argument values
+  the client withheld. A report only adds holds.
+- `thoth.governance.GovernanceSettings`: a binding in `secretBrokerAuthBindingsJson` may set `upstream`, the MCP
+  gateway upstream it is for (bridged from `thoth_governance_settings`).
+- `thoth.governance.PolicyBundle` (bridged from `thoth_policy_bundle`): a create, update or destroy made with an
+  API key is held pending until a signed-in org admin approves it; the provider stops with a "pending approval"
+  error that names the change id. `thoth.governance.PolicyExceptionReview` and
+  `thoth.governance.PolicyChangeArtifactApply` are refused for an API key (403): a review or apply is a signed-in
+  person's decision.
 - `thoth.governance.TenantApprovers` resource (bridged from `thoth_tenant_approvers`): who may
-  approve held actions on a workspace with no Slack workspace connected. `userIds` is a set of WorkOS
-  user IDs (at most 50); `revision`, `updatedBy` and `updatedAt` are outputs. Needs a signed-in admin
+  approve held actions on a workspace with no Slack workspace connected. `userIds` is a set of user IDs
+  from your sign-in provider (at most 50); `revision`, `updatedBy` and `updatedAt` are outputs. Needs a signed-in admin
   session, not an API key. Destroying it saves an empty list, so nobody can approve until a new list
   is set.
 
